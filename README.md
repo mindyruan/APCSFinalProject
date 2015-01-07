@@ -15,3 +15,7 @@ Don't lose a life when you lose a mini game, but the length of the snake require
 As you level...
 - You have to clear more mini games.
 - Ghosts get faster.
+
+January 7, 2015
+  Very basic movement for pacman. (currently only moves in one direction)
+  At least there's no trail this time :^)
