@@ -56,7 +56,7 @@ class setUpCircles{
   int i2 = 2;
   while ((i1 < 1000 && i2 < 1000) && (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2))){
   //while (i1 < 1000 && i2 < 1000){
-    fill(0);
+    fill(255);
     ellipse(i1, i2, radius, radius);
     i1 += 50;
     i2 += 50;
@@ -72,9 +72,9 @@ void draw() {
   //ArrayList<Integer>ycoords = new ArrayList<Integer>();
   setUpCircles test = new setUpCircles();
   background(0);
-  fill(255);
   //image(img, x, y, 100, 100);
   test.updateDraw(30);
+  fill(100);
   ellipse(x, y, 20, 20);
 
   
