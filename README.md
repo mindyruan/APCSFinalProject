@@ -21,3 +21,5 @@ January 7, 2015
   At least there's no trail this time :^)
   ----
   Now with keyboard input! (still in one direction)
+  ----
+  Now featuring left and right continuous movement! (up and down coming very very soon)
