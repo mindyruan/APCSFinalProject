@@ -18,9 +18,8 @@ As you level...
 
 January 7, 2015
 
-  Very basic movement for pacman. (currently only moves in one direction)
+  -Very basic movement for pacman. (currently only moves in one direction)
   At least there's no trail this time :^)
-  
-  Now with keyboard input! (still in one direction)
-
-  Now featuring left and right continuous movement! (up and down coming very very soon)
+  -Now with keyboard input! (still in one direction)
+  -Now featuring left and right continuous movement! (up and down coming very very soon)
+  -Added up and down continuous movements! (circle goes a little offscreen when you go left or down)
