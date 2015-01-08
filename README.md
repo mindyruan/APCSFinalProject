@@ -20,3 +20,4 @@ January 7, 2015
 - Very basic movement for pacman using with keyboard input! (currently in one direction)
 - Added continuous movements for up, down, left, right using w,a,s,d (circle goes a little offscreen when you go left or down)
 - Fixed it so it doesn't go offscreen but encountered a problem; circle will only move along the edge when key is pressed, but if you get away from the edge, it goes back into continuous movement
+- Above problem fixed! Movement is now working perfectly.
