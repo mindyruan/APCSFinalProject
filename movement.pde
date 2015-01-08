@@ -13,8 +13,10 @@ void setup() {
 void draw() {
   background(0);
   ellipse(x, y, 100, 100);
-  if (x == 50 || x == 850 || y == 50 || y == 550) {
+  if (x == 50 || x == 850) {
     xdir = 0;
+  }
+  if (y == 50 || y == 550){
     ydir = 0;
   }
   if (keyPressed) {
