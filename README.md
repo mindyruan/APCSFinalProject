@@ -23,5 +23,6 @@ January 7, 2015
 - Above problem fixed! Movement is now working perfectly.
 - Trying to allow the pacman eat away circles permanently with the recording of coordinates with ArrayList<Integer>(), but this is not working yet.
 
-January 9, 2015
+January 8 night / 9, 2015
 - Working on walls! Made a basic map to test getting and using colors of pixels.
+- ahh yes! The circles are finally permanently eaten and put onto a blacklist. This works now.
