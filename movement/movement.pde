@@ -63,16 +63,20 @@ class setUpCircles{
       println(yStart.indexOf(y) != -1);
       println(xStart.indexOf(x) == yStart.indexOf(y));
       */
-      
-    if ((blackListX.indexOf(x) == -1 || blackListY.indexOf(y) == -1) && xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 ){
+      int xRecordB = blackListX.indexOf(x);
+      int xRecord = xStart.indexOf(x);
+    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && yStart.get(xRecord) == y){
       //might need for later: && xStart.indexOf(x) == yStart.indexOf(y)
+    if (blackListX.indexOf(x) == -1 || blackListY.indexOf(y) == -1 || blackListY.get(xRecordB) != y){
+        score += 1;
       blackListX.add(x);
       blackListY.add(y);
       println(x + "," + y + "add to blacklist");
       //println(blackListX);
       //println(blackListY);
-      score += 1;
     }
+     
+     }
   }
 
   
@@ -85,7 +89,7 @@ class setUpCircles{
   int i1 = 0;
   int i2 = 50;
   while (i1 < 1000){
-    if (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2)){
+    if (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1){
 
       while ((i1 < 1000) && (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2))){
       //while (i1 < 1000 && i2 < 1000){
