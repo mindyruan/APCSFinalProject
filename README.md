@@ -26,3 +26,6 @@ January 7, 2015
 January 8 night / 9, 2015
 - Working on walls! Made a basic map to test getting and using colors of pixels.
 - ahh yes! The circles are finally permanently eaten and put onto a blacklist. This works now.
+- Scorekeeping (!!) for every circle eaten
+- Needed to be debugged: when the score increases on a circle that was previously eaten already (and now black)
+- Needed to be done: Put in food/circles of a specific size in the new map in order to allow pacman to eat
