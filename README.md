@@ -29,3 +29,6 @@ January 8 night / 9, 2015
 - Scorekeeping (!!) for every circle eaten
 - Needed to be debugged: when the score increases on a circle that was previously eaten already (and now black)
 - Needed to be done: Put in food/circles of a specific size in the new map in order to allow pacman to eat
+
+January 9, 2015
+- As mentioned yesterday: made sure the score does not increase on a circle that was previously eaten. 
