@@ -43,7 +43,7 @@ class setUpCircles{
   println(yStart);
   }
   
-  void update(int x, int y, int radius){
+  void update(int x, int y){
     if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && xStart.indexOf(x) == yStart.indexOf(y)){
       blackListX.add(x);
       blackListY.add(y);
@@ -56,13 +56,13 @@ class setUpCircles{
   
   //make circles that exclude the ones pacman already ate.
   void updateDraw(int radius){
-    
+  background(0);
   int i1 = 0;
   int i2 = 2;
   while (i1 < 1000 && i2 < 1000){
     if (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2)){
 
-      while (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2)){
+      while ((i1 < 1000 && i2 < 1000) && (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2))){
       //while (i1 < 1000 && i2 < 1000){
         //println(i1 + "," + i2 + "add circle");
         fill(255);
@@ -83,10 +83,9 @@ class setUpCircles{
 
 
 void draw() {
-  test.update(x,y, 30);
+  test.update(x,y);
   //ArrayList<Integer>xcoords = new ArrayList<Integer>();
   //ArrayList<Integer>ycoords = new ArrayList<Integer>();
-  background(0);
   //image(img, x, y, 100, 100);
   test.updateDraw(30);
   fill(100);
