@@ -1,19 +1,33 @@
-int x = 400;
-int y = 400;
+PImage img;
+
+int x = 450;
+int y = 300;
 int xdir = 0;
 int ydir = 0;
+color wall = color(21,56,255);
 
 void setup() {
   size(900, 600);
   smooth();
   background(0);
   noStroke();
+  
+  img = loadImage("try2.png");
 }
 
-void draw() {
-  background(0);
-  ellipse(x, y, 100, 100);
-  if (x == 50 || x == 850) {
+void draw(){
+ background(0);
+ imageMode(CENTER);
+ image(img,450,300);
+ ellipse(x,y,26,26);
+ 
+color c = get(x+13,y);
+if ((""+(int)red(c)+(int)green(c)+(int)blue(c)).equals("2156255")){
+  println("woof");
+}
+//println(""+(int)red(wall)+(int)green(wall)+(int)blue(wall));
+ 
+   if (x == 50 || x == 850) {
     xdir = 0;
   }
   if (y == 50 || y == 550){
@@ -39,4 +53,5 @@ void draw() {
   }
   x += xdir;
   y += ydir;
+  
 }
