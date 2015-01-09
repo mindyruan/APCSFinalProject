@@ -1,6 +1,6 @@
-int x = 400;
+int x = 0; // this is completely random
 PImage img; //loading an image to test
-int y = 400;
+int y = 50; // this is completely random
 int xdir = 0;
 int ydir = 0;
 
@@ -22,10 +22,15 @@ class setUpCircles{
   ArrayList<Integer>blackListX = new ArrayList<Integer>();
   ArrayList<Integer>blackListY = new ArrayList<Integer>();
   
+  PFont f= createFont("Arial", 200, true);
+  int score = 0;
+  
+  
   setUpCircles(){
+
   // (below) : load the circles Pacman is eating
   int i1 = 0;
-  int i2 = 2;
+  int i2 = 50;
   //while (i1 < 1000){
   //  fill(255);
   // ellipse(i1, i2, 30, 30);
@@ -33,23 +38,40 @@ class setUpCircles{
   //}  
    while(i1 < 1000){
     xStart.add(i1);
+    yStart.add(i2);
     i1 += 50;
   }
+  /*
   while(i2 < 1000){
     yStart.add(i2);
     i2 += 50;
   }
+  */
   println(xStart);
   println(yStart);
   }
   
-  void update(int x, int y){
-    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && xStart.indexOf(x) == yStart.indexOf(y)){
+  
+    void update(int x, int y){
+      
+      //println(blackListX);
+      //println(blackListY);
+      /*
+      println(blackListX.indexOf(x) == -1);
+      println(blackListY.indexOf(y) == -1);
+      println(xStart.indexOf(x) != -1);
+      println(yStart.indexOf(y) != -1);
+      println(xStart.indexOf(x) == yStart.indexOf(y));
+      */
+      
+    if ((blackListX.indexOf(x) == -1 || blackListY.indexOf(y) == -1) && xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 ){
+      //might need for later: && xStart.indexOf(x) == yStart.indexOf(y)
       blackListX.add(x);
       blackListY.add(y);
       println(x + "," + y + "add to blacklist");
-      println(blackListX);
-      println(blackListY);
+      //println(blackListX);
+      //println(blackListY);
+      score += 1;
     }
   }
 
@@ -57,22 +79,25 @@ class setUpCircles{
   //make circles that exclude the ones pacman already ate.
   void updateDraw(int radius){
   background(0);
+  textFont(f, 200);
+  fill (100);
+  text(score, 780, 220);
   int i1 = 0;
-  int i2 = 2;
-  while (i1 < 1000 && i2 < 1000){
+  int i2 = 50;
+  while (i1 < 1000){
     if (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2)){
 
-      while ((i1 < 1000 && i2 < 1000) && (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2))){
+      while ((i1 < 1000) && (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2))){
       //while (i1 < 1000 && i2 < 1000){
         //println(i1 + "," + i2 + "add circle");
         fill(255);
         ellipse(i1, i2, radius, radius);
       i1 += 50;
-      i2 += 50;
+//      i2 += 50;
       }
       }else{
         i1 += 50;
-        i2 += 50;
+//        i2 += 50;
       }
     }
   }
@@ -120,4 +145,5 @@ void draw() {
   y += ydir;
   //fill(255);
   //ellipse(x, y, 10, 10);
+  //println(x + "," + y);
 }
