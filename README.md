@@ -22,3 +22,6 @@ January 7, 2015
 - Fixed it so it doesn't go offscreen but encountered a problem; circle will only move along the edge when key is pressed, but if you get away from the edge, it goes back into continuous movement
 - Above problem fixed! Movement is now working perfectly.
 - Trying to allow the pacman eat away circles permanently with the recording of coordinates with ArrayList<Integer>(), but this is not working yet.
+
+January 9, 2015
+- Working on walls! Made a basic map to test getting and using colors of pixels.
