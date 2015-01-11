@@ -71,14 +71,8 @@ int score = 0;
       //println(blackListX);
       //println(blackListY);
     }
-<<<<<<< HEAD
     }
     }
-=======
-     
-     }
-  }
->>>>>>> d802261d8afd845c7c058233f577a515f84e3792
 
   
   //make circles that exclude the ones pacman already ate.
