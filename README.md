@@ -34,7 +34,6 @@ January 9, 2015
 - As mentioned yesterday DEBUGGED: made sure the score does not increase on a circle that was previously eaten. 
 
 January 10 night / 11, 2015
-- Tried to restructure code with classes in order for Pacman and Snake to both use class movement.
-- Still trying to figure that out --> needs debugging.
-- 
+- Tried to restructure code with classes in order for Pacman and Snake to both use class movement. (still needs to be worked on)
+
 
