@@ -1,41 +1,36 @@
-int x = 0; // this is completely random
+ 
 PImage img; //loading an image to test
-int y = 50; // this is completely random
-int xdir = 0;
-int ydir = 0;
-
 void setup() {
   size(900, 600);
   smooth();
   background(0);
   noStroke();
   img= loadImage("2000px-Pacman.svg.png");
-  
+
   
 }
 
-class setUpCircles{
+class movementAll{
+  int x = 0; // this is completely random
+
+int y = 50; // this is completely random
+int xdir = 0;
+int ydir = 0;
   
-  
-  ArrayList<Integer>xStart = new ArrayList<Integer>();
-  ArrayList<Integer>yStart = new ArrayList<Integer>();
-  ArrayList<Integer>blackListX = new ArrayList<Integer>();
-  ArrayList<Integer>blackListY = new ArrayList<Integer>();
-  
-  PFont f= createFont("Arial", 200, true);
-  int score = 0;
-  
-  
-  setUpCircles(){
+ArrayList<Integer>xStart = new ArrayList<Integer>();
+ArrayList<Integer>yStart = new ArrayList<Integer>();
+ArrayList<Integer>blackListX = new ArrayList<Integer>();
+ArrayList<Integer>blackListY = new ArrayList<Integer>();
+
+PFont f= createFont("Arial", 25, true);
+int score = 0;
+
+  void setUpCircles(){
 
   // (below) : load the circles Pacman is eating
   int i1 = 0;
   int i2 = 50;
-  //while (i1 < 1000){
-  //  fill(255);
-  // ellipse(i1, i2, 30, 30);
-  // i += 50;
-  //}  
+  
    while(i1 < 1000){
     xStart.add(i1);
     yStart.add(i2);
@@ -46,9 +41,10 @@ class setUpCircles{
     yStart.add(i2);
     i2 += 50;
   }
-  */
+  
   println(xStart);
   println(yStart);
+  */
   }
   
   
@@ -63,17 +59,20 @@ class setUpCircles{
       println(yStart.indexOf(y) != -1);
       println(xStart.indexOf(x) == yStart.indexOf(y));
       */
-      
-    if ((blackListX.indexOf(x) == -1 || blackListY.indexOf(y) == -1) && xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 ){
+      int xRecordB = blackListX.indexOf(x);
+      int xRecord = xStart.indexOf(x);
+    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && yStart.get(xRecord) == y){
       //might need for later: && xStart.indexOf(x) == yStart.indexOf(y)
+    if (blackListX.indexOf(x) == -1 || blackListY.indexOf(y) == -1 || blackListY.get(xRecordB) != y){
+        score += 1;
       blackListX.add(x);
       blackListY.add(y);
-      println(x + "," + y + "add to blacklist");
+      //println(x + "," + y + "add to blacklist");
       //println(blackListX);
       //println(blackListY);
-      score += 1;
     }
-  }
+    }
+    }
 
   
   //make circles that exclude the ones pacman already ate.
@@ -81,11 +80,11 @@ class setUpCircles{
   background(0);
   textFont(f, 200);
   fill (100);
-  text(score, 780, 220);
+  text(score, 660, 220);
   int i1 = 0;
   int i2 = 50;
   while (i1 < 1000){
-    if (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2)){
+    if (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1){
 
       while ((i1 < 1000) && (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListX.indexOf(i1) != blackListY.indexOf(i2))){
       //while (i1 < 1000 && i2 < 1000){
@@ -101,18 +100,18 @@ class setUpCircles{
       }
     }
   }
-  }
   
 
-  setUpCircles test = new setUpCircles();
-
-
-void draw() {
-  test.update(x,y);
+void movingCircle() {
+  color c1 = get(x + 20,y); //based on the radius of the moving circle
+  color c2 = get(x,y + 20); //based on the radius of the moving circle
+  if (c1!= 0 || c2 != 0){
+  update(x,y);
+  }
   //ArrayList<Integer>xcoords = new ArrayList<Integer>();
   //ArrayList<Integer>ycoords = new ArrayList<Integer>();
   //image(img, x, y, 100, 100);
-  test.updateDraw(30);
+  updateDraw(30);
   fill(100);
   ellipse(x, y, 20, 20);
 
@@ -143,7 +142,13 @@ void draw() {
   }
   x += xdir;
   y += ydir;
-  //fill(255);
-  //ellipse(x, y, 10, 10);
-  //println(x + "," + y);
+}
+  }
+  
+
+
+void draw(){
+  movementAll tester = new movementAll();
+  tester.setUpCircles();
+  tester.movingCircle();
 }
