@@ -86,13 +86,14 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
       
      float randX = random(900);
   float randY = random(600);
+   int xcoor = int(randX);
+  int ycoor = int(randY);
 
   
   //make circles that exclude the ones pacman already ate.
   void updateDraw(int radius){
     
-      int xcoor = int(randX);
-  int ycoor = int(randY);
+     
   
     println("hello there");
   background(0);
@@ -103,7 +104,7 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
   if (update(xcoor, ycoor) == true){
     println("truee");
  
-  int tracker = blackListX.indexOf(ycoor);
+  int tracker = blackListX.indexOf(xcoor);
 
 
   
@@ -116,7 +117,7 @@ while (blackListX.indexOf(xcoor) != -1 && blackListY.indexOf(ycoor) != -1 && bla
   }
     fill(255);
     ellipse(xcoor, ycoor, radius, radius);
-    
+    addCirclesToArray(xcoor, ycoor);
     println(xcoor);
     println(ycoor);
     }
