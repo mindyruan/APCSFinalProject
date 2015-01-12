@@ -41,14 +41,18 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
 
   }
 
+//  int counter = -10;
   
-    void update(int x, int y){
-      int counter = -5
+    boolean update(int x, int y){
+      
 
       //allow room for error when snaking
-      x -= 5;
-      y -= 5;
-      while (counter <= 5){
+      /*
+      counter = -10;
+      x -= -10;
+      y -= -10;
+      */
+      //while (counter <= 10){
       //println(blackListX);
       //println(blackListY);
       /*
@@ -60,59 +64,79 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
       */
       int xRecordB = blackListX.indexOf(x);
       int xRecord = xStart.indexOf(x);
-    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && yStart.get(xRecord) == y){
+      boolean on = false;
+
+    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && abs(yStart.get(xRecord) - y) <= 10){
+      on = true;
       //might need for later: && xStart.indexOf(x) == yStart.indexOf(y)
     if (blackListX.indexOf(x) == -1 || blackListY.indexOf(y) == -1 || blackListY.get(xRecordB) != y){
         score += 1;
+        blackListX.add(x);
+        blackListY.add(y);
+        //println(x + "," + y + "add to blacklist");
+        //println(blackListX);
+        //println(blackListY);
+        println("yay");
         
-        
-      blackListX.add(x);
-      blackListY.add(y);
-      //println(x + "," + y + "add to blacklist");
-      //println(blackListX);
-      //println(blackListY);
-      counter += 1;
-      x += 1;
-      y += 1;
     }
     }
-    }
-    }
+       return on;
+      }
+
+      
+     float randX = random(900);
+  float randY = random(600);
 
   
   //make circles that exclude the ones pacman already ate.
   void updateDraw(int radius){
+    
+      int xcoor = int(randX);
+  int ycoor = int(randY);
+  
+    println("hello there");
   background(0);
   textFont(f, 200);
   fill (100);
   text(score, 660, 220);
   
-  float randX = random(width);
-  float randY = random(height);
-  int tracker = blackListX.indexOf(int(randX));
+  if (update(xcoor, ycoor) == true){
+    println("truee");
+ 
+  int tracker = blackListX.indexOf(ycoor);
+
 
   
-  ellipse(int(randX), int(randY));
-  
-while (blackListX.indexOf(int(randX)) != -1 && blackListY.indexOf(int(randY)) != -1 && blackListY.get(tracker) != int(randY)){
-  float randX == random(width);
-  float randY = random(height);
+while (blackListX.indexOf(xcoor) != -1 && blackListY.indexOf(ycoor) != -1 && blackListY.get(tracker) == ycoor){
+   randX = random(900);
+   randY = random(600);
+   x = int(randX);
+   y = int(randY);
 }
-     ellipse(int(randX), int(randY), 20 20);
   }
-}
+    fill(255);
+    ellipse(xcoor, ycoor, radius, radius);
+    
+    println(xcoor);
+    println(ycoor);
+    }
+
+
+   
+    
+
+  
+    
+  }
    
 
   setUpCircles test = new setUpCircles();
 
 void draw() {
   
-  test.update(x,y);
-  }
-  //ArrayList<Integer>xcoords = new ArrayList<Integer>();
-  //ArrayList<Integer>ycoords = new ArrayList<Integer>();
-  //image(img, x, y, 100, 100);
+ 
   test.updateDraw(30);
+  
   fill(100);
   ellipse(x, y, 20, 20);
 
@@ -143,10 +167,8 @@ void draw() {
   }
   x += xdir;
   y += ydir;
-  //fill(255);
-  //ellipse(x, y, 10, 10);
-  //println(x + "," + y);
-  
-  }
-  
+  println(x + "," + y);
 }
+
+  
+
