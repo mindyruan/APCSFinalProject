@@ -26,13 +26,7 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
   PFont f= createFont("Arial", 25, true);
   int score = 0;
   
-  void addXToArray(int x){
-    xStart.add(x);
-  }
-  
-  void addYToArray(int y){
-    yStart.add(y);
-  }
+ 
   
   void addCirclesToArray(int x, int y){
 
@@ -41,20 +35,21 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
 
   }
 
-//  int counter = -10;
   
     boolean update(int x, int y){
       
 
       //allow room for error when snaking
-      /*
-      counter = -10;
+      
+      int counter = -10;
       x -= -10;
       y -= -10;
-      */
-      //while (counter <= 10){
-      //println(blackListX);
-      //println(blackListY);
+      
+      
+      boolean on = false;
+      
+      while (counter <= 10){
+        println("into counter");
       /*
       println(blackListX.indexOf(x) == -1);
       println(blackListY.indexOf(y) == -1);
@@ -62,40 +57,47 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
       println(yStart.indexOf(y) != -1);
       println(xStart.indexOf(x) == yStart.indexOf(y));
       */
-      int xRecordB = blackListX.indexOf(x);
+      //int xRecordB = blackListX.indexOf(x);
       int xRecord = xStart.indexOf(x);
-      boolean on = false;
+      //int yRecordB = blackListY.indexOf(y);
+      int yRecord = yStart.indexOf(y);
 
-    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && abs(yStart.get(xRecord) - y) <= 10){
+    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && (abs(yStart.get(xRecord) - y) <= 10 && abs(xStart.get(yRecord) - x) <= 10)){
       on = true;
+      /*
       //might need for later: && xStart.indexOf(x) == yStart.indexOf(y)
     if (blackListX.indexOf(x) == -1 || blackListY.indexOf(y) == -1 || blackListY.get(xRecordB) != y){
         score += 1;
+    }
         blackListX.add(x);
         blackListY.add(y);
         //println(x + "," + y + "add to blacklist");
         //println(blackListX);
         //println(blackListY);
+        */
         println("yay");
+        return on;
         
     }
-    }
-       return on;
+    counter += 1;
+    x += 1;
+    y += 1;
+    
       }
-
       
-     float randX = random(900);
+      println("falseeeee");
+      return on;
+    }
+      
+  float randX = random(900);
   float randY = random(600);
-   int xcoor = int(randX);
+  int xcoor = int(randX);
   int ycoor = int(randY);
 
   
   //make circles that exclude the ones pacman already ate.
   void updateDraw(int radius){
     
-     
-  
-    println("hello there");
   background(0);
   textFont(f, 200);
   fill (100);
@@ -104,22 +106,24 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
   if (update(xcoor, ycoor) == true){
     println("truee");
  
-  int tracker = blackListX.indexOf(xcoor);
+//  int tracker = blackListX.indexOf(xcoor);
 
 
-  
-while (blackListX.indexOf(xcoor) != -1 && blackListY.indexOf(ycoor) != -1 && blackListY.get(tracker) == ycoor){
+
+//while (blackListX.indexOf(xcoor) != -1 && blackListY.indexOf(ycoor) != -1 && blackListY.get(tracker) == ycoor){
    randX = random(900);
    randY = random(600);
-   x = int(randX);
-   y = int(randY);
-}
+   xcoor = int(randX);
+   ycoor = int(randY);
+//}
   }
+  
     fill(255);
     ellipse(xcoor, ycoor, radius, radius);
     addCirclesToArray(xcoor, ycoor);
-    println(xcoor);
-    println(ycoor);
+    
+    //println(xcoor);
+    //println(ycoor);
     }
 
 
