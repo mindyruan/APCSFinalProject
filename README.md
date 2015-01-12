@@ -39,3 +39,5 @@ January 10 night / 11, 2015
 January 11, 2015
 - Started the Snake game. This is very similar to the code movement has. We might need to have the same code in both Pacman and Snake unless we figure out how to be able to incorporate Snake's code into Pacman's code.
 
+January 12, 2015
+- Pacman will now stop at walls, but his sides can still clip through them (ouch). Working on fixing that problem!
