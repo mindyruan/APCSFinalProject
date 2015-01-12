@@ -1,31 +1,33 @@
- 
+int x = 0; // this is completely random
 PImage img; //loading an image to test
+int y = 50; // this is completely random
+int xdir = 0;
+int ydir = 0;
+
 void setup() {
   size(900, 600);
   smooth();
   background(0);
   noStroke();
   img= loadImage("2000px-Pacman.svg.png");
-
+  
   
 }
 
-class movementAll{
-  int x = 0; // this is completely random
-
-int y = 50; // this is completely random
-int xdir = 0;
-int ydir = 0;
+class setUpCircles{
+  
   
 ArrayList<Integer>xStart = new ArrayList<Integer>();
 ArrayList<Integer>yStart = new ArrayList<Integer>();
 ArrayList<Integer>blackListX = new ArrayList<Integer>();
 ArrayList<Integer>blackListY = new ArrayList<Integer>();
 
-PFont f= createFont("Arial", 25, true);
-int score = 0;
-
-  void setUpCircles(){
+  
+  PFont f= createFont("Arial", 25, true);
+  int score = 0;
+  
+  
+  void addCirclesToArray(){
 
   // (below) : load the circles Pacman is eating
   int i1 = 0;
@@ -100,18 +102,23 @@ int score = 0;
       }
     }
   }
+  }
   
 
-void movingCircle() {
+  setUpCircles test = new setUpCircles();
+//  test.addCirclesToArray();
+
+void draw() {
+  test.addCirclesToArray();
   color c1 = get(x + 20,y); //based on the radius of the moving circle
   color c2 = get(x,y + 20); //based on the radius of the moving circle
   if (c1!= 0 || c2 != 0){
-  update(x,y);
+  test.update(x,y);
   }
   //ArrayList<Integer>xcoords = new ArrayList<Integer>();
   //ArrayList<Integer>ycoords = new ArrayList<Integer>();
   //image(img, x, y, 100, 100);
-  updateDraw(30);
+  test.updateDraw(30);
   fill(100);
   ellipse(x, y, 20, 20);
 
@@ -142,13 +149,7 @@ void movingCircle() {
   }
   x += xdir;
   y += ydir;
-}
-  }
-  
-
-
-void draw(){
-  movementAll tester = new movementAll();
-  tester.setUpCircles();
-  tester.movingCircle();
+  //fill(255);
+  //ellipse(x, y, 10, 10);
+  //println(x + "," + y);
 }
