@@ -39,7 +39,9 @@ January 10 night / 11, 2015
 January 11, 2015
 - Started the Snake game. This is very similar to the code movement has. We might need to have the same code in both Pacman and Snake unless we figure out how to be able to incorporate Snake's code into Pacman's code.
 
-January 12, 2015
+January 12, 2015 class + night / January 13 morning
 - Pacman will now stop at walls, but his sides can still clip through them (ouch). Working on fixing that problem!
 - Found a bug where Pacman gets stuck when he touches a wall
 - Fixed above bug, but side clipping still a problem
+- Trying to debug: adding to blackList because that is that main problem.
+- Found a huge bug: the indexOf fuction only finds the first instance of an object in the list, so made our own function to go through the list.
