@@ -1,6 +1,6 @@
 PImage img;
 
-int x = 450;
+int x = 451;
 int y = 300;
 int xdir = 0;
 int ydir = 0;
@@ -12,7 +12,7 @@ void setup() {
   background(0);
   noStroke();
   
-  img = loadImage("try.png");
+  img = loadImage("exp2.png");
 }
 
 void draw(){
@@ -20,90 +20,76 @@ void draw(){
  imageMode(CENTER);
  image(img,450,300);
  ellipse(x,y,26,26);
+ /*
+ color i = get((x+(14*xdir)),(y+(14*ydir)));
+ if(getRGB(i).equals("2156255")){
+  println("yass"); 
+ }
+ */
  
  color cright = get(x+13,y);
  color cleft = get(x-14,y);
  color cup = get(x,y-14);
  color cdown = get(x,y+13);
  color cupleft = get(x-14,y-14);
- color cupright = get(x+13,y-14);
- color cdownleft = get(x-14,y+13);
- color cdownright = get(x+13,y+13);
+ color cupright = get(x+14,y-14);
+ color cdownleft = get(x-14,y+14);
+ color cdownright = get(x+14,y+14);
  
- if (getRGB(cup).equals("2156255")){
-   println("wall!!!");
- }
- /*
- if((""+(int)red(cx)+(int)green(cx)+(int)blue(cx)).equals("2156255")){
-   println("wall!!!");
- }
- */
-
+ println(getRGB(cupleft) + " " + getRGB(cdownleft) + " " + getRGB(cright));
+ 
+ 
 /*
-if ((""+(int)red(c)+(int)green(c)+(int)blue(c)).equals("2156255")){
-  println("woof");
-}
-*/
 if ((getRGB(cright).equals("2156255")) || (getRGB(cleft).equals("2156255"))){
     xdir = 0;
   }
   if ((getRGB(cup).equals("2156255")) || (getRGB(cdown).equals("2156255"))){
     ydir = 0;
   }
-  if (keyPressed) {
-    if ((!(getRGB(cleft)).equals("2156255")) && (key == 'a' || key =='A')
-    && (!(getRGB(cupleft)).equals("2156255")) && (!(getRGB(cdownleft)).equals("2156255"))) { //go left
-      xdir = -1;
-      ydir = 0;
-    }
-    if ((!(getRGB(cright)).equals("2156255")) && (key == 'd' || key == 'D')
-    && (!(getRGB(cupright)).equals("2156255")) && (!(getRGB(cdownright)).equals("2156255"))) { //go right
-      xdir = 1;
-      ydir = 0;
-    }
-    if ((!(getRGB(cup)).equals("2156255")) && (key == 'w' || key =='W')
-    && (!(getRGB(cupleft)).equals("2156255")) && (!(getRGB(cupright)).equals("2156255"))) { //go up
-      xdir = 0;
-      ydir = -1;
-    }
-    if ((!(getRGB(cdown)).equals("2156255")) && (key == 's' || key == 'S')
-    && (!(getRGB(cdownleft)).equals("2156255")) && (!(getRGB(cdownright)).equals("2156255"))) { //go down
-      xdir = 0;
-      ydir = 1;
-    }
-  }
-  x += xdir;
-  y += ydir;
-
-//println(""+(int)red(wall)+(int)green(wall)+(int)blue(wall));
- /*
-   if (x == 50 || x == 850) {
-    xdir = 0;
-  }
-  if (y == 50 || y == 550){
-    ydir = 0;
-  }
-  if (keyPressed) {
-    if (x>50 && (key == 'a' || key =='A')) { //go left
-      xdir = -1;
-      ydir = 0;
-    }
-    if (x<850 && (key == 'd' || key == 'D')) { //go right
-      xdir = 1;
-      ydir = 0;
-    }
-    if (y>50 && (key == 'w' || key =='W')) { //go up
-      xdir = 0;
-      ydir = -1;
-    }
-    if ((key == 's' || key == 'S') && y<550) { //go down
-      xdir = 0;
-      ydir = 1;
-    }
-  }
-  x += xdir;
-  y += ydir;
   */
+  if (keyPressed) {
+    if ((key == 'a' || key =='A') && 
+    (((getRGB(cleft)).equals("000")) ||
+    (((getRGB(cupleft)).equals("000")) &&
+    ((getRGB(cdownleft)).equals("000")) &&
+    ((getRGB(cleft)).equals("000"))))){ //go left
+      xdir = -1;
+      ydir = 0;
+    }
+    if ((key == 'd' || key == 'D') && 
+    (((getRGB(cright)).equals("000")) ||
+    (((getRGB(cupright)).equals("000")) && 
+    ((getRGB(cdownright)).equals("000")) &&
+    ((getRGB(cright)).equals("000"))))) { //go right
+      xdir = 1;
+      ydir = 0;
+    }
+    if ((key == 'w' || key =='W') &&
+    (((getRGB(cup)).equals("000")) ||
+    (((getRGB(cupleft)).equals("000")) &&
+    ((getRGB(cupright)).equals("000")) &&
+    ((getRGB(cup)).equals("000"))))) { //go up
+      xdir = 0;
+      ydir = -1;
+    }
+    if ((key == 's' || key == 'S') && 
+    (((getRGB(cdown)).equals("000")) || 
+    (((getRGB(cdownleft)).equals("000")) && 
+    ((getRGB(cdownright)).equals("000")) &&
+    ((getRGB(cdown)).equals("000"))))) { //go down
+      xdir = 0;
+      ydir = 1;
+    }
+  }
+  x += xdir;
+  y += ydir;
+  
+   color i = get((x+(14*xdir)),(y+(14*ydir)));
+ if ((getRGB(i).equals("2156255"))){
+  xdir = 0;
+ ydir = 0; 
+ }
+
 }
 
 String getRGB(color col){
