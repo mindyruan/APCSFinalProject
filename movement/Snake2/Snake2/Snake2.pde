@@ -22,8 +22,8 @@ boolean checkCoord(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int 
   placeX = 0;
   placeY = 0;
     while (placeY < exampleY.size()){
-      if (abs(exampleY.get(placeY) - y) <= 5){
-        if (abs(exampleX.get(placeY) - x) <= 5){
+      if (exampleY.get(placeY) == y ){
+        if (exampleX.get(placeY) == x){
           println("hello check coord true");
           return true;
         }
