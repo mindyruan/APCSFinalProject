@@ -22,8 +22,8 @@ boolean checkCoord(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int 
   placeX = 0;
   placeY = 0;
     while (placeY < exampleY.size()){
-      if (exampleY.get(placeY) - y <= 5){
-        if (exampleX.get(placeY) - x <= 5){
+      if (abs(exampleY.get(placeY) - y) <= 5){
+        if (abs(exampleX.get(placeY) - x) <= 5){
           println("hello check coord true");
           return true;
         }
@@ -87,7 +87,7 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
       println(y + "," + yStart.indexOf(y));
 //    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && (abs(yStart.get(xRecord) - y) <= 10 && abs(xStart.get(yRecord) - x) <= 10)){
   if (checkCoord(xStart, yStart, x, y)){
-    if (checkCoord(blackListX, blackListY, x,y) == false){
+//    if (checkCoord(blackListX, blackListY, x,y) == false){
       //
       /*
       //might need for later: && xStart.indexOf(x) == yStart.indexOf(y)
@@ -100,14 +100,14 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
         //println(blackListX);
         //println(blackListY);
         */
-        blackListX.add(x);
-        blackListY.add(y);
+//        blackListX.add(x);
+//        blackListY.add(y);
         on = true;
         score += 1;
         println("yay");
         return on;
         
-    }
+//    }
   }
     counter += 1;
     x += 1;
@@ -134,11 +134,12 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
   println(xStart);
   println(yStart);
   
-  if (this.update(x, y) == true){
+  if ((this.update(x, y) == true) || (xStart.isEmpty() && yStart.isEmpty())){
  
 //  int tracker = blackListX.indexOf(xcoor);
 
 //while (blackListX.indexOf(xcoor) != -1 && blackListY.indexOf(ycoor) != -1 && blackListY.get(tracker) == ycoor){ 
+  /*
   while (checkCoord(blackListX, blackListY, xcoor, ycoor) == false){  
    randX = random(900);
    randY = random(600);
@@ -149,13 +150,14 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
 
   
   if (xStart.isEmpty() && yStart.isEmpty()){
+    */
       randX = random(900);
    randY = random(600);
    xcoor = int(randX);
    ycoor = int(randY);
    
-  }
-  if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(x, y) == true)){
+//  }
+//  if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(x, y) == true)){
    counter = -10;
    xcoor -= 10;
    ycoor -= 10;
@@ -167,7 +169,6 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
    }
 //}
   }
-  
     fill(100);
     ellipse(xcoor, ycoor, radius, radius);
     
