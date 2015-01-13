@@ -4,6 +4,8 @@ int y = 50; // this is completely random
 int xdir = 0;
 int ydir = 0;
 int counter = -10; // allow room for errors
+int placeX = 0;
+int placeY = 0;
 
 void setup() {
   size(900, 600);
@@ -14,6 +16,27 @@ void setup() {
   
   
 }
+
+
+boolean checkCoord(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int x, int y){
+  placeX = 0;
+  placeY = 0;
+    while (placeY < exampleY.size()){
+      if (exampleY.get(placeY) - y <= 5){
+        if (exampleX.get(placeY) - x <= 5){
+          println("hello check coord true");
+          return true;
+        }
+      }
+      placeY += 1;
+    }
+    println("hello check coord false");
+    return false;
+    
+    
+}
+
+
 
 class setUpCircles{
   
@@ -35,8 +58,8 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
     yStart.add(y);
 
   }
-
-
+      
+      
     boolean update(int x, int y){
       
       //allow room for error when snaking
@@ -48,7 +71,6 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
       boolean on = false;
       
       while (counter <= 10){
-        println("into counter");
       /*
       println(blackListX.indexOf(x) == -1);
       println(blackListY.indexOf(y) == -1);
@@ -61,11 +83,12 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
       //int yRecordB = blackListY.indexOf(y);
       int yRecord = yStart.indexOf(y);
       
-      println(x + "," + xStart.get(x));
-      println(y + "y" + yStart.get(y));
-    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 ){
-      //&& (abs(yStart.get(xRecord) - y) <= 10 && abs(xStart.get(yRecord) - x) <= 10)
-      on = true;
+      println(x + "," + xStart.indexOf(x));
+      println(y + "," + yStart.indexOf(y));
+//    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && (abs(yStart.get(xRecord) - y) <= 10 && abs(xStart.get(yRecord) - x) <= 10)){
+  if (checkCoord(xStart, yStart, x, y)){
+    if (checkCoord(blackListX, blackListY, x,y) == false){
+      //
       /*
       //might need for later: && xStart.indexOf(x) == yStart.indexOf(y)
     if (blackListX.indexOf(x) == -1 || blackListY.indexOf(y) == -1 || blackListY.get(xRecordB) != y){
@@ -77,16 +100,20 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
         //println(blackListX);
         //println(blackListY);
         */
+        blackListX.add(x);
+        blackListY.add(y);
+        on = true;
+        score += 1;
         println("yay");
         return on;
         
     }
+  }
     counter += 1;
     x += 1;
     y += 1;
     
-      }
-      
+      }      
       println("falseeeee");
       return on;
     }
@@ -98,7 +125,7 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
 
   
   //make circles that exclude the ones pacman already ate.
-  void updateDraw(int radius){
+  void updateDraw(int x, int y, int radius){
   background(0);
   textFont(f, 200);
   fill (100);
@@ -107,18 +134,28 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
   println(xStart);
   println(yStart);
   
-  if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(xcoor, ycoor) == true)){
-    println("truee");
+  if (this.update(x, y) == true){
  
 //  int tracker = blackListX.indexOf(xcoor);
 
-//while (blackListX.indexOf(xcoor) != -1 && blackListY.indexOf(ycoor) != -1 && blackListY.get(tracker) == ycoor){
-  
+//while (blackListX.indexOf(xcoor) != -1 && blackListY.indexOf(ycoor) != -1 && blackListY.get(tracker) == ycoor){ 
+  while (checkCoord(blackListX, blackListY, xcoor, ycoor) == false){  
    randX = random(900);
    randY = random(600);
    xcoor = int(randX);
    ycoor = int(randY);
+  }
+}
+
+  
+  if (xStart.isEmpty() && yStart.isEmpty()){
+      randX = random(900);
+   randY = random(600);
+   xcoor = int(randX);
+   ycoor = int(randY);
    
+  }
+  if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(x, y) == true)){
    counter = -10;
    xcoor -= 10;
    ycoor -= 10;
@@ -142,7 +179,7 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
 
 void draw() {
   
-  test.updateDraw(30);
+  test.updateDraw(x, y, 30);
   
   fill(255);
   ellipse(x, y, 20, 20);
@@ -174,8 +211,6 @@ void draw() {
   }
   x += xdir;
   y += ydir;
-  point(x,y);
-  println(x + "," + y);
 }
 
   
