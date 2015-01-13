@@ -8,6 +8,8 @@ int ydir = 0;
 int placeX = 0;
 int placeY = 0;
 int numberOfCircles = 0;
+int lastxdir = 0;
+int lastydir = 0;
 
 void setup() {
   size(900, 600);
