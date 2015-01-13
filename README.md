@@ -45,3 +45,7 @@ January 12, 2015 class + night / January 13 morning
 - Fixed above bug, but side clipping still a problem
 - Trying to debug: adding to blackList because that is that main problem.
 - Found a huge bug: the indexOf fuction only finds the first instance of an object in the list, so made our own function to go through the list.
+
+January 13, 2014
+- Debugged that huge bug further. Using our created function, circles can now eat. Every time circles eat, the score increases by one and the eaten circle goes away. In Snake, another random food circle appears. In movement/Pacman, the remaining circles appear. Instead of blackLists, used the remove function and this allowed the to be eaten permanently.
+- NEW FEATURE: SNAKE. Snake is eating with a tail behind it. The snake does not wrap around itself, but it moves in the direction the head is moving.
