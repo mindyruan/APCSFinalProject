@@ -1,9 +1,11 @@
+//coordinate will not go into blackList until 5 times later
+
 int x = 0; // this is completely random
 PImage img; //loading an image to test
 int y = 50; // this is completely random
 int xdir = 0;
 int ydir = 0;
-int counter = -10; // allow room for errors
+int counter = -5; // allow room for errors
 int placeX = 0;
 int placeY = 0;
 
@@ -83,11 +85,11 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
       //int yRecordB = blackListY.indexOf(y);
       int yRecord = yStart.indexOf(y);
       
-      println(x + "," + xStart.indexOf(x));
-      println(y + "," + yStart.indexOf(y));
 //    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && (abs(yStart.get(xRecord) - y) <= 10 && abs(xStart.get(yRecord) - x) <= 10)){
   if (checkCoord(xStart, yStart, x, y)){
-//    if (checkCoord(blackListX, blackListY, x,y) == false){
+    if (checkCoord(blackListX, blackListY, x, y) == false){
+      on = true;
+
       //
       /*
       //might need for later: && xStart.indexOf(x) == yStart.indexOf(y)
@@ -100,15 +102,15 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
         //println(blackListX);
         //println(blackListY);
         */
-//        blackListX.add(x);
-//        blackListY.add(y);
-        on = true;
+
+        blackListX.add(x);
+        blackListY.add(y);
         score += 1;
-        println("yay");
         return on;
-        
-//    }
+    }
   }
+        
+  
     counter += 1;
     x += 1;
     y += 1;
@@ -131,50 +133,49 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
   fill (100);
   text(score, 660, 220);
   
-  println(xStart);
-  println(yStart);
   
-  if ((this.update(x, y) == true) || (xStart.isEmpty() && yStart.isEmpty())){
+  if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(x, y) == true)){
+   randX = random(900);
+   randY = random(600);
+   xcoor = int(randX);
+   ycoor = int(randY);
  
 //  int tracker = blackListX.indexOf(xcoor);
 
 //while (blackListX.indexOf(xcoor) != -1 && blackListY.indexOf(ycoor) != -1 && blackListY.get(tracker) == ycoor){ 
-  /*
-  while (checkCoord(blackListX, blackListY, xcoor, ycoor) == false){  
+ 
+  while (checkCoord(blackListX, blackListY, xcoor, ycoor) == true){
    randX = random(900);
    randY = random(600);
    xcoor = int(randX);
    ycoor = int(randY);
   }
-}
+
 
   
-  if (xStart.isEmpty() && yStart.isEmpty()){
-    */
-      randX = random(900);
-   randY = random(600);
-   xcoor = int(randX);
-   ycoor = int(randY);
-   
-//  }
 //  if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(x, y) == true)){
-   counter = -10;
-   xcoor -= 10;
-   ycoor -= 10;
-   while (counter <= 10){
-   addCirclesToArray(xcoor, ycoor);
-   counter += 1;
-   xcoor += 1;
-   ycoor += 1;
+   counter = -5;
+   xcoor -= 5;
+   ycoor -= 5;
+   while (counter <= 5){
+     addCirclesToArray(xcoor, ycoor);
+     counter += 1;
+     xcoor += 1;
+     ycoor += 1;
    }
-//}
+   xcoor -= 5;
+   ycoor -= 5;
   }
+  
+  
+  
     fill(100);
     ellipse(xcoor, ycoor, radius, radius);
     
     }
-    
   }
+    
+  
 
   setUpCircles test = new setUpCircles();
 
