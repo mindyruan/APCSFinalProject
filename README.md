@@ -41,3 +41,5 @@ January 11, 2015
 
 January 12, 2015
 - Pacman will now stop at walls, but his sides can still clip through them (ouch). Working on fixing that problem!
+- Found a bug where Pacman gets stuck when he touches a wall
+- Fixed above bug, but side clipping still a problem
