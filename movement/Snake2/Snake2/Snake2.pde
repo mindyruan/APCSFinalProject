@@ -24,11 +24,11 @@ boolean checkCoord(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int 
   placeX = 0;
   placeY = 0;
     while (placeY < exampleY.size()){
-      if (exampleY.get(placeY) == y ){
-        if (exampleX.get(placeY) == x){
+      if (((pow((y - exampleY.get(placeY)), 2)) + (pow((x - exampleX.get(placeY)), 2))) <= 100){
+//        if (exampleX.get(placeY) == x){
           println("hello check coord true");
           return true;
-        }
+//        }
       }
       placeY += 1;
     }
@@ -39,8 +39,27 @@ boolean checkCoord(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int 
 }
 
 
+boolean checkCoordB(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int x, int y){
+  placeX = 0;
+  placeY = 0;
+    while (placeY < exampleY.size()){
+     if (exampleY.get(placeY) == y){
+        if (exampleX.get(placeY) == x){
+          println("hello check coord true");
+          return true;
+        }       
+      }
+      placeY += 1;
+    }
+    println("hello blackList check coord false");
+    return false;
+    
+    
+}
+
 
 class setUpCircles{
+  boolean on = false;
   
   
 ArrayList<Integer>xStart = new ArrayList<Integer>();
@@ -65,14 +84,18 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
     boolean update(int x, int y){
       
       //allow room for error when snaking
+      
+      /*
       counter = -10;
       x -= -10;
       y -= -10;
+      */
       
+      on = false;
       
-      boolean on = false;
+
       
-      while (counter <= 10){
+//      while (counter <= 10){
       /*
       println(blackListX.indexOf(x) == -1);
       println(blackListY.indexOf(y) == -1);
@@ -81,13 +104,13 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
       println(xStart.indexOf(x) == yStart.indexOf(y));
       */
       //int xRecordB = blackListX.indexOf(x);
-      int xRecord = xStart.indexOf(x);
+//      int xRecord = xStart.indexOf(x);
       //int yRecordB = blackListY.indexOf(y);
-      int yRecord = yStart.indexOf(y);
+//      int yRecord = yStart.indexOf(y);
       
 //    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && (abs(yStart.get(xRecord) - y) <= 10 && abs(xStart.get(yRecord) - x) <= 10)){
   if (checkCoord(xStart, yStart, x, y)){
-    if (checkCoord(blackListX, blackListY, x, y) == false){
+    if (checkCoordB(blackListX, blackListY, x, y) == false){
       on = true;
 
       //
@@ -110,12 +133,7 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
     }
   }
         
-  
-    counter += 1;
-    x += 1;
-    y += 1;
-    
-      }      
+     
       println("falseeeee");
       return on;
     }
@@ -144,20 +162,23 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
 
 //while (blackListX.indexOf(xcoor) != -1 && blackListY.indexOf(ycoor) != -1 && blackListY.get(tracker) == ycoor){ 
  
-  while (checkCoord(blackListX, blackListY, xcoor, ycoor) == true){
+  while (checkCoordB(blackListX, blackListY, xcoor, ycoor) == true){
    randX = random(900);
    randY = random(600);
    xcoor = int(randX);
    ycoor = int(randY);
   }
+  
+  addCirclesToArray(xcoor, ycoor);
 
 
   
 //  if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(x, y) == true)){
+  /*
    counter = -5;
    xcoor -= 5;
    ycoor -= 5;
-   while (counter <= 5){
+   while (counter <= 5 && checkCoord(blackListX, blackListY, xcoor, ycoor) == false){
      addCirclesToArray(xcoor, ycoor);
      counter += 1;
      xcoor += 1;
@@ -165,9 +186,8 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
    }
    xcoor -= 5;
    ycoor -= 5;
+   */
   }
-  
-  
   
     fill(100);
     ellipse(xcoor, ycoor, radius, radius);
