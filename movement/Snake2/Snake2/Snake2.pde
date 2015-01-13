@@ -168,7 +168,8 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
    xcoor = int(randX);
    ycoor = int(randY);
   }
-  
+  xStart.clear();
+  yStart.clear();
   addCirclesToArray(xcoor, ycoor);
 
 
