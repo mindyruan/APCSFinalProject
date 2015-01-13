@@ -5,9 +5,9 @@ PImage img; //loading an image to test
 int y = 50; // this is completely random
 int xdir = 0;
 int ydir = 0;
-int counter = -5; // allow room for errors
 int placeX = 0;
 int placeY = 0;
+int numberOfCircles = 0;
 
 void setup() {
   size(900, 600);
@@ -60,18 +60,18 @@ boolean checkCoordB(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int
 
 class setUpCircles{
   boolean on = false;
-  
-  
-ArrayList<Integer>xStart = new ArrayList<Integer>();
-ArrayList<Integer>yStart = new ArrayList<Integer>();
-ArrayList<Integer>blackListX = new ArrayList<Integer>();
-ArrayList<Integer>blackListY = new ArrayList<Integer>();
+  int score = 0;
+  int numberOfCircles = score;
+  PFont f= createFont("Arial", 25, true);
+  int xCoorTail = 0;
+  int yCoorTail = 0;
 
   
-  PFont f= createFont("Arial", 25, true);
-  int score = 0;
+  ArrayList<Integer>xStart = new ArrayList<Integer>();
+  ArrayList<Integer>yStart = new ArrayList<Integer>();
+  ArrayList<Integer>blackListX = new ArrayList<Integer>();
+  ArrayList<Integer>blackListY = new ArrayList<Integer>();
   
- 
   
   void addCirclesToArray(int x, int y){
 
@@ -92,8 +92,6 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
       */
       
       on = false;
-      
-
       
 //      while (counter <= 10){
       /*
@@ -192,8 +190,25 @@ ArrayList<Integer>blackListY = new ArrayList<Integer>();
   
     fill(100);
     ellipse(xcoor, ycoor, radius, radius);
-    
+    if (score != 0){
+    numberOfCircles = 1;
+  
+  xCoorTail = (x + (-1 * xdir * 20));
+  yCoorTail = (y + (-1 * ydir * 20));
+    while (numberOfCircles <= score){
+      if (xdir != 0){
+      ellipse(xCoorTail , y , 20, 20);
+      xCoorTail += (-1 * xdir * 20);
+      }else{
+        if (ydir != 0){
+          ellipse(x, yCoorTail, 20, 20);
+          yCoorTail += (-1 * ydir * 20);
+        }
+      }
+      numberOfCircles += 1;      
     }
+    }
+  }
   }
     
   
