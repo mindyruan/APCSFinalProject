@@ -10,6 +10,8 @@ int placeY = 0;
 int numberOfCircles = 0;
 int lastxdir = 0;
 int lastydir = 0;
+int xdirG = 0;
+int ydirG = 0;
 
 void setup() {
   size(900, 600);
@@ -110,7 +112,7 @@ class setUpCircles{
       
 //    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && (abs(yStart.get(xRecord) - y) <= 10 && abs(xStart.get(yRecord) - x) <= 10)){
   if (checkCoord(xStart, yStart, x, y)){
-    if (checkCoordB(blackListX, blackListY, x, y) == false){
+//  if (checkCoordB(blackListX, blackListY, x, y) == false){
       on = true;
 
       //
@@ -126,12 +128,12 @@ class setUpCircles{
         //println(blackListY);
         */
 
-        blackListX.add(x);
-        blackListY.add(y);
+//      blackListX.add(x);
+//      blackListY.add(y);
         score += 1;
         return on;
     }
-  }
+//}
         
      
       println("falseeeee");
@@ -195,16 +197,16 @@ class setUpCircles{
     if (score != 0){
     numberOfCircles = 1;
   
-  xCoorTail = (x + (-1 * xdir * 20));
-  yCoorTail = (y + (-1 * ydir * 20));
+  xCoorTail = (x + (-1 * (xdir / 3) * 20));
+  yCoorTail = (y + (-1 * (ydir / 3) * 20));
     while (numberOfCircles <= score){
       if (xdir != 0){
       ellipse(xCoorTail , y , 20, 20);
-      xCoorTail += (-1 * xdir * 20);
+      xCoorTail += (-1 * (xdir / 3) * 20);
       }else{
         if (ydir != 0){
           ellipse(x, yCoorTail, 20, 20);
-          yCoorTail += (-1 * ydir * 20);
+          yCoorTail += (-1 * (ydir / 3) * 20);
         }
       }
       numberOfCircles += 1;      
@@ -212,11 +214,9 @@ class setUpCircles{
     }
   }
   }
-    
   
-
   setUpCircles test = new setUpCircles();
-
+  
 void draw() {
   
   test.updateDraw(x, y, 30);
@@ -233,20 +233,20 @@ void draw() {
   }
   if (keyPressed) {
     if (x>50 && (key == 'a' || key =='A')) { //go left
-      xdir = -1;
+      xdir = -3;
       ydir = 0;
     }
     if (x<850 && (key == 'd' || key == 'D')) { //go right
-      xdir = 1;
+      xdir = 3;
       ydir = 0;
     }
     if (y>50 && (key == 'w' || key =='W')) { //go up
       xdir = 0;
-      ydir = -1;
+      ydir = -3;
     }
     if ((key == 's' || key == 'S') && y<550) { //go down
       xdir = 0;
-      ydir = 1;
+      ydir = 3;
     }
   }
   x += xdir;
