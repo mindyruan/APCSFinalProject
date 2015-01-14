@@ -20,12 +20,6 @@ void draw(){
  imageMode(CENTER);
  image(img,450,300);
  ellipse(x,y,26,26);
- /*
- color i = get((x+(14*xdir)),(y+(14*ydir)));
- if(getRGB(i).equals("2156255")){
-  println("yass"); 
- }
- */
  
  color cright = get(x+13,y);
  color cleft = get(x-14,y);
@@ -36,7 +30,9 @@ void draw(){
  color cdownleft = get(x-14,y+14);
  color cdownright = get(x+14,y+14);
  
- println(getRGB(cupleft) + " " + getRGB(cdownleft) + " " + getRGB(cright));
+ if (checkWalls(y-14,y+13,x-14)){
+   println("wall!!!!!");
+ }
  
  
 /*
@@ -94,4 +90,18 @@ if ((getRGB(cright).equals("2156255")) || (getRGB(cleft).equals("2156255"))){
 
 String getRGB(color col){
   return ""+(int)red(col)+(int)green(col)+(int)blue(col);
+}
+
+boolean checkWalls(int startCoor,int endCoor, int bound){
+ while (startCoor != endCoor){
+   if ((bound == x-14)){
+     color temp = get(bound, startCoor);
+     if (getRGB(temp).equals("2156255")){
+       return true;
+     }else{
+       startCoor++;
+     }
+   }
+ }
+ return false;
 }
