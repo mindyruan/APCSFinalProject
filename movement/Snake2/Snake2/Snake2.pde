@@ -7,11 +7,6 @@ int xdir = 0;
 int ydir = 0;
 int placeX = 0;
 int placeY = 0;
-int numberOfCircles = 0;
-int lastxdir = 0;
-int lastydir = 0;
-int xdirG = 0;
-int ydirG = 0;
 
 void setup() {
   size(900, 600);
@@ -62,7 +57,11 @@ boolean checkCoordB(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int
 }
 
 
-class setUpCircles{
+class setUpCirclesSnake{
+  
+  int numberOfCircles = 0;
+  int lastxdir = 0;
+  int lastydir = 0;
   boolean on = false;
   int score = 0;
   int numberOfCircles = score;
@@ -173,8 +172,6 @@ class setUpCircles{
   xStart.clear();
   yStart.clear();
   addCirclesToArray(xcoor, ycoor);
-
-
   
 //  if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(x, y) == true)){
   /*
@@ -215,11 +212,11 @@ class setUpCircles{
   }
   }
   
-  setUpCircles test = new setUpCircles();
+  setUpCirclesSnake test2 = new setUpCirclesSnake();
   
 void draw() {
   
-  test.updateDraw(x, y, 30);
+  test2.updateDraw(x, y, 30);
   
   fill(255);
   ellipse(x, y, 20, 20);
