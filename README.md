@@ -46,8 +46,15 @@ January 12, 2015 class + night / January 13 morning
 - Trying to debug: adding to blackList because that is that main problem.
 - Found a huge bug: the indexOf fuction only finds the first instance of an object in the list, so made our own function to go through the list.
 
-January 13, 2014
+January 13, 2015
 - Debugged that huge bug further. Using our created function, circles can now eat. Every time circles eat, the score increases by one and the eaten circle goes away. In Snake, another random food circle appears. In movement/Pacman, the remaining circles appear. Instead of blackLists, used the remove function and this allowed the to be eaten permanently.
 - NEW FEATURE: SNAKE. Snake is eating with a tail behind it. The snake does not wrap around itself, but it moves in the direction the head is moving.
 - Made a checkWalls() function that returns a boolean (true = there's a wall; false = no wall); figuring out where to put this in the movement code now!
 - So down works now, Pacman stops at and doesn't clip the wall. Trying to figure out why it doesn't work with the other directions though.
+
+January 14, 2015
+- Right and down works, up and left don't even stop at the wall anymore?? Working on that now
+- Combined Snake and Pacman code. Going to work on the score requirement for Snake and when we should switch between Snake/Pacman
+- Snake whips around completely when the direction changes instead of wrapping around itself. This will be changed if there is time. Snake game is generally working though.
+- Made an experimental map to test movement
+- No more wall clipping! Neato
