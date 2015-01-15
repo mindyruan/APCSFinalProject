@@ -173,6 +173,9 @@ class setUpCircles{
     }
 
 class setUpGhosts{
+  
+  ArrayList<Integer>snakeX = new ArrayList<Integer>();
+  ArrayList<Integer>snakeY = new ArrayList<Integer>();
     
     void drawGhosts(int xG, int yG){
       fill (200);
@@ -325,16 +328,16 @@ class setUpCirclesSnake{
     if (score != 0){
     numberOfCircles = 1;
   
-  xCoorTail = (x + (-1 * (xdir / 3) * 20));
-  yCoorTail = (y + (-1 * (ydir / 3) * 20));
+  xCoorTail = (x + (-1 * (xdir) * 20));
+  yCoorTail = (y + (-1 * (ydir) * 20));
     while (numberOfCircles <= score){
       if (xdir != 0){
       ellipse(xCoorTail , y , 20, 20);
-      xCoorTail += (-1 * (xdir / 3) * 20);
+      xCoorTail += (-1 * (xdir) * 20);
       }else{
         if (ydir != 0){
           ellipse(x, yCoorTail, 20, 20);
-          yCoorTail += (-1 * (ydir / 3) * 20);
+          yCoorTail += (-1 * (ydir) * 20);
         }
       }
       numberOfCircles += 1;      
@@ -351,7 +354,7 @@ class setUpCirclesSnake{
 
 void draw() {
   or = true;
-  if (or == false){
+  if (or == true){
     test2.updateDraw(x, y, 30);
   }else{
 //  color c1 = get(x + 20,y); //based on the radius of the moving circle
