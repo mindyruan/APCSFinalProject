@@ -37,7 +37,7 @@ void draw() {
     //(((getRGB(cupleft)).equals("000")) &&
     //((getRGB(cdownleft)).equals("000")) &&
     //((getRGB(cleft)).equals("000")))) &&
-    (!(checkWalls(y-13, y+12, "x-14")))) { //go left
+    (!(checkWalls(y-13, y+13, "x-14")))) { //y+12//go left
       xdir = -1;
       ydir = 0;
     }
