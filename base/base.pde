@@ -1,7 +1,7 @@
 PImage img;
 
 int x = 450;
-int y = 300;
+int y = 314;
 int xdir = 0;
 int ydir = 0;
 color wall = color(21, 56, 255);
@@ -25,100 +25,67 @@ void draw() {
   color cleft = get(x-14, y);
   color cup = get(x, y-14);
   color cdown = get(x, y+13);
-  boolean goRight = true;
-  boolean goLeft = true;
-  boolean goUp = true;
-  boolean goDown = true;
   color cupleft = get(x-14, y-14);
   color cupright = get(x+14, y-14);
   color cdownleft = get(x-14, y+14);
   color cdownright = get(x+14, y+14);
-  
-  color exp = get(x,y+12);
-  println(getRGB(exp));
-  //right (x+12,y)
-  //left (x-13,y)
-  //up (x,y-13)
-  //down (x, y+12);
-  
-  
-  
-  /*
- if (checkWalls(y-14,y+13,x-14)){
-   println("wall!!!!!");
-   }
-   */
-  if (getRGB(cright).equals("2156255")) {
-    goRight = false;
-  }
-  if (getRGB(cleft).equals("2156255")) {
-    goLeft = false;
-  }
-  if (getRGB(cup).equals("2156255")) {
-    goUp = false;
-  }
-  if (getRGB(cdown).equals("2156255")) {
-    goDown = false;
-  }
+
 
   if (keyPressed) {
-    if ((key == 'a' || key =='A') && 
-      (((getRGB(cleft)).equals("000")) ||
-      (((getRGB(cupleft)).equals("000")) &&
-      ((getRGB(cdownleft)).equals("000")) &&
-      ((getRGB(cleft)).equals("000")))) &&
-      (!(checkWalls(y-13, y+12, x-14)))) { //go left
+    if ((key == 'a' || key =='A') &&//){//&& 
+    //(((getRGB(cleft)).equals("000")) ||
+    //(((getRGB(cupleft)).equals("000")) &&
+    //((getRGB(cdownleft)).equals("000")) &&
+    //((getRGB(cleft)).equals("000")))) &&
+    (!(checkWalls(y-13, y+12, "x-14")))) { //go left
       xdir = -1;
       ydir = 0;
     }
-    if ((key == 'd' || key == 'D') && 
-      (((getRGB(cright)).equals("000")) ||
-      (((getRGB(cupright)).equals("000")) && 
-      ((getRGB(cdownright)).equals("000")) &&
-      ((getRGB(cright)).equals("000")))) &&
-      (!(checkWalls(y-13, y+12, x+13)))) { //go right
+    if ((key == 'd' || key == 'D') && //){//&& 
+    //(((getRGB(cright)).equals("000")) ||
+    //(((getRGB(cupright)).equals("000")) && 
+    //((getRGB(cdownright)).equals("000")) &&
+    //((getRGB(cright)).equals("000")))) &&
+    (!(checkWalls(y-13, y+13, "x+13")))) { //go right #2(y+12)
       xdir = 1;
       ydir = 0;
     }
-    if ((key == 'w' || key =='W') && 
-      (((getRGB(cup)).equals("000")) ||
-      (((getRGB(cupleft)).equals("000")) &&
-      ((getRGB(cupright)).equals("000")) &&
-      ((getRGB(cup)).equals("000")))) &&
-      (!(checkWalls(x-13, x+12, y-14)))) { //go up
+    if ((key == 'w' || key =='W') &&//){//&& 
+    //(((getRGB(cup)).equals("000")) ||
+    //(((getRGB(cupleft)).equals("000")) &&
+    //((getRGB(cupright)).equals("000")) &&
+    //((getRGB(cup)).equals("000")))) &&
+    (!(checkWalls(x-13, x+13, "y-14")))) { //go up -13,+12,-14
       xdir = 0;
       ydir = -1;
     }
-    
-    if ((key == 's' || key == 'S') && 
-     (((getRGB(cdown)).equals("000")) || 
-     (((getRGB(cdownleft)).equals("000")) && 
-     ((getRGB(cdownright)).equals("000")) &&
-     ((getRGB(cdown)).equals("000")))) &&
-     (!(checkWalls(x-13, x+12, y+13)))) { //go down
-     xdir = 0;
-     ydir = 1;
-     }
-     
-/*
-    if ((key == 's' || key == 'S') && 
-      (!(checkWalls(x-13, x+13, y+14)))) { //go down
+
+    if ((key == 's' || key == 'S') &&//){//&& 
+    //(((getRGB(cdown)).equals("000")) || 
+    //(((getRGB(cdownleft)).equals("000")) && 
+    //((getRGB(cdownright)).equals("000")) &&
+    //((getRGB(cdown)).equals("000")))) &&
+    (!(checkWalls(x-13, x+13, "y+13")))) { //go down
       xdir = 0;
       ydir = 1;
     }
-    */
+
   }
 
-  color i = get((x+(13*xdir)), (y+(13*ydir)));
+  color i = get((x+(14*xdir)), (y+(14*ydir)));
+  if (xdir == 1 || ydir == 1) {
+    i = get((x+(13*xdir)), (y+(13*ydir)));
+  }
+
   if ((getRGB(i).equals("2156255"))) {
     xdir = 0;
     ydir = 0;
   }
+  
 
   x += xdir;
   y += ydir;
 }
-
 
 
 /*
@@ -180,37 +147,25 @@ String getRGB(color col) {
   return ""+(int)red(col)+(int)green(col)+(int)blue(col);
 }
 
-/*
-boolean checkWalls(int startCoor, int endCoor, int bound) {
-  while ((startCoor + 1) != (endCoor - 1))
-    color temp = get(startCoor, bound);
-    if ((bound == x-13) || (bound == x+13)) {
-      temp = get(bound, startCoor);
+
+boolean checkWalls(int startCoor, int endCoor, String bound) {
+  color temp = get(x, y);
+  for (int i = startCoor; i != endCoor; i++) {
+    if (bound.equals("x-14")) {
+      temp = get(x-14, i);
     }
-    if (getRGB(temp).equals("000")) {
-      println("woof");
-      startCoor++;
-    } else {
+    if (bound.equals("x+13")) {
+      temp = get(x+13, i);
+    }
+    if (bound.equals("y-14")) {
+      temp = get(i, y-14);
+    }
+    if (bound.equals("y+13")) {
+      temp = get(i, y+13);
+    }
+    if ((getRGB(temp)).equals("2156255")) {
       return true;
     }
   }
   return false;
 }
-*/
-
-boolean checkWalls(int startCoor, int endCoor, int bound) {
-  while (startCoor != endCoor) {
-    color temp = get(startCoor, bound);
-    if ((bound == x-13) || (bound == x+13)) {
-      temp = get(bound, startCoor);
-    }
-    if (getRGB(temp).equals("2156255")) {
-      println("woof");
-      return true;
-    } else {
-      startCoor++;
-    }
-  }
-  return false;
-}
-
