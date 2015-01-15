@@ -12,6 +12,7 @@ int ydirG = 0;
 int xGhost = 0;
 int yGhost = 0;
 boolean or = false;
+int removedPlace = 0;
 
 void setup() {
   size(900, 600);
@@ -29,6 +30,7 @@ boolean checkCoord(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int 
     while (placeY < exampleY.size()){
       if (((pow((y - exampleY.get(placeY)), 2)) + (pow((x - exampleX.get(placeY)), 2))) <= 100){
 //        if (exampleX.get(placeY) == x){
+          removedPlace = placeY;
           println("hello check coord true");
           return true;
 //        }
@@ -119,12 +121,17 @@ class setUpCircles{
 //    if (xStart.indexOf(x) != -1 && yStart.indexOf(y) != -1 && yStart.get(xRecord) == y){
       //might need for later: && xStart.indexOf(x) == yStart.indexOf(y)
 //    if (blackListX.indexOf(x) == -1 || blackListY.indexOf(y) == -1 || blackListY.get(xRecordB) != y){
-    if (checkCoordB(xStart, yStart, x, y)){
+//    if (checkCoordB(xStart, yStart, x, y)){
+      if (checkCoord(xStart, yStart, x, y)){
 //    if (checkCoordB(blackListX, blackListY, x, y) == false){
 //      on = true;
-      score += 1;
-      xStart.remove((Integer)(x));
-      yStart.remove((Integer)(y));
+        score += 1;
+        /*
+        xStart.remove((Integer)(x));
+        yStart.remove((Integer)(y));
+        */
+        xStart.remove(removedPlace);
+        yStart.remove(removedPlace);
 //      blackListX.add(x);
 //      blackListY.add(y);
       //println(x + "," + y + "add to blacklist");
@@ -150,7 +157,7 @@ class setUpCircles{
 //      while ((i1 < 1000) && (blackListX.indexOf(i1) == -1 || blackListY.indexOf(i2) == -1 || blackListY.get(tracker) != i2)){
       //while (i1 < 1000 && i2 < 1000){
         //println(i1 + "," + i2 + "add circle");
-        while (place < xStart.size()){
+        while (place < xStart.size() - 1){
 //        while(checkCoordB(blackListX, blackListY, i1, i2) == false){
         fill(255);
         ellipse(xStart.get(place), yStart.get(place), radius, radius);
