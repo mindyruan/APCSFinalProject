@@ -51,3 +51,4 @@ January 13, 2014
 - NEW FEATURE: SNAKE. Snake is eating with a tail behind it. The snake does not wrap around itself, but it moves in the direction the head is moving.
 - Made a checkWalls() function that returns a boolean (true = there's a wall; false = no wall); figuring out where to put this in the movement code now!
 - So down works now, Pacman stops at and doesn't clip the wall. Trying to figure out why it doesn't work with the other directions though.
+- Right and down works, up and left don't even stop at the wall anymore?? Working on that now
