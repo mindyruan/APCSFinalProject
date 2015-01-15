@@ -56,3 +56,4 @@ January 14, 2015
 - Right and down works, up and left don't even stop at the wall anymore?? Working on that now
 - Combined Snake and Pacman code. Going to work on the score requirement for Snake and when we should switch between Snake/Pacman
 - Snake whips around completely when the direction changes instead of wrapping around itself. This will be changed if there is time. Snake game is generally working though.
+- Made an experimental map to test movement!
