@@ -58,3 +58,6 @@ January 14, 2015
 - Snake whips around completely when the direction changes instead of wrapping around itself. This will be changed if there is time. Snake game is generally working though.
 - Made an experimental map to test movement
 - No more wall clipping! Neato
+
+January 15, 2015
+- Working on placing the food on the map!
