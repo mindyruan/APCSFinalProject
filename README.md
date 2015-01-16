@@ -61,3 +61,4 @@ January 14, 2015
 
 January 15, 2015
 - Working on placing the food on the map!
+- Made an experimental map to help visualize the spacing and placing of the food
