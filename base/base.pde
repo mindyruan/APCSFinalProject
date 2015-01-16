@@ -11,14 +11,27 @@ void setup() {
   background(0);
   noStroke();
 
-  img = loadImage("exp2.png");
+  img = loadImage("try.png");
 }
+
+//x = 45: blank space begins
+//x = 854; ends
+//y = 133; blank space begins
+//y = 466; ends
+
+//foods
+//x = 54 left edge, 61, right edge, 82 begin, 89;
+//y = 142 up edge, 149, down edge, 170 begin, 177 end;
 
 void draw() {
   background(0);
   imageMode(CENTER);
   image(img, 450, 300);
-  ellipse(x, y, 26, 26);
+  //ellipse(x, y, 26, 26);
+  ellipse(58,146,8,8);
+
+color rr = get(mouseX,mouseY);
+//println(mouseX + " " + mouseY + " " + getRGB(rr));
 
 
   if (keyPressed) {
@@ -50,6 +63,8 @@ void draw() {
   if (xdir == 1 || ydir == 1) {
     i = get((x+(13*xdir)), (y+(13*ydir)));
   }
+  
+  //checkWalls
 
   if ((getRGB(i).equals("2156255"))) {
     xdir = 0;
