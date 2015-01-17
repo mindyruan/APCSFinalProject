@@ -78,18 +78,17 @@ class setUpCircles {
   PFont f= createFont("Arial", 25, true);
   int score = 0;
 
-  void addCirclesToArray() {
-// (below) : load the circles Pacman is eating
+  void addCirclesToArray(int col) {
+    // (below) : load the circles Pacman is eating
     //int i1 = 50;
     //int i2 = 50;
     int xfood = 58;
-    int yfood = 146;
+    int yfood = col; //146
 
-    while (xfood < 890) {
+    while (xfood <= 860) {
       xStart.add(xfood);
       yStart.add(yfood);
       xfood += 28;
-      yfood += 0;
     }
     //println(xStart);
     //println(yStart);
@@ -98,7 +97,11 @@ class setUpCircles {
 
   void update(int x, int y) {  
     if (xStart.isEmpty() && yStart.isEmpty()) {
-      test.addCirclesToArray();
+      int startYCoor = 146;
+      while (startYCoor < 470) {
+        test.addCirclesToArray(startYCoor);
+        startYCoor += 28;
+      }
     }
     if (checkCoord(xStart, yStart, x, y)) {
       score += 1;
@@ -107,20 +110,7 @@ class setUpCircles {
     }
   }
 
-  void updateDraw(int radius) {
-    textFont(f, 200);
-    fill (100);
-    text(score, 660, 220);
-    place = 0;
-    while (place < xStart.size () - 1) {
-      fill(255);
-      ellipse(xStart.get(place), yStart.get(place), radius, radius);
-      place += 1;
-    }
-  }
-
   //make circles that exclude the ones pacman already ate.
-  /*
   void updateDraw(int radius) {
     textFont(f, 200);
     fill (100);
@@ -132,7 +122,6 @@ class setUpCircles {
       place += 1;
     }
   }
-  */
 }
 
 class setUpCirclesSnake {
@@ -243,7 +232,7 @@ void draw() {
   //ellipse(58,146,8,8);
 
   color rr = get(mouseX, mouseY);
-  println(mouseX + " " + mouseY + " " + getRGB(rr));
+  //println(mouseX + " " + mouseY + " " + getRGB(rr));
 
 
   if (keyPressed) {
