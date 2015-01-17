@@ -9,8 +9,6 @@ int score = 0;
 int place = 0;
 int xdirG = 0;
 int ydirG = 0;
-int xGhost = 0;
-int yGhost = 0;
 boolean or = false;
 int removedPlace = 0;
 
@@ -174,21 +172,87 @@ class setUpCircles{
 
 class setUpGhosts{
   
-  ArrayList<Integer>snakeX = new ArrayList<Integer>();
-  ArrayList<Integer>snakeY = new ArrayList<Integer>();
+  ArrayList<Integer>ghostX = new ArrayList<Integer>();
+  ArrayList<Integer>ghostY = new ArrayList<Integer>();
+  int placeGhostNRandom = 0;
+  int placeGhostRandom = 0;
+  int currentGX = 0;
+  int currentGY = 0;
+  float rGX = random(2);
+  float rGY = random(2);
+  int randGXLeft = int(rGX)- 1;
+  int randGYUp = int(rGY) - 1;
+  int randGXRight = int(GX) + 1;
+  int randGYDown = int(rGY) + 1;
     
     void drawGhosts(int xG, int yG){
-      fill (200);
+      fill (255, 0, 0);
       ellipse(xG, yG, 30, 30);
       xGhost = xG;
       yGhost = yG;
     }
     
-    void updateG(){
-      if (x < xGhost){
-        xdirG = 0;
+    void updateG(int x, int y){
+      while (placeGhostNRandom < 2){ // 2 ghosts target
+        currentGX = ghostX.get(placeGhostNRandom);
+        currentGY = ghostY.get(placeGhostNRandom);
+        if (x < currentGX){
+          xdirG += randGXLeft;
+          if (randGXLeft == 0){
+            if (y < currentGY){
+              ydirG += -1;
+            }else{
+              if (y > currentGY){
+                ydirG += 1;
+              }else{
+                xdirG += -1;
+              }          
+            }
+          }        
+        }else{
+          if (x > currentGX){
+            xdirG += randGXRight;
+            if (randGXRight == 0){
+              if (y > currentGY){
+                ydirG += 1;
+              }else{
+                if (y < currentGY){
+                  ydirG += -1;
+                }else{
+                  xdirG += 1;
+                }
+              }
+            }
+          }
+          if (x == currentGX){
+            if (y > currentGY){
+              ydirG += 1;
+            }else{
+              ydirG -= 1;
+            }
+          }
+        }
+        currentGX += xdirG;
+        currentGY += ydirG;
+        ghostX.set(placeGhostNRandom, currentGX);
+        ghostY.set(placeGhostNRandom, currentGY);
+        placeGhostNRandom += 1;
       }
+      placeGhostRandom = 2;
+      while (placeGhostRandom < 4){
+        currentGX = GhostX.get(placeGhostRandom);
+        currentGY = GhostY.get(placeGhostRandom);
+        
     }
+              
+              
+            
+          
+        
+                  
+          
+          
+      
 }
 
 class setUpCirclesSnake{
