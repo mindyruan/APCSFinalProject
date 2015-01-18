@@ -182,7 +182,6 @@ class setUpCircles {
         ((146 + (28*(echY-1))) == ycoor)) {
         gameX.remove(i);
         gameY.remove(i);
-        println("yooOOOOO");
         return true;
       }
     }
@@ -253,14 +252,16 @@ class setUpCirclesSnake {
 
 
   //make circles that exclude the ones pacman already ate.
-  void updateDraw(int x, int y, int radius) {
+  void updateDraw(int xc, int yc, int radius) {
     background(0);
     textFont(f, 200);
     fill (100);
     text(score, 660, 220);
+    //int saveX = savedX;
+    //int saveY = savedY;
 
 
-    if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(x, y) == true)) {
+    if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(xc, yc) == true)) {
       randX = random(900);
       randY = random(600);
       xcoor = int(randX);
@@ -281,20 +282,26 @@ class setUpCirclesSnake {
     if (score != 0) {
       numberOfCircles = 1;
 
-      xCoorTail = (x + (-1 * (xdir) * 20));
-      yCoorTail = (y + (-1 * (ydir) * 20));
+      xCoorTail = (xc + (-1 * (xdir) * 20));
+      yCoorTail = (yc + (-1 * (ydir) * 20));
       while (numberOfCircles <= score) {
         if (xdir != 0) {
-          ellipse(xCoorTail, y, 20, 20);
+          ellipse(xCoorTail, yc, 20, 20);
           xCoorTail += (-1 * (xdir) * 20);
         } else {
           if (ydir != 0) {
-            ellipse(x, yCoorTail, 20, 20);
+            ellipse(xc, yCoorTail, 20, 20);
             yCoorTail += (-1 * (ydir) * 20);
           }
         }
         numberOfCircles += 1;
       }
+    }
+    if (score == 5){
+      or = false;
+      score = 0;
+      x = saveX;
+      y = saveY;
     }
   }
 } 
@@ -323,7 +330,6 @@ class setUpGhosts {
   float rWallChase = random (4);
   int randWallChase = int(rWallChase);
 
-
   void addInitalCoordsG() {
     placeGhostDraw = 0;
     testinggX = 226;
@@ -335,8 +341,8 @@ class setUpGhosts {
       placeGhostDraw += 1;
     }
     //    this.drawGhosts();
-    println(ghostX);
-    println(ghostY);
+    //println(ghostX);
+    //println(ghostY);
   }
 
   void drawGhosts() {
@@ -413,13 +419,13 @@ class setUpGhosts {
   boolean oneDirectionEQ() {
     if (x == currentGX) {
       if (y >= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y+13"))) {
-        println("new1");
+        //println("new1");
         xdirG = 0;
         ydirG = 1;
       } else {
         //                  if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
         if (y <= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y-14"))) {
-          println("4");
+          //println("4");
           xdirG = 0;
           ydirG = -1;
         }
@@ -428,13 +434,13 @@ class setUpGhosts {
     } else {
       if (y == currentGY) {
         if (x <= currentGX && !this.checkWalls(currentGY-13, currentGY+13, "x-14")) {
-          println("1");
+          //println("1");
           xdirG = -1;
           ydirG = 0;
         } else {
           //            if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
           if (x >= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x+13"))) {
-            println("2");
+            //println("2");
             xdirG = 1;
             ydirG = 0;
           }
@@ -458,10 +464,6 @@ class setUpGhosts {
     return false;
   }
 
-
-
-
-
   void updateG() {
     float rGX = random(2);
     float rGY = random(2);
@@ -476,7 +478,7 @@ class setUpGhosts {
     while (placeGhostNRandom < 2){ // 2 target ghosts
     currentGX = ghostX.get(placeGhostNRandom);
     currentGY = ghostY.get(placeGhostNRandom);
-    println(currentGX + "," + currentGY);
+    //println(currentGX + "," + currentGY);
 //    rGX = random(2);
 //    rGY = random(2);
 //    randGXLeft = int(rGX)- 1;
@@ -486,25 +488,25 @@ class setUpGhosts {
     //        if (x < currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x-14"))){
     //    if (!noChoice()) {
     if (x <= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x-14"))) {
-      println("1");
+      //println("1");
       xdirG = -1;
       ydirG = 0;
     } else {
       //            if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
       if (x >= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x+13"))) {
-        println("2");
+        //println("2");
         xdirG = 1;
         ydirG = 0;
       } else {
         //              if (y > currentGY && !(this.checkWalls(x-13, x+13, "y+13"))){
         if (y >= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y+13"))) {
-          println("3");
+          //println("3");
           xdirG = 0;
           ydirG = 1;
         } else {
           //                  if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
           if (y <= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y-14"))) {
-            println("4");
+            //println("4");
             xdirG = 0;
             ydirG = -1;
           }
@@ -516,42 +518,11 @@ class setUpGhosts {
     currentGY += ydirG;
     ghostX.set(placeGhostNRandom, currentGX);
     ghostY.set(placeGhostNRandom, currentGY);
-    println("place" + placeGhostRandom);
+    //println("place" + placeGhostRandom);
     placeGhostNRandom += 1;
-    println(ghostX);
-    println(ghostY);
-      }
-    //        }
-/*
-     placeGhostNRandom = 1;
-     //      while (placeGhostRandom < 4){
-     while (placeGhostNRandom < 3){
-     rGX2 = random(3);
-     rGY2 = random(3);
-     randGXRandom = int(rGX2) - 1;
-     randGYRandom = int(rGY2) - 1;
-     currentGX = ghostX.get(placeGhostNRandom);
-     currentGY = ghostY.get(placeGhostNRandom);
-     if (randGXRandom == -1 && (!(this.checkWalls(currentGY-13, currentGY+13, "x-14"))) ||
-         randGXRandom == +1 && (!(this.checkWalls(currentGY-13, currentGY+13, "x+13"))) ){
-     xdirG = randGXRandom;
-         }else{
-     if (randGXRandom == 0){
-     while (randGYRandom != 0){
-     rGY2 = random(3);
-     randGYRandom = int(rGY2) - 1;
-     }
-     ydirG = randGYRandom;
-     }
-     currentGX += xdirG;
-     currentGY += ydirG;
-     ghostX.set(placeGhostNRandom, currentGX);
-     ghostY.set(placeGhostNRandom, currentGY);
-     placeGhostNRandom += 1;
-     }
-     }
-     
-     */  
+    //println(ghostX);
+    //println(ghostY);
+      } 
      }
  }
 
