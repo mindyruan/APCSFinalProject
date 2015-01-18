@@ -73,3 +73,4 @@ January 17, 2015
 - Removed all the food in the walls by manually finding each coordinate of each food (rest in peace)
 - Created ghosts. Cannot get the ghosts to stay within the walls yet, so working on that. Made 1 ghost that chases pacman and 2 that is randomly moving.  (forgot to update this day, but did work)
 - Put mini games on the map. Pacman is brought to the middle and Snake begins. Working on bringing Pacman back onto the same spot on the map after a game of Snake.
+- Pacman will now go back to where he was before on the map after player beats Snake.
