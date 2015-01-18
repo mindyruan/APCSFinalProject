@@ -6,6 +6,10 @@ int x = 450;
 int y = 314;
 int xdir = 0;
 int ydir = 0;
+int saveX = 450;
+int saveY = 314;
+int snakeX = 450;
+int snakeY = 314;
 int placeX = 0;
 int placeY = 0;
 int score = 0;
@@ -78,41 +82,47 @@ class setUpCircles {
 
   //rest in peace me
   ArrayList<Integer>badX = new ArrayList<Integer>(
-  Arrays.asList(15,
-  2,3,4,5,6,8,10,11,12,14,15,16,18,20,22,24,25,26,27,28,
-  4,10,12,18,19,20,26,
-  1,2,6,7,8,14,15,16,22,23,24,28,29,
-  4,7,10,12,15,18,20,23,26,
-  2,4,5,9,10,12,13,17,18,20,21,25,26,28,
-  2,4,5,7,9,10,12,13,15,17,18,20,21,23,25,26,28,
-  4,10,12,18,20,26,
-  1,2,6,7,8,14,15,16,22,23,24,28,29,
-  4,7,10,11,12,15,18,20,23,26,
-  2,3,4,5,6,8,10,12,14,15,16,18,19,20,22,24,25,26,27,28,
-  15));
+  Arrays.asList(1, 15, 29, 
+  2, 3, 4, 5, 6, 8, 10, 11, 12, 14, 15, 16, 18, 20, 22, 24, 25, 26, 27, 28, 
+  4, 10, 12, 18, 19, 20, 26, 
+  1, 2, 6, 7, 8, 14, 15, 16, 22, 23, 24, 28, 29, 
+  4, 7, 10, 12, 15, 18, 20, 23, 26, 
+  2, 4, 5, 9, 10, 12, 13, 17, 18, 20, 21, 25, 26, 28, 
+  2, 4, 5, 7, 9, 10, 12, 13, 15, 17, 18, 20, 21, 23, 25, 26, 28, 
+  4, 10, 12, 18, 20, 26, 
+  1, 2, 6, 7, 8, 14, 15, 16, 22, 23, 24, 28, 29, 
+  4, 7, 10, 11, 12, 15, 18, 20, 23, 26, 
+  2, 3, 4, 5, 6, 8, 10, 12, 14, 15, 16, 18, 19, 20, 22, 24, 25, 26, 27, 28, 
+  1, 15));
 
-  
+
   ArrayList<Integer>badY = new ArrayList<Integer>(
-  Arrays.asList(1,
-  2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-  3,3,3,3,3,3,3,
-  4,4,4,4,4,4,4,4,4,4,4,4,4,
-  5,5,5,5,5,5,5,5,5,
-  6,6,6,6,6,6,6,6,6,6,6,6,6,6,
-  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
-  8,8,8,8,8,8,
-  9,9,9,9,9,9,9,9,9,9,9,9,9,
-  10,10,10,10,10,10,10,10,10,10,
-  11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
-  12));
+  Arrays.asList(1, 1, 1, 
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
+  3, 3, 3, 3, 3, 3, 3, 
+  4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+  5, 5, 5, 5, 5, 5, 5, 5, 5, 
+  6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 
+  7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 
+  8, 8, 8, 8, 8, 8, 
+  9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 
+  10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 
+  11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 
+  12, 12));
+
+  ArrayList<Integer>gameX = new ArrayList<Integer>(
+  Arrays.asList(1, 29, 1, 29));
+
+  ArrayList<Integer>gameY = new ArrayList<Integer>(
+  Arrays.asList(1, 1, 12, 12));
 
 
-// s = a + (n-1)d  arithmetic sequences heck yeah
-//58 + 6(28) = 226   [[ 58 + (x-1)28 ]]
-//146 + 3(28) = 230  [[ 146 + (x-1)28 ]]
+  // s = a + (n-1)d  arithmetic sequences heck yeah
+  //58 + 6(28) = 226   [[ 58 + (x-1)28 ]]
+  //146 + 3(28) = 230  [[ 146 + (x-1)28 ]]
 
-//first circle = 58,146
-//col 7, row 4 = 226,230
+  //first circle = 58,146
+  //col 7, row 4 = 226,230
 
 
   PFont f= createFont("Arial", 25, true);
@@ -157,13 +167,26 @@ class setUpCircles {
         startYCoor += 28;
       }
     }
-
-
     if (checkCoord(xStart, yStart, x, y)) {
       score += 1;
       xStart.remove(removedPlace);
       yStart.remove(removedPlace);
+    }  
+  }
+
+  boolean game(int xcoor, int ycoor) {
+    for (int i = 0; i < gameX.size (); i++) {
+      int echX = gameX.get(i);
+      int echY = gameY.get(i);
+      if (((58 + (28*(echX-1))) == xcoor) && 
+        ((146 + (28*(echY-1))) == ycoor)) {
+        gameX.remove(i);
+        gameY.remove(i);
+        println("yooOOOOO");
+        return true;
+      }
     }
+    return false;
   }
    
   //make circles that exclude the ones pacman already ate.
@@ -176,6 +199,13 @@ class setUpCircles {
       fill(255);
       ellipse(xStart.get(place), yStart.get(place), radius, radius);
       place += 1;
+    }
+    //MINIGAME FOOD
+    for (int i = 0; i < gameX.size (); i++) {
+      int echX = gameX.get(i);
+      int echY = gameY.get(i);
+      //fill(255,0,0);
+      ellipse((58+(28*(echX-1))), (146+(28*(echY-1))), 15, 15);
     }
   }
 }
@@ -200,7 +230,6 @@ class setUpCirclesSnake {
 
 
   void addCirclesToArray(int x, int y) {
-
     xStart.add(x);
     yStart.add(y);
   }
@@ -522,15 +551,9 @@ class setUpGhosts {
      }
      }
      
-     */
-     
-   
-
-
+     */  
      }
  }
-//}
-
 
 setUpCircles test = new setUpCircles();
 setUpCirclesSnake test2 = new setUpCirclesSnake();
@@ -540,9 +563,17 @@ void draw() {
   background(0);
   imageMode(CENTER);
   image(img, 450, 300);
-  or = false;
+  //or = false;
+  if((test.game(x,y)) == true){
+    or = true;
+    saveX = x;
+    saveY = y;
+    x = 450;
+    y = 314;
+  }
   if (or == true) {
     test2.updateDraw(x, y, 30);
+    println("savedX: "  + saveX + " savedY: " + saveY);
   } else {
     test.update(x, y);
     test.updateDraw(8);
