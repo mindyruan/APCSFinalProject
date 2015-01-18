@@ -1,3 +1,5 @@
+import java.util.*;
+
 PImage img;
 
 int x = 450;
@@ -21,7 +23,7 @@ void setup() {
   background(0);
   noStroke();
 
-  img = loadImage("try.png");
+  img = loadImage("try2.png");
 }
 
 //x = 45: blank space begins
@@ -74,6 +76,12 @@ class setUpCircles {
   ArrayList<Integer>blackListX = new ArrayList<Integer>();
   ArrayList<Integer>blackListY = new ArrayList<Integer>();
 
+  ArrayList<Integer>badX = new ArrayList<Integer>(
+  Arrays.asList(226, 450, 674));
+  ArrayList<Integer>badY = new ArrayList<Integer>(
+  Arrays.asList(230, 230, 230));
+
+
 
   PFont f= createFont("Arial", 25, true);
   int score = 0;
@@ -82,20 +90,44 @@ class setUpCircles {
     // (below) : load the circles Pacman is eating
     //int i1 = 50;
     //int i2 = 50;
-    int xfood = 58;
+    //int xfood = 58;
     int yfood = col; //146
 
-    while (xfood <= 860) {
-      xStart.add(xfood);
-      yStart.add(yfood);
-      xfood += 28;
+    for (int xfood = 58; xfood <= 860; xfood+=28) {
+      if (pleaseGoAway(xfood, yfood)) {
+        xStart.add(xfood);
+        yStart.add(yfood);
+      }
+      /*
+    while ((xfood <= 860) && (pleaseGoAway(xfood,yfood))) {
+       xStart.add(xfood);
+       yStart.add(yfood);
+       xfood += 28;
+       }
+       */
+      //println(xStart);
+      //println(yStart);
     }
-    //println(xStart);
-    //println(yStart);
   }
 
+  boolean pleaseGoAway(int xcor, int ycor) {
+    int index = badX.indexOf(xcor);
+    if (index == -1) {
+      return true;
+    }
+    for (int i = 0; i < badX.size (); i++) {
+      if ((badX.get(i) == xcor)
+        && (badY.get(i) == ycor)) {
+        badX.remove(i);
+        badY.remove(i);
+        return false;
+      }
+    }
+    return true;
+  }
 
   void update(int x, int y) {  
+    //println(""+ badX.get(1) + " " +badY.get(1));
     if (xStart.isEmpty() && yStart.isEmpty()) {
       int startYCoor = 146;
       while (startYCoor < 470) {
@@ -103,6 +135,8 @@ class setUpCircles {
         startYCoor += 28;
       }
     }
+
+
     if (checkCoord(xStart, yStart, x, y)) {
       score += 1;
       xStart.remove(removedPlace);
@@ -110,11 +144,27 @@ class setUpCircles {
     }
   }
 
+  /*
+  void update(int x, int y) {  
+   if (xStart.isEmpty() && yStart.isEmpty()) {
+   int startYCoor = 146;
+   while (startYCoor < 470) {
+   test.addCirclesToArray(startYCoor);
+   startYCoor += 28;
+   }
+   }
+   if (checkCoord(xStart, yStart, x, y)) {
+   score += 1;
+   xStart.remove(removedPlace);
+   yStart.remove(removedPlace);
+   }
+   }
+   */
   //make circles that exclude the ones pacman already ate.
   void updateDraw(int radius) {
-    textFont(f, 200);
+    textFont(f, 100);
     fill (100);
-    text(score, 660, 220);
+    text(score, 660, 120);
     place = 0;
     while (place < xStart.size () - 1) {
       fill(255);
@@ -233,6 +283,11 @@ void draw() {
 
   color rr = get(mouseX, mouseY);
   //println(mouseX + " " + mouseY + " " + getRGB(rr));
+  //println("x: " + x+" y: "+y);
+
+  //FIRST GHOST: (226,230)
+  //MIDDLE GHOST : (450,230)
+  //LAST GHOST: (674,230)
 
 
   if (keyPressed) {
