@@ -299,10 +299,10 @@ class setUpGhosts {
     placeGhostDraw = 0;
     testinggX = 226;
     testinggY = 282;
-    while (placeGhostDraw < 3) {
+    while (placeGhostDraw < 2) {
       ghostX.add(testinggX);
       ghostY.add(testinggY);
-      testinggX += 224;
+      testinggX += 448;
       placeGhostDraw += 1;
     }
     //    this.drawGhosts();
@@ -316,7 +316,7 @@ class setUpGhosts {
     //      println(ghostX);
     //      println(ghostX);
     //      println(ghostY);
-    while (placeGhostDraw < 3) {
+    while (placeGhostDraw < 2) {
       //        println(placeGhostDraw);
       //      println(ghostX.get(0));
       currentGX = ghostX.get(placeGhostDraw);
@@ -444,38 +444,37 @@ class setUpGhosts {
       this.addInitalCoordsG();
     }
     placeGhostNRandom = 0;
-    //      while (placeGhostNRandom < 2){ // 2 ghosts target
+    while (placeGhostNRandom < 2){ // 2 target ghosts
     currentGX = ghostX.get(placeGhostNRandom);
     currentGY = ghostY.get(placeGhostNRandom);
-    rGX = random(2);
-    rGY = random(2);
-    randGXLeft = int(rGX)- 1;
-    randGYUp = int(rGY) - 1;
-    randGXRight = int(rGX) + 1;
-    randGYDown = int(rGY) + 1;
     println(currentGX + "," + currentGY);
-
+//    rGX = random(2);
+//    rGY = random(2);
+//    randGXLeft = int(rGX)- 1;
+//    randGYUp = int(rGY) - 1;
+//    randGXRight = int(rGX) + 1;
+//    randGYDown = int(rGY) + 1;
     //        if (x < currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x-14"))){
     //    if (!noChoice()) {
-    if ((y == currentGY || x <= currentGX) && !this.checkWalls(currentGY-13, currentGY+13, "x-14")) {
+    if (x <= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x-14"))) {
       println("1");
       xdirG = -1;
       ydirG = 0;
     } else {
       //            if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
-      if ((y == currentGY || x >= currentGX) && !(this.checkWalls(currentGY-13, currentGY+13, "x+13"))) {
+      if (x >= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x+13"))) {
         println("2");
         xdirG = 1;
         ydirG = 0;
       } else {
         //              if (y > currentGY && !(this.checkWalls(x-13, x+13, "y+13"))){
-        if ((x == currentGX ||  y >= currentGY) && !(this.checkWalls(currentGX-13, currentGX+13, "y+13"))) {
+        if (y >= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y+13"))) {
           println("3");
           xdirG = 0;
           ydirG = 1;
         } else {
           //                  if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
-          if ((x == currentGX || y <= currentGY) && !(this.checkWalls(currentGX-13, currentGX+13, "y-14"))) {
+          if (y <= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y-14"))) {
             println("4");
             xdirG = 0;
             ydirG = -1;
@@ -483,51 +482,31 @@ class setUpGhosts {
         }
       }
     }
+        
+    currentGX += xdirG;
+    currentGY += ydirG;
+    ghostX.set(placeGhostNRandom, currentGX);
+    ghostY.set(placeGhostNRandom, currentGY);
+    println("place" + placeGhostRandom);
+    placeGhostNRandom += 1;
+    println(ghostX);
+    println(ghostY);
+      }
     //        }
-
-
-    /*
-          if (x > currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x+14"))){
-     //            xdirG = randGXRight;
-     xdirG = 1;
-     if (randGXRight == 0){
-     if (y > currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y+13"))){
-     ydirG = 1;
-     }else{
-     if (y < currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y-13"))){
-     ydirG = -1;
-     }else{
-     xdirG = 1;
-     }
-     }
-     }
-     }
-     if (x == currentGX){
-     if (y > currentGY && !(this.checkWalls(x-13, x+13, "y+13"))){
-     ydirG = 1;
-     }else{
-     ydirG = -1;
-     }
-     }
-     
-     
-     currentGX += xdirG;
-     currentGY += ydirG;
-     ghostX.set(placeGhostNRandom, currentGX);
-     ghostY.set(placeGhostNRandom, currentGY);
-     //        placeGhostNRandom += 1;
-     //      }
-     //      placeGhostRandom = 2;
-     placeGhostRandom = 1;
+/*
+     placeGhostNRandom = 1;
      //      while (placeGhostRandom < 4){
-     while (placeGhostRandom < 3){
+     while (placeGhostNRandom < 3){
      rGX2 = random(3);
      rGY2 = random(3);
      randGXRandom = int(rGX2) - 1;
      randGYRandom = int(rGY2) - 1;
-     currentGX = ghostX.get(placeGhostRandom);
-     currentGY = ghostY.get(placeGhostRandom);
+     currentGX = ghostX.get(placeGhostNRandom);
+     currentGY = ghostY.get(placeGhostNRandom);
+     if (randGXRandom == -1 && (!(this.checkWalls(currentGY-13, currentGY+13, "x-14"))) ||
+         randGXRandom == +1 && (!(this.checkWalls(currentGY-13, currentGY+13, "x+13"))) ){
      xdirG = randGXRandom;
+         }else{
      if (randGXRandom == 0){
      while (randGYRandom != 0){
      rGY2 = random(3);
@@ -539,26 +518,18 @@ class setUpGhosts {
      currentGY += ydirG;
      ghostX.set(placeGhostNRandom, currentGX);
      ghostY.set(placeGhostNRandom, currentGY);
-     placeGhostRandom += 1;
+     placeGhostNRandom += 1;
+     }
      }
      
-     
      */
-
-    currentGX += xdirG;
-    println(xdirG);
-    currentGY += ydirG;
-    ghostX.set(placeGhostNRandom, currentGX);
-    ghostY.set(placeGhostNRandom, currentGY);
-    println(ghostX);
-    println(ghostY);
-  }
-}
+     
+   
 
 
-
-
-
+     }
+ }
+//}
 
 
 setUpCircles test = new setUpCircles();
