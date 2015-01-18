@@ -171,7 +171,7 @@ class setUpCircles {
       score += 1;
       xStart.remove(removedPlace);
       yStart.remove(removedPlace);
-    }  
+    }
   }
 
   boolean game(int xcoor, int ycoor) {
@@ -187,7 +187,7 @@ class setUpCircles {
     }
     return false;
   }
-   
+
   //make circles that exclude the ones pacman already ate.
   void updateDraw(int radius) {
     textFont(f, 100);
@@ -220,12 +220,18 @@ class setUpCirclesSnake {
   PFont f= createFont("Arial", 25, true);
   int xCoorTail = 0;
   int yCoorTail = 0;
+  int lastxdirc = 0;
+  int lastydirc = 0;
 
 
   ArrayList<Integer>xStart = new ArrayList<Integer>();
   ArrayList<Integer>yStart = new ArrayList<Integer>();
   ArrayList<Integer>blackListX = new ArrayList<Integer>();
   ArrayList<Integer>blackListY = new ArrayList<Integer>();
+  ArrayList<Integer>xdirection = new ArrayList<Integer>();
+  ArrayList<Integer>ydirection = new ArrayList<Integer>();
+  ArrayList<Integer>xTail = new ArrayList<Integer>();
+  ArrayList<Integer>yTail = new ArrayList<Integer>();
 
 
   void addCirclesToArray(int x, int y) {
@@ -252,7 +258,7 @@ class setUpCirclesSnake {
 
 
   //make circles that exclude the ones pacman already ate.
-  void updateDraw(int xc, int yc, int radius) {
+  void updateDraw(int xc, int yc, int radius, int dirxc, int diryc) {
     background(0);
     textFont(f, 200);
     fill (100);
@@ -279,32 +285,77 @@ class setUpCirclesSnake {
 
     fill(100);
     ellipse(xcoor, ycoor, radius, radius);
+    //    xdirection.add(0, xdirc);
+    //    ydirection.add(0, ydirc);
+    int addOnePlace = 0;
     if (score != 0) {
-      numberOfCircles = 1;
+      numberOfCircles = 0;
 
-      xCoorTail = (xc + (-1 * (xdir) * 20));
-      yCoorTail = (yc + (-1 * (ydir) * 20));
-      while (numberOfCircles <= score) {
-        if (xdir != 0) {
-          ellipse(xCoorTail, yc, 20, 20);
-          xCoorTail += (-1 * (xdir) * 20);
-        } else {
-          if (ydir != 0) {
-            ellipse(xc, yCoorTail, 20, 20);
-            yCoorTail += (-1 * (ydir) * 20);
+      if (lastxdirc != dirxc || lastydirc != diryc) {
+        xCoorTail = (xc + (-1 * (dirxc) * 20));
+        yCoorTail = (yc + (-1 * (diryc) * 20));
+        xTail.add(xCoorTail);
+        yTail.add(yCoorTail);
+//        println(xTail);
+//        println(yTail);
+      } else {
+        while (addOnePlace < score + 10) {
+          if (lastxdirc == +1) {
+            xTail.set(addOnePlace, xTail.get(addOnePlace) + 1);
+          } else {
+            if (lastxdirc == -1) {
+              xTail.set(addOnePlace, xTail.get(addOnePlace) - 1);
+            } else {
+              if (lastydirc == 1) {
+                yTail.set(addOnePlace, yTail.get(addOnePlace) + 1);
+              } else {
+                if (lastydirc == -1) {
+                  yTail.set(addOnePlace, yTail.get(addOnePlace) - 1);
+                }
+              }
+            }
           }
+          addOnePlace += 1;
         }
-        numberOfCircles += 1;
+                  println(xTail.get(numberOfCircles) + "," + yTail.get(numberOfCircles));
+
+        numberOfCircles = 0;
+        while (numberOfCircles < score) {
+          ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
+          numberOfCircles += 1;
+          println(xTail.get(numberOfCircles) + "," + yTail.get(numberOfCircles));
+        }
+        lastxdirc = dirxc;
+        lastydirc = diryc;
+
+
+
+        /*
+
+         while (numberOfCircles < score) {
+         if (xdir != 0) {
+         ellipse(xCoorTail, yc, 20, 20);
+         xCoorTail += (-1 * (xdirection.get(numberOfCircles)) * 20);
+         } else {
+         if (ydir != 0) {
+         ellipse(xc, yCoorTail, 20, 20);
+         yCoorTail += (-1 * (ydirection.get(numberOfCircles)) * 20);
+         }
+         }
+         numberOfCircles += 1;
+         }
+         }
+         */
+        if (score == 5) {
+          or = false;
+          score = 0;
+          x = saveX;
+          y = saveY;
+        }
       }
     }
-    if (score == 5){
-      or = false;
-      score = 0;
-      x = saveX;
-      y = saveY;
-    }
   }
-} 
+}
 
 class setUpGhosts {
 
@@ -475,56 +526,56 @@ class setUpGhosts {
       this.addInitalCoordsG();
     }
     placeGhostNRandom = 0;
-    while (placeGhostNRandom < 2){ // 2 target ghosts
-    currentGX = ghostX.get(placeGhostNRandom);
-    currentGY = ghostY.get(placeGhostNRandom);
-    //println(currentGX + "," + currentGY);
-//    rGX = random(2);
-//    rGY = random(2);
-//    randGXLeft = int(rGX)- 1;
-//    randGYUp = int(rGY) - 1;
-//    randGXRight = int(rGX) + 1;
-//    randGYDown = int(rGY) + 1;
-    //        if (x < currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x-14"))){
-    //    if (!noChoice()) {
-    if (x <= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x-14"))) {
-      //println("1");
-      xdirG = -1;
-      ydirG = 0;
-    } else {
-      //            if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
-      if (x >= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x+13"))) {
-        //println("2");
-        xdirG = 1;
+    while (placeGhostNRandom < 2) { // 2 target ghosts
+      currentGX = ghostX.get(placeGhostNRandom);
+      currentGY = ghostY.get(placeGhostNRandom);
+      //println(currentGX + "," + currentGY);
+      //    rGX = random(2);
+      //    rGY = random(2);
+      //    randGXLeft = int(rGX)- 1;
+      //    randGYUp = int(rGY) - 1;
+      //    randGXRight = int(rGX) + 1;
+      //    randGYDown = int(rGY) + 1;
+      //        if (x < currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x-14"))){
+      //    if (!noChoice()) {
+      if (x <= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x-14"))) {
+        //println("1");
+        xdirG = -1;
         ydirG = 0;
       } else {
-        //              if (y > currentGY && !(this.checkWalls(x-13, x+13, "y+13"))){
-        if (y >= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y+13"))) {
-          //println("3");
-          xdirG = 0;
-          ydirG = 1;
+        //            if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
+        if (x >= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x+13"))) {
+          //println("2");
+          xdirG = 1;
+          ydirG = 0;
         } else {
-          //                  if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
-          if (y <= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y-14"))) {
-            //println("4");
+          //              if (y > currentGY && !(this.checkWalls(x-13, x+13, "y+13"))){
+          if (y >= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y+13"))) {
+            //println("3");
             xdirG = 0;
-            ydirG = -1;
+            ydirG = 1;
+          } else {
+            //                  if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
+            if (y <= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y-14"))) {
+              //println("4");
+              xdirG = 0;
+              ydirG = -1;
+            }
           }
         }
       }
+
+      currentGX += xdirG;
+      currentGY += ydirG;
+      ghostX.set(placeGhostNRandom, currentGX);
+      ghostY.set(placeGhostNRandom, currentGY);
+      //println("place" + placeGhostRandom);
+      placeGhostNRandom += 1;
+      //println(ghostX);
+      //println(ghostY);
     }
-        
-    currentGX += xdirG;
-    currentGY += ydirG;
-    ghostX.set(placeGhostNRandom, currentGX);
-    ghostY.set(placeGhostNRandom, currentGY);
-    //println("place" + placeGhostRandom);
-    placeGhostNRandom += 1;
-    //println(ghostX);
-    //println(ghostY);
-      } 
-     }
- }
+  }
+}
 
 setUpCircles test = new setUpCircles();
 setUpCirclesSnake test2 = new setUpCirclesSnake();
@@ -535,7 +586,7 @@ void draw() {
   imageMode(CENTER);
   image(img, 450, 300);
   //or = false;
-  if((test.game(x,y)) == true){
+  if ((test.game(x, y)) == true) {
     or = true;
     saveX = x;
     saveY = y;
@@ -543,7 +594,7 @@ void draw() {
     y = 314;
   }
   if (or == true) {
-    test2.updateDraw(x, y, 30);
+    test2.updateDraw(x, y, 30, xdir, ydir);
     println("savedX: "  + saveX + " savedY: " + saveY);
   } else {
     test.update(x, y);
@@ -628,3 +679,4 @@ boolean checkWalls(int startCoor, int endCoor, String bound) {
   }
   return false;
 }
+
