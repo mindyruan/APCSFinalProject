@@ -66,9 +66,9 @@ January 15, 2015
 January 16, 2015
 - Combined our codes! Spawned food into the first row of the map, but haven't added to the other rows yet. Eating also works fine. *Food is also spawned inside the walls. We're going to manually remove those.
 - Filled the map with food! (For some reason the very last box in the bottom right corner doesn't spawn a food but that's okay we'll just put the minigame there) Working on getting rid of wall food.
+
+January 17, 2015
 - Removed a few walls for the ghosts! Quite possibly the final version of the map.
 - Figured out how to remove the food in the walls! Successfully removed 3 test foods; now working on removing the rest of them
 - Removed all the food in the walls by manually finding each coordinate of each food (rest in peace)
-
-January 17, 2015 (forgot to update this day, but did work)
-- Created ghosts. Cannot get the ghosts to stay within the walls yet, so working on that. Made 1 ghost that chases pacman and 2 that is randomly moving.
+- Created ghosts. Cannot get the ghosts to stay within the walls yet, so working on that. Made 1 ghost that chases pacman and 2 that is randomly moving.  (forgot to update this day, but did work)
