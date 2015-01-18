@@ -76,11 +76,43 @@ class setUpCircles {
   ArrayList<Integer>blackListX = new ArrayList<Integer>();
   ArrayList<Integer>blackListY = new ArrayList<Integer>();
 
+  //rest in peace me
   ArrayList<Integer>badX = new ArrayList<Integer>(
-  Arrays.asList(226, 450, 674));
-  ArrayList<Integer>badY = new ArrayList<Integer>(
-  Arrays.asList(230, 230, 230));
+  Arrays.asList(15,
+  2,3,4,5,6,8,10,11,12,14,15,16,18,20,22,24,25,26,27,28,
+  4,10,12,18,19,20,26,
+  1,2,6,7,8,14,15,16,22,23,24,28,29,
+  4,7,10,12,15,18,20,23,26,
+  2,4,5,9,10,12,13,17,18,20,21,25,26,28,
+  2,4,5,7,9,10,12,13,15,17,18,20,21,23,25,26,28,
+  4,10,12,18,20,26,
+  1,2,6,7,8,14,15,16,22,23,24,28,29,
+  4,7,10,11,12,15,18,20,23,26,
+  2,3,4,5,6,8,10,12,14,15,16,18,19,20,22,24,25,26,27,28,
+  15));
 
+  
+  ArrayList<Integer>badY = new ArrayList<Integer>(
+  Arrays.asList(1,
+  2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+  3,3,3,3,3,3,3,
+  4,4,4,4,4,4,4,4,4,4,4,4,4,
+  5,5,5,5,5,5,5,5,5,
+  6,6,6,6,6,6,6,6,6,6,6,6,6,6,
+  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
+  8,8,8,8,8,8,
+  9,9,9,9,9,9,9,9,9,9,9,9,9,
+  10,10,10,10,10,10,10,10,10,10,
+  11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
+  12));
+
+
+// s = a + (n-1)d  arithmetic sequences heck yeah
+//58 + 6(28) = 226   [[ 58 + (x-1)28 ]]
+//146 + 3(28) = 230  [[ 146 + (x-1)28 ]]
+
+//first circle = 58,146
+//col 7, row 4 = 226,230
 
 
   PFont f= createFont("Arial", 25, true);
@@ -88,8 +120,6 @@ class setUpCircles {
 
   void addCirclesToArray(int col) {
     // (below) : load the circles Pacman is eating
-    //int i1 = 50;
-    //int i2 = 50;
     //int xfood = 58;
     int yfood = col; //146
 
@@ -98,26 +128,19 @@ class setUpCircles {
         xStart.add(xfood);
         yStart.add(yfood);
       }
-      /*
-    while ((xfood <= 860) && (pleaseGoAway(xfood,yfood))) {
-       xStart.add(xfood);
-       yStart.add(yfood);
-       xfood += 28;
-       }
-       */
-      //println(xStart);
-      //println(yStart);
     }
   }
 
   boolean pleaseGoAway(int xcor, int ycor) {
-    int index = badX.indexOf(xcor);
+    int index = badX.indexOf(((xcor-58)/28)+1);
     if (index == -1) {
       return true;
     }
     for (int i = 0; i < badX.size (); i++) {
-      if ((badX.get(i) == xcor)
-        && (badY.get(i) == ycor)) {
+      int noX = badX.get(i);
+      int noY = badY.get(i);
+      if (((58 + (28*(noX - 1))) == xcor)
+        && ((146 + (28*(noY - 1))) == ycor)) {
         badX.remove(i);
         badY.remove(i);
         return false;
@@ -127,7 +150,6 @@ class setUpCircles {
   }
 
   void update(int x, int y) {  
-    //println(""+ badX.get(1) + " " +badY.get(1));
     if (xStart.isEmpty() && yStart.isEmpty()) {
       int startYCoor = 146;
       while (startYCoor < 470) {
@@ -143,23 +165,7 @@ class setUpCircles {
       yStart.remove(removedPlace);
     }
   }
-
-  /*
-  void update(int x, int y) {  
-   if (xStart.isEmpty() && yStart.isEmpty()) {
-   int startYCoor = 146;
-   while (startYCoor < 470) {
-   test.addCirclesToArray(startYCoor);
-   startYCoor += 28;
-   }
-   }
-   if (checkCoord(xStart, yStart, x, y)) {
-   score += 1;
-   xStart.remove(removedPlace);
-   yStart.remove(removedPlace);
-   }
-   }
-   */
+   
   //make circles that exclude the ones pacman already ate.
   void updateDraw(int radius) {
     textFont(f, 100);
