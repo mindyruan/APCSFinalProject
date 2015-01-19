@@ -225,6 +225,8 @@ class setUpCirclesSnake {
   int lastydirc = 0;
   int prevX = 0;
   int prevY = 0;
+  int xTailPlace = 0;
+  int yTailPlace = 0;
 
 
   ArrayList<Integer>xStart = new ArrayList<Integer>();
@@ -235,8 +237,8 @@ class setUpCirclesSnake {
   ArrayList<Integer>ydirection = new ArrayList<Integer>();
   ArrayList<Integer>xTail = new ArrayList<Integer>();
   ArrayList<Integer>yTail = new ArrayList<Integer>();
-  
-  setUpCirclesSnake(){
+
+  setUpCirclesSnake() {
     xTail.add(450);
     yTail.add(314);
   }
@@ -296,57 +298,74 @@ class setUpCirclesSnake {
     //    ydirection.add(0, ydirc);
 
 
-   
-     
-//    xTail.add(0, xc + (dirxc * 20));
-//    yTail.add(0, yc + (diryc * 20));
 
+
+    //    xTail.add(0, xc + (dirxc * 20));
+    //    yTail.add(0, yc + (diryc * 20));
+    /*
     println(xc);
-    println(yc);
-    println(xTail);
-    println(yTail);
+     println(yc);
+     println(xTail);
+     println(yTail);
+     */
 
 
-/*
-    if (score >= 1){
-     println("hi1");
-     xCoorTail = xTail.get(0);
-     yCoorTail = yTail.get(0);
-     numberOfCircles = 0;
-     while (numberOfCircles <= score) {
-     println("yoooooooooooooooooo");
-     xCoorTail += (-1 * (dirxc) * 20);
-     xTail.add(xCoorTail);
-     yCoorTail += (-1 * (diryc) * 20);
-     yTail.add(yCoorTail);
-     numberOfCircles += 1;
+
+//    if (score >= 1) {
+      println("hi1");
+      xCoorTail = xc;
+      yCoorTail = yc;
+      numberOfCircles = 0;
+      while (numberOfCircles <= score) {
+        println("yoooooooooooooooooo");
+        xCoorTail += (-1 * numberOfCircles * (dirxc) * 20);
+        xTail.add(numberOfCircles, xCoorTail);
+        yCoorTail += (-1 * numberOfCircles * (diryc) * 20);
+        yTail.add(numberOfCircles, yCoorTail);
+        numberOfCircles += 1;
+//      }
+    } 
+      if (lastxdirc != dirxc || lastydirc != diryc) {
+
+        xCoorTail = xTail.get(0) + ( (dirxc) * 20);
+        yCoorTail = yTail.get(0) + ((diryc) * 20);
+        xTail.add(0, xCoorTail);
+        yTail.add(0, yCoorTail);
+
+        lastxdirc = dirxc;
+        lastydirc = diryc;
+      }
+    
+    /*
+    xTailPlace = xTail.size() - 1;
+     yTailPlace = yTail.size() - 1;
+     
+     while (xTailPlace > 0) {
+     xTail.set(xTailPlace, xTail.get(xTailPlace - 1));
+     xTailPlace += 1;
      }
-    }
-    */
-
-
-
-      xCoorTail = xTail.get(0) + ( (dirxc) * 20);
-      yCoorTail = yTail.get(0) + ((diryc) * 20);
-      xTail.add(0, xCoorTail);
-      yTail.add(0, yCoorTail);
-      numberOfCircles = 1;
-
-    lastxdirc = dirxc;
-    lastydirc = diryc;
-    //    }
+     
+     while (yTailPlace > 0) {
+     yTail.set(yTailPlace, yTail.get(yTailPlace - 1));
+     yTailPlace += 1;
+     }
+     */
 
     numberOfCircles = 0;
-    println(xTail.subList(0,1));
-    println(yTail.subList(0,1));
-    while (numberOfCircles <= scoreSnake) {
+    println(xTail.subList(0, 1));
+    println(yTail.subList(0, 1));
+    while (numberOfCircles < scoreSnake) {
       ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
       numberOfCircles += 1;
     }
-    
+
     println(scoreSnake);
-    
-    
+    if (xTail.size() > 1){
+      println(xTail.subList(0,2));
+      println(yTail.subList(0,2));
+    }
+
+
     if (scoreSnake == 5) {
       or = false;
       scoreSnake = 0;
@@ -586,7 +605,7 @@ void draw() {
   background(0);
   imageMode(CENTER);
   image(img, 450, 300);
-//  or = false;
+  or = true;
 
   if ((test.game(x, y)) == true) {
     or = true;
@@ -595,8 +614,8 @@ void draw() {
     x = 450;
     y = 314;
   }
-  
-  println(test.game(x,y));
+
+  println(test.game(x, y));
   println(or);
 
   if (or == true) {
@@ -625,38 +644,38 @@ void draw() {
       (!(checkWalls(y-13, y+13, "x-14")))) { //go left
       xdir = -1;
       ydir = 0;
-//      if (or == true){
-//        xdir = -3;
-//        ydir = 0;
-//      }
+      //      if (or == true){
+      //        xdir = -3;
+      //        ydir = 0;
+      //      }
     }
     if ((key == 'd' || key == 'D') &&
       (!(checkWalls(y-13, y+13, "x+13")))) { //go right
       xdir = 1;
       ydir = 0;
-//      if (or == true){
-//        xdir = 3;
-//        ydir = 0;
-//     }
+      //      if (or == true){
+      //        xdir = 3;
+      //        ydir = 0;
+      //     }
     }
     if ((key == 'w' || key =='W') &&
       (!(checkWalls(x-13, x+13, "y-14")))) { //go up
       xdir = 0;
       ydir = -1;
-//      if (or == true){
-//        xdir = 0;
-//        ydir = -3;
-//      }
+      //      if (or == true){
+      //        xdir = 0;
+      //        ydir = -3;
+      //      }
     }
 
     if ((key == 's' || key == 'S') &&
       (!(checkWalls(x-13, x+13, "y+13")))) { //go down
       xdir = 0;
       ydir = 1;
-//      if (or == true){
-//        xdir = 0;
-//        ydir = 3;
-//      }
+      //      if (or == true){
+      //        xdir = 0;
+      //        ydir = 3;
+      //      }
     }
   }
 
