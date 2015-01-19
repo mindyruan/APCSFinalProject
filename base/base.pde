@@ -290,32 +290,22 @@ class setUpCirclesSnake {
     //    xdirection.add(0, xdirc);
     //    ydirection.add(0, ydirc);
 
-
-
-    if (score == 1) {
-      numberOfCircles = 1;
-
-      xCoorTail = (xc + (-1 * (dirxc) * 20));
-      yCoorTail = (yc + (-1 * (diryc) * 20));
+    xTail.clear();
+    yTail.clear();
+    
+    if (score == 1){
+      xCoorTail = xc;
+      yCoorTail = yc;
       while (numberOfCircles <= score) {
-        if (xdir != 0) {
-//          ellipse(xCoorTail, y, 20, 20);
-          xCoorTail += (-1 * (xdir) * 20);
-        } else {
-          if (ydir != 0) {
-//            ellipse(x, yCoorTail, 20, 20);
-            yCoorTail += (-1 * (ydir) * 20);
-          }
-        }
+          xCoorTail += (-1 * (lastxdirc) * 20);
+          xTail.add(xCoorTail);
+          yCoorTail += (-1 * (lastydirc) * 20);
+          yTail.add(yCoorTail);
         numberOfCircles += 1;
       }
-      xTail.add(xCoorTail);
-      yTail.add(yCoorTail);
     }
 
-
-    numberOfCircles = 2; 
-    if (score > 1) {
+    
       if (lastxdirc != dirxc || lastydirc != diryc) {
         xCoorTail = xc + (-1 * (dirxc) * 20);
         yCoorTail = yc + (-1 * (diryc) * 20);
@@ -323,11 +313,13 @@ class setUpCirclesSnake {
         yTail.add(0, yCoorTail);
         numberOfCircles = 1;
       }
-    }
+      lastxdirc = dirxc;
+      lastydirc = diryc;
+    
 
     numberOfCircles = 0;
 
-    while (numberOfCircles < score) {
+    while (numberOfCircles < score - 1) {
       ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
       numberOfCircles += 1;
     }
@@ -347,13 +339,6 @@ class setUpCirclesSnake {
      }
      
      */
-
-
-
-
-
-
-
 
 
     /*
