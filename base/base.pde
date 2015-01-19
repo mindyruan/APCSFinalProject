@@ -212,11 +212,8 @@ class setUpCircles {
 
 class setUpCirclesSnake {
 
-
-  //  int lastxdir = 0;
-  //  int lastydir = 0;
   boolean on = false;
-  int score = 0;
+  //  int score = 0;
   int numberOfCircles = score;
   PFont f= createFont("Arial", 25, true);
   int xCoorTail = x;
@@ -227,33 +224,61 @@ class setUpCirclesSnake {
   int prevY = 0;
   int xTailPlace = 0;
   int yTailPlace = 0;
+  int lengthTail = 3 + scoreSnake;
+  int timee = millis();
+  float randX = random(900);
+  float randY = random(600);
+  int xcoor = int(randX);
+  int ycoor = int(randY);
 
 
   ArrayList<Integer>xStart = new ArrayList<Integer>();
   ArrayList<Integer>yStart = new ArrayList<Integer>();
-  ArrayList<Integer>blackListX = new ArrayList<Integer>();
-  ArrayList<Integer>blackListY = new ArrayList<Integer>();
-  ArrayList<Integer>xdirection = new ArrayList<Integer>();
-  ArrayList<Integer>ydirection = new ArrayList<Integer>();
+  //  ArrayList<Integer>blackListX = new ArrayList<Integer>();
+  //  ArrayList<Integer>blackListY = new ArrayList<Integer>();
+  //  ArrayList<Integer>xdirection = new ArrayList<Integer>();
+  //  ArrayList<Integer>ydirection = new ArrayList<Integer>();
   ArrayList<Integer>xTail = new ArrayList<Integer>();
   ArrayList<Integer>yTail = new ArrayList<Integer>();
 
   setUpCirclesSnake() {
-    xTail.add(450);
-    yTail.add(314);
+    int placeeS = 0;
+    int xS = 450;
+    int yS = 314;
+    while (placeeS < 3) {
+      xTail.add(xS);
+      yTail.add(yS);
+      xS += 20;
+      yS += 0;
+      placeeS += 1;
+    }
+    println(xTail);
+    println(yTail);
   }
-
-
 
   void addCirclesToArray(int x, int y) {
     xStart.add(x);
     yStart.add(y);
   }
 
-
   boolean update(int x, int y) {
     on = false;
-    if (checkCoord(xStart, yStart, x, y)) {
+    int xTailPlace = 0;
+    int yTailPlace = 0;
+    while (xTailPlace < lengthTail) {
+      if (checkCoordB(xTail, yTail, xTail.get(xTailPlace), yTail.get(yTailPlace))) {
+        scoreSnake = 0;
+        or = false;
+        x = saveX;
+        y = saveY;
+      } else {
+        xTailPlace += 1;
+        yTailPlace += 1;
+      }
+    }
+    xTailPlace = 0;
+    yTailPlace = 0;
+    if (checkCoord(xStart, yStart, xTail.get(xTailPlace), yTail.get(yTailPlace))) {
       on = true;
       scoreSnake += 1;
       return on;
@@ -261,10 +286,6 @@ class setUpCirclesSnake {
     return on;
   }
 
-  float randX = random(900);
-  float randY = random(600);
-  int xcoor = int(randX);
-  int ycoor = int(randY);
 
 
   //make circles that exclude the ones pacman already ate.
@@ -281,12 +302,6 @@ class setUpCirclesSnake {
       randY = random(600);
       xcoor = int(randX);
       ycoor = int(randY);
-      while (checkCoordB (blackListX, blackListY, xcoor, ycoor) == true) {
-        randX = random(900);
-        randY = random(600);
-        xcoor = int(randX);
-        ycoor = int(randY);
-      }
       xStart.clear();
       yStart.clear();
       addCirclesToArray(xcoor, ycoor);
@@ -294,76 +309,62 @@ class setUpCirclesSnake {
 
     fill(100);
     ellipse(xcoor, ycoor, radius, radius);
-    //    xdirection.add(0, xdirc);
-    //    ydirection.add(0, ydirc);
 
-
-
-
-    //    xTail.add(0, xc + (dirxc * 20));
-    //    yTail.add(0, yc + (diryc * 20));
     /*
-    println(xc);
-     println(yc);
-     println(xTail);
-     println(yTail);
-     */
-
-
-
 //    if (score >= 1) {
-      println("hi1");
-      xCoorTail = xc;
-      yCoorTail = yc;
-      numberOfCircles = 0;
-      while (numberOfCircles <= score) {
-        println("yoooooooooooooooooo");
-        xCoorTail += (-1 * numberOfCircles * (dirxc) * 20);
-        xTail.add(numberOfCircles, xCoorTail);
-        yCoorTail += (-1 * numberOfCircles * (diryc) * 20);
-        yTail.add(numberOfCircles, yCoorTail);
-        numberOfCircles += 1;
-//      }
-    } 
-      if (lastxdirc != dirxc || lastydirc != diryc) {
-
-        xCoorTail = xTail.get(0) + ( (dirxc) * 20);
-        yCoorTail = yTail.get(0) + ((diryc) * 20);
-        xTail.add(0, xCoorTail);
-        yTail.add(0, yCoorTail);
-
-        lastxdirc = dirxc;
-        lastydirc = diryc;
-      }
-    
-    /*
-    xTailPlace = xTail.size() - 1;
-     yTailPlace = yTail.size() - 1;
-     
-     while (xTailPlace > 0) {
-     xTail.set(xTailPlace, xTail.get(xTailPlace - 1));
-     xTailPlace += 1;
-     }
-     
-     while (yTailPlace > 0) {
-     yTail.set(yTailPlace, yTail.get(yTailPlace - 1));
-     yTailPlace += 1;
-     }
+     println("hi1");
+     xCoorTail = xc;
+     yCoorTail = yc;
+     numberOfCircles = 0;
+     while (numberOfCircles <= score) {
+     println("yoooooooooooooooooo");
+     xCoorTail += (-1 * numberOfCircles * (dirxc) * 20);
+     xTail.add(numberOfCircles, xCoorTail);
+     yCoorTail += (-1 * numberOfCircles * (diryc) * 20);
+     yTail.add(numberOfCircles, yCoorTail);
+     numberOfCircles += 1;
+     //      }
+     } 
      */
+    //      if (lastxdirc != dirxc || lastydirc != diryc) {
+    if (millis() - timee > 150) {
+      xCoorTail = xTail.get(0) + ((dirxc) * 20);
+      yCoorTail = yTail.get(0) + ((diryc) * 20);
+      xTail.add(0, xCoorTail);
+      yTail.add(0, yCoorTail);
 
+      //    lastxdirc = dirxc;
+      //    lastydirc = diryc;
+      /*
+
+       xTailPlace = xTail.size() - 1;
+       yTailPlace = yTail.size() - 1;
+       
+       while (xTailPlace > 0) {
+       xTail.set(xTailPlace, xTail.get(xTailPlace - 1));
+       xTailPlace -= 1;
+       }
+       
+       while (yTailPlace > 0) {
+       yTail.set(yTailPlace, yTail.get(yTailPlace - 1));
+       yTailPlace -= 1;
+       }
+       */
+
+      timee = millis();
+    }
+
+    lengthTail = 3 + scoreSnake;
     numberOfCircles = 0;
-    println(xTail.subList(0, 1));
-    println(yTail.subList(0, 1));
-    while (numberOfCircles < scoreSnake) {
+    //    println(xTail.subList(0, 1));
+    //    println(yTail.subList(0, 1));
+    while (numberOfCircles < lengthTail) {
       ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
       numberOfCircles += 1;
     }
 
-    println(scoreSnake);
-    if (xTail.size() > 1){
-      println(xTail.subList(0,2));
-      println(yTail.subList(0,2));
-    }
+    println(lengthTail);
+
 
 
     if (scoreSnake == 5) {
@@ -626,8 +627,9 @@ void draw() {
     test.updateDraw(8);
     test3.updateG();
     test3.drawGhosts();
+    ellipse(x, y, 26, 26);
   }
-  ellipse(x, y, 26, 26);
+  //  ellipse(x, y, 26, 26);
   //ellipse(58,146,8,8);
 
   color rr = get(mouseX, mouseY);
