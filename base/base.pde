@@ -13,6 +13,7 @@ int snakeY = 314;
 int placeX = 0;
 int placeY = 0;
 int score = 0;
+int scoreSnake = 0;
 int place = 0;
 int xdirG = 0;
 int ydirG = 0;
@@ -252,7 +253,7 @@ class setUpCirclesSnake {
     on = false;
     if (checkCoord(xStart, yStart, x, y)) {
       on = true;
-      score += 1;
+      scoreSnake += 1;
       return on;
     }
     return on;
@@ -269,7 +270,7 @@ class setUpCirclesSnake {
     background(0);
     textFont(f, 200);
     fill (100);
-    text(score, 660, 220);
+    text(scoreSnake, 660, 220);
     //int saveX = savedX;
     //int saveY = savedY;
 
@@ -306,7 +307,7 @@ class setUpCirclesSnake {
     println(yTail);
 
 
-
+/*
     if (score >= 1){
      println("hi1");
      xCoorTail = xTail.get(0);
@@ -321,15 +322,16 @@ class setUpCirclesSnake {
      numberOfCircles += 1;
      }
     }
+    */
 
-/*
 
-      xCoorTail = xTail.get(0) + (-1 * (dirxc) * 20);
-      yCoorTail = yTail.get(0) + (-1 * (diryc) * 20);
+
+      xCoorTail = xTail.get(0) + ( (dirxc) * 20);
+      yCoorTail = yTail.get(0) + ((diryc) * 20);
       xTail.add(0, xCoorTail);
       yTail.add(0, yCoorTail);
       numberOfCircles = 1;
-*/
+
     lastxdirc = dirxc;
     lastydirc = diryc;
     //    }
@@ -337,159 +339,17 @@ class setUpCirclesSnake {
     numberOfCircles = 0;
     println(xTail.subList(0,1));
     println(yTail.subList(0,1));
-    while (numberOfCircles < score) {
+    while (numberOfCircles <= scoreSnake) {
       ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
       numberOfCircles += 1;
     }
-
-    /*
     
-     if (score != 0) {
-     xCoorTail = (xc + (-1 * (lastxdirc) * 20));
-     yCoorTail = (yc + (-1 * (lastydirc) * 20));
-     while (numberOfCircles <= score) {
-     xCoorTail += (-1 * (xdir) * 20);
-     xTail.add(xCoorTail);
-     yCoorTail += (-1 * (ydir) * 20);
-     yTail.add(yCoorTail);
-     numberOfCircles += 1;
-     }
-     }
-     
-     */
-
-
-    /*
-    xCoorTail = xc + (-1 * (dirxc) * 20);
-     yCoorTail = yc + (-1 * (diryc) * 20);
-     
-     if (xdirection.isEmpty()) {
-     xdirection.add(dirxc);
-     ydirection.add(diryc);
-     }
-     
-     while (numberOfCircles < score) {
-     if (dirxc != xdirection.get(0) || diryc != ydirection.get(0)) {
-     xdirection.add(0, dirxc);
-     ydirection.add(0, diryc);
-     }
-     
-     ellipse(xCoorTail, yCoorTail, 20, 20);
-     numberOfCircles += 1;
-     xCoorTail = xc + (-1 * (xdirection.get(numberOfCircles)) * 20);
-     yCoorTail = yc + (-1 * (ydirection.get(numberOfCircles)) * 20);
-     }
-     
-     
-     */
-
-    /*
+    println(scoreSnake);
     
-     
-     if (score != 0) {
-     numberOfCircles = 0;
-     
-     xCoorTail = (xc + (-1 * (xdir) * 20));
-     yCoorTail = (yc + (-1 * (ydir) * 20));
-     //      xCoorTail += (-1 * (xdir) * 20);
-     //      yCoorTail += (-1 * (ydir) * 20);
-     if (xTail.isEmpty()){
-     xTail.add(xCoorTail);
-     yTail.add(yCoorTail);
-     }
-     //      numberOfCircles += 1;
-     }
-     println(xTail);
-     println(yTail);
-    /*
-     numberOfCircles = 1;
-     
-     while (numberOfCircles < xTail.size()){
-     println(xTail);
-     println(yTail);
-     prevX = xTail.set(numberOfCircles, prevX);
-     prevY = yTail.set(numberOfCircles, prevY);
-     numberOfCircles += 1;
-     }
-     
-     
-     numberOfCircles = 0;
-     
-     while (numberOfCircles < score - 1){
-     ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
-     numberOfCircles += 1;
-     }
-     */
-
-    /*
     
-     xTail.add(xc);
-     yTail.add(yc);
-     
-     if (lastxdirc != dirxc || lastydirc != diryc) {
-     
-     int addOnePlace = 0;
-     if (score != 0) {
-     numberOfCircles = 0;
-     
-     if (lastxdirc != dirxc || lastydirc != diryc) {
-     xCoorTail = (xc + (-1 * (dirxc) * 20));
-     yCoorTail = (yc + (-1 * (diryc) * 20));
-     xTail.add(xCoorTail);
-     yTail.add(yCoorTail);
-     //        println(xTail);
-     //        println(yTail);
-     } else {
-     while (addOnePlace < score + 10) {
-     if (lastxdirc == +1) {
-     xTail.set(addOnePlace, xTail.get(addOnePlace) + 1);
-     } else {
-     if (lastxdirc == -1) {
-     xTail.set(addOnePlace, xTail.get(addOnePlace) - 1);
-     } else {
-     if (lastydirc == 1) {
-     yTail.set(addOnePlace, yTail.get(addOnePlace) + 1);
-     } else {
-     if (lastydirc == -1) {
-     yTail.set(addOnePlace, yTail.get(addOnePlace) - 1);
-     }
-     }
-     }
-     }
-     addOnePlace += 1;
-     }
-     println(xTail.get(numberOfCircles) + "," + yTail.get(numberOfCircles));
-     
-     numberOfCircles = 0;
-     while (numberOfCircles < score) {
-     ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
-     numberOfCircles += 1;
-     println(xTail.get(numberOfCircles) + "," + yTail.get(numberOfCircles));
-     }
-     lastxdirc = dirxc;
-     lastydirc = diryc;
-     
-     
-     
-    /*
-     
-     while (numberOfCircles < score) {
-     if (xdir != 0) {
-     ellipse(xCoorTail, yc, 20, 20);
-     xCoorTail += (-1 * (xdirection.get(numberOfCircles)) * 20);
-     } else {
-     if (ydir != 0) {
-     ellipse(xc, yCoorTail, 20, 20);
-     yCoorTail += (-1 * (ydirection.get(numberOfCircles)) * 20);
-     }
-     }
-     numberOfCircles += 1;
-     }
-     }
-     */
-    if (score == 5) {
+    if (scoreSnake == 5) {
       or = false;
-      score = 0;
+      scoreSnake = 0;
       x = saveX;
       y = saveY;
     }
@@ -726,7 +586,7 @@ void draw() {
   background(0);
   imageMode(CENTER);
   image(img, 450, 300);
-  or = true;
+//  or = false;
 
   if ((test.game(x, y)) == true) {
     or = true;
@@ -735,6 +595,9 @@ void draw() {
     x = 450;
     y = 314;
   }
+  
+  println(test.game(x,y));
+  println(or);
 
   if (or == true) {
     test2.updateDraw(x, y, 30, xdir, ydir);
@@ -762,22 +625,38 @@ void draw() {
       (!(checkWalls(y-13, y+13, "x-14")))) { //go left
       xdir = -1;
       ydir = 0;
+//      if (or == true){
+//        xdir = -3;
+//        ydir = 0;
+//      }
     }
     if ((key == 'd' || key == 'D') &&
       (!(checkWalls(y-13, y+13, "x+13")))) { //go right
       xdir = 1;
       ydir = 0;
+//      if (or == true){
+//        xdir = 3;
+//        ydir = 0;
+//     }
     }
     if ((key == 'w' || key =='W') &&
       (!(checkWalls(x-13, x+13, "y-14")))) { //go up
       xdir = 0;
       ydir = -1;
+//      if (or == true){
+//        xdir = 0;
+//        ydir = -3;
+//      }
     }
 
     if ((key == 's' || key == 'S') &&
       (!(checkWalls(x-13, x+13, "y+13")))) { //go down
       xdir = 0;
       ydir = 1;
+//      if (or == true){
+//        xdir = 0;
+//        ydir = 3;
+//      }
     }
   }
 
