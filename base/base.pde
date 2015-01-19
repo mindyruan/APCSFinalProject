@@ -212,8 +212,8 @@ class setUpCircles {
 class setUpCirclesSnake {
 
 
-  int lastxdir = 0;
-  int lastydir = 0;
+  //  int lastxdir = 0;
+  //  int lastydir = 0;
   boolean on = false;
   int score = 0;
   int numberOfCircles = score;
@@ -222,6 +222,8 @@ class setUpCirclesSnake {
   int yCoorTail = 0;
   int lastxdirc = 0;
   int lastydirc = 0;
+  int prevX = 0;
+  int prevY = 0;
 
 
   ArrayList<Integer>xStart = new ArrayList<Integer>();
@@ -287,75 +289,214 @@ class setUpCirclesSnake {
     ellipse(xcoor, ycoor, radius, radius);
     //    xdirection.add(0, xdirc);
     //    ydirection.add(0, ydirc);
-    int addOnePlace = 0;
-    if (score != 0) {
-      numberOfCircles = 0;
 
-      if (lastxdirc != dirxc || lastydirc != diryc) {
-        xCoorTail = (xc + (-1 * (dirxc) * 20));
-        yCoorTail = (yc + (-1 * (diryc) * 20));
-        xTail.add(xCoorTail);
-        yTail.add(yCoorTail);
-//        println(xTail);
-//        println(yTail);
-      } else {
-        while (addOnePlace < score + 10) {
-          if (lastxdirc == +1) {
-            xTail.set(addOnePlace, xTail.get(addOnePlace) + 1);
-          } else {
-            if (lastxdirc == -1) {
-              xTail.set(addOnePlace, xTail.get(addOnePlace) - 1);
-            } else {
-              if (lastydirc == 1) {
-                yTail.set(addOnePlace, yTail.get(addOnePlace) + 1);
-              } else {
-                if (lastydirc == -1) {
-                  yTail.set(addOnePlace, yTail.get(addOnePlace) - 1);
-                }
-              }
-            }
+
+
+    if (score == 1) {
+      numberOfCircles = 1;
+
+      xCoorTail = (xc + (-1 * (dirxc) * 20));
+      yCoorTail = (yc + (-1 * (diryc) * 20));
+      while (numberOfCircles <= score) {
+        if (xdir != 0) {
+//          ellipse(xCoorTail, y, 20, 20);
+          xCoorTail += (-1 * (xdir) * 20);
+        } else {
+          if (ydir != 0) {
+//            ellipse(x, yCoorTail, 20, 20);
+            yCoorTail += (-1 * (ydir) * 20);
           }
-          addOnePlace += 1;
         }
-                  println(xTail.get(numberOfCircles) + "," + yTail.get(numberOfCircles));
-
-        numberOfCircles = 0;
-        while (numberOfCircles < score) {
-          ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
-          numberOfCircles += 1;
-          println(xTail.get(numberOfCircles) + "," + yTail.get(numberOfCircles));
-        }
-        lastxdirc = dirxc;
-        lastydirc = diryc;
-
-
-
-        /*
-
-         while (numberOfCircles < score) {
-         if (xdir != 0) {
-         ellipse(xCoorTail, yc, 20, 20);
-         xCoorTail += (-1 * (xdirection.get(numberOfCircles)) * 20);
-         } else {
-         if (ydir != 0) {
-         ellipse(xc, yCoorTail, 20, 20);
-         yCoorTail += (-1 * (ydirection.get(numberOfCircles)) * 20);
-         }
-         }
-         numberOfCircles += 1;
-         }
-         }
-         */
-        if (score == 5) {
-          or = false;
-          score = 0;
-          x = saveX;
-          y = saveY;
-        }
+        numberOfCircles += 1;
       }
+      xTail.add(xCoorTail);
+      yTail.add(yCoorTail);
+    }
+
+
+    numberOfCircles = 2; 
+    if (score > 1) {
+      if (lastxdirc != dirxc || lastydirc != diryc) {
+        xCoorTail = xc + (-1 * (dirxc) * 20);
+        yCoorTail = yc + (-1 * (diryc) * 20);
+        xTail.add(0, xCoorTail);
+        yTail.add(0, yCoorTail);
+        numberOfCircles = 1;
+      }
+    }
+
+    numberOfCircles = 0;
+
+    while (numberOfCircles < score) {
+      ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
+      numberOfCircles += 1;
+    }
+
+    /*
+    
+     if (score != 0) {
+     xCoorTail = (xc + (-1 * (lastxdirc) * 20));
+     yCoorTail = (yc + (-1 * (lastydirc) * 20));
+     while (numberOfCircles <= score) {
+     xCoorTail += (-1 * (xdir) * 20);
+     xTail.add(xCoorTail);
+     yCoorTail += (-1 * (ydir) * 20);
+     yTail.add(yCoorTail);
+     numberOfCircles += 1;
+     }
+     }
+     
+     */
+
+
+
+
+
+
+
+
+
+    /*
+    xCoorTail = xc + (-1 * (dirxc) * 20);
+     yCoorTail = yc + (-1 * (diryc) * 20);
+     
+     if (xdirection.isEmpty()) {
+     xdirection.add(dirxc);
+     ydirection.add(diryc);
+     }
+     
+     while (numberOfCircles < score) {
+     if (dirxc != xdirection.get(0) || diryc != ydirection.get(0)) {
+     xdirection.add(0, dirxc);
+     ydirection.add(0, diryc);
+     }
+     
+     ellipse(xCoorTail, yCoorTail, 20, 20);
+     numberOfCircles += 1;
+     xCoorTail = xc + (-1 * (xdirection.get(numberOfCircles)) * 20);
+     yCoorTail = yc + (-1 * (ydirection.get(numberOfCircles)) * 20);
+     }
+     
+     
+     */
+
+    /*
+    
+     
+     if (score != 0) {
+     numberOfCircles = 0;
+     
+     xCoorTail = (xc + (-1 * (xdir) * 20));
+     yCoorTail = (yc + (-1 * (ydir) * 20));
+     //      xCoorTail += (-1 * (xdir) * 20);
+     //      yCoorTail += (-1 * (ydir) * 20);
+     if (xTail.isEmpty()){
+     xTail.add(xCoorTail);
+     yTail.add(yCoorTail);
+     }
+     //      numberOfCircles += 1;
+     }
+     println(xTail);
+     println(yTail);
+    /*
+     numberOfCircles = 1;
+     
+     while (numberOfCircles < xTail.size()){
+     println(xTail);
+     println(yTail);
+     prevX = xTail.set(numberOfCircles, prevX);
+     prevY = yTail.set(numberOfCircles, prevY);
+     numberOfCircles += 1;
+     }
+     
+     
+     numberOfCircles = 0;
+     
+     while (numberOfCircles < score - 1){
+     ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
+     numberOfCircles += 1;
+     }
+     */
+
+    /*
+    
+     xTail.add(xc);
+     yTail.add(yc);
+     
+     if (lastxdirc != dirxc || lastydirc != diryc) {
+     
+     
+     
+     
+     int addOnePlace = 0;
+     if (score != 0) {
+     numberOfCircles = 0;
+     
+     if (lastxdirc != dirxc || lastydirc != diryc) {
+     xCoorTail = (xc + (-1 * (dirxc) * 20));
+     yCoorTail = (yc + (-1 * (diryc) * 20));
+     xTail.add(xCoorTail);
+     yTail.add(yCoorTail);
+     //        println(xTail);
+     //        println(yTail);
+     } else {
+     while (addOnePlace < score + 10) {
+     if (lastxdirc == +1) {
+     xTail.set(addOnePlace, xTail.get(addOnePlace) + 1);
+     } else {
+     if (lastxdirc == -1) {
+     xTail.set(addOnePlace, xTail.get(addOnePlace) - 1);
+     } else {
+     if (lastydirc == 1) {
+     yTail.set(addOnePlace, yTail.get(addOnePlace) + 1);
+     } else {
+     if (lastydirc == -1) {
+     yTail.set(addOnePlace, yTail.get(addOnePlace) - 1);
+     }
+     }
+     }
+     }
+     addOnePlace += 1;
+     }
+     println(xTail.get(numberOfCircles) + "," + yTail.get(numberOfCircles));
+     
+     numberOfCircles = 0;
+     while (numberOfCircles < score) {
+     ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
+     numberOfCircles += 1;
+     println(xTail.get(numberOfCircles) + "," + yTail.get(numberOfCircles));
+     }
+     lastxdirc = dirxc;
+     lastydirc = diryc;
+     
+     
+     
+    /*
+     
+     while (numberOfCircles < score) {
+     if (xdir != 0) {
+     ellipse(xCoorTail, yc, 20, 20);
+     xCoorTail += (-1 * (xdirection.get(numberOfCircles)) * 20);
+     } else {
+     if (ydir != 0) {
+     ellipse(xc, yCoorTail, 20, 20);
+     yCoorTail += (-1 * (ydirection.get(numberOfCircles)) * 20);
+     }
+     }
+     numberOfCircles += 1;
+     }
+     }
+     */
+    if (score == 5) {
+      or = false;
+      score = 0;
+      x = saveX;
+      y = saveY;
     }
   }
 }
+
+
 
 class setUpGhosts {
 
@@ -585,7 +726,7 @@ void draw() {
   background(0);
   imageMode(CENTER);
   image(img, 450, 300);
-  //or = false;
+  or = true;
   if ((test.game(x, y)) == true) {
     or = true;
     saveX = x;
