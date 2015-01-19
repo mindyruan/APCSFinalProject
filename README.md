@@ -74,3 +74,7 @@ January 17, 2015
 - Created ghosts. Cannot get the ghosts to stay within the walls yet, so working on that. Made 1 ghost that chases pacman and 2 that is randomly moving.  (forgot to update this day, but did work)
 - Put mini games on the map. Pacman is brought to the middle and Snake begins. Working on bringing Pacman back onto the same spot on the map after a game of Snake.
 - Pacman will now go back to where he was before on the map after player beats Snake.
+
+January 18, 2015
+- Continued with ghosts. Sometimes, they stay within the walls, and sometimes, they don't. Need to make ghosts chase after pacman in a way that the ghosts will not start spazzing.
+- Continued working on the whipping of the tail of Snake. Almost there...hopefully.
