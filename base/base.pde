@@ -205,7 +205,12 @@ class setUpCircles {
   void updateDraw(int radius) {
     textFont(f, 100);
     fill (100);
+    textSize(25);
     text(score, 660, 120);
+    text(lives, 750, 120);
+    textSize(20);
+    text("SCORE", 660, 80);
+    text("LIVES", 750, 80);
     place = 0;
     while (place < xStart.size () - 1) {
       fill(255);
@@ -289,7 +294,12 @@ class setUpCirclesSnake {
     background(0);
     textFont(f, 200);
     fill (100);
-    text(scoreSnake, 660, 220);
+    textSize(25);
+    text(scoreSnake, 660, 120);
+    text(lives, 750, 120);
+    textSize(20);
+    text("SCORE", 660, 80);
+    text("LIVES", 750, 80);
     if (or != false) {
       if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(xc, yc) == true)) {
         randX = random(860);
@@ -436,7 +446,7 @@ class setUpCirclesSnake {
         ellipse(xGhostSnake, yGhostSnake, 20, 20);
 
 
-        if (scoreSnake == 5) {
+        if (scoreSnake == 2) {
           or = false;
           scoreSnake = 0;
           x = saveX;
