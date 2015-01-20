@@ -28,7 +28,7 @@ void setup() {
   background(0);
   noStroke();
 
-  img = loadImage("try2.png");
+  img = loadImage("exp2.png");
 }
 
 //x = 45: blank space begins
@@ -44,7 +44,7 @@ boolean checkCoord(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int 
   placeX = 0;
   placeY = 0;
   while (placeY < exampleY.size ()) {
-    if (((pow((y - exampleY.get(placeY)), 2)) + (pow((x - exampleX.get(placeY)), 2))) <= 200) {
+    if (((pow((y - exampleY.get(placeY)), 2)) + (pow((x - exampleX.get(placeY)), 2))) <= 100) {
       removedPlace = placeY;
       //println("hello check coord true");
       return true;
@@ -342,7 +342,6 @@ class setUpCirclesSnake {
         //    lastxdirc = dirxc;
         //    lastydirc = diryc;
         /*
-
          xTailPlace = xTail.size() - 1;
          yTailPlace = yTail.size() - 1;
          
@@ -384,239 +383,89 @@ class setUpCirclesSnake {
 }
 
 
-
-
-class setUpGhosts {
-
-  ArrayList<Integer>ghostX = new ArrayList<Integer>();
-  ArrayList<Integer>ghostY = new ArrayList<Integer>();
-  int placeGhostNRandom = 0;
-  int placeGhostRandom = 0;
-  int currentGX = 0;
-  int currentGY = 0;
-  float rGX = random(2);
-  float rGY = random(2);
-  int randGXLeft = int(rGX)- 1;
-  int randGYUp = int(rGY) - 1;
-  int randGXRight = int(rGX) + 1;
-  int randGYDown = int(rGY) + 1;
-  float rGX2 = random(3);
-  float rGY2 = random(3);
-  int randGXRandom = int(rGX2) - 1;
-  int randGYRandom = int(rGY2) - 1;
-  int placeGhostDraw = 0;
-  int testinggX = 226;
-  int testinggY = 230;
-  float rWallChase = random (4);
-  int randWallChase = int(rWallChase);
-
-  void addInitalCoordsG() {
-    placeGhostDraw = 0;
-    testinggX = 226;
-    testinggY = 282;
-    while (placeGhostDraw < 2) {
-      ghostX.add(testinggX);
-      ghostY.add(testinggY);
-      testinggX += 448;
-      placeGhostDraw += 1;
-    }
-    //    this.drawGhosts();
-    //println(ghostX);
-    //println(ghostY);
+class setUpGhostsP {
+  int ghostX1 = 842; //bottom right
+  int ghostY1 = 454;
+  int ghostX2 = 58;  // bottom left
+  int ghostY2 = 454;
+  int ghostX3 = 842; // top right
+  int ghostY3 = 146;
+  int ghostX4 = 58;  // top left
+  int ghostY4 = 146;
+  int xdir1 = 0;
+  int ydir1 = -1;
+  
+  //bottom right - 842,454
+  //bottom left - 58, 454
+  //top right - 842,146
+  //top left - 58,146
+  
+  void drawGhosts(){
+    ellipse(ghostX1, ghostY1,26,26);
+    ellipse(ghostX2, ghostY2,26,26);
+    ellipse(ghostX3, ghostY3,26,26);
+    ellipse(ghostX4, ghostY4,26,26);
+    //ellipse(156,189,26,26);
   }
-
-  void drawGhosts() {
-    placeGhostDraw = 0;
-    //      println(ghostX.get(0));
-    //      println(ghostX);
-    //      println(ghostX);
-    //      println(ghostY);
-    while (placeGhostDraw < 2) {
-      //        println(placeGhostDraw);
-      //      println(ghostX.get(0));
-      currentGX = ghostX.get(placeGhostDraw);
-      currentGY = ghostY.get(placeGhostDraw);
-      fill (255, 0, 0);
-      ellipse(currentGX, currentGY, 26, 26);
-      placeGhostDraw += 1;
+  
+  void updateG(){
+    if ((ydir1 == -1)  && (checkWallsG(ghostX1-13, ghostX1+13, "y-14"))){ //up
+      ydir1 = 1;
     }
-  }
-
-  boolean checkWalls(int startCoor, int endCoor, String bound) {
-    color temp = get(currentGX, currentGY);
-    for (int i = startCoor; i != endCoor; i++) {
-      if (bound.equals("x-14")) {
-        temp = get(currentGX-14, i);
-      }
-      if (bound.equals("x+13")) {
-        temp = get(currentGX+13, i);
-      }
-      if (bound.equals("y-14")) {
-        temp = get(i, currentGY-14);
-      }
-      if (bound.equals("y+13")) {
-        temp = get(i, currentGY+13);
-      }
-      if ((getRGB(temp)).equals("2156255")) {
-        return true;
-      }
+    if ((ydir1 == 1)  && (checkWallsG(ghostX1-13, ghostX1+13, "y+13"))){
+      ydir1 = 0;
+      xdir1 = -1;
     }
-    return false;
-  }
-
-  void onlyWallChase() {
-    rWallChase = random (4);
-    randWallChase = int(rWallChase);      
-
-    if (!this.checkWalls(currentGY-13, currentGY+13, "x-14")) {
-      xdirG = -1;
-      ydirG = 0;
-    } else {
-      if (!(this.checkWalls(currentGX-13, currentGX+13, "y-14"))) {
-        xdirG = 0;
-        ydirG = -1;
-      } else {
-        if (!(this.checkWalls(currentGX-13, currentGX+13, "y+13"))) {
-          xdirG = 0;
-          ydirG = 1;
-        } else {
-          if (!(this.checkWalls(currentGY-13, currentGX+13, "x+13"))) {
-            xdirG = 1;
-            ydirG = 0;
-          }
-          /*else{
-           rWallChase = random (4);
-           randWallChase = int(rWallChase); 
-           onlyWallChase();
-           }
-           */
-        }
-      }
+    if ((xdir1 == -1) && (checkWallsG(ghostY1-13, ghostY1+13, "x-14"))){
+      xdir1 = 1;
     }
-  }
-
-
-
-  boolean oneDirectionEQ() {
-    if (x == currentGX) {
-      if (y >= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y+13"))) {
-        //println("new1");
-        xdirG = 0;
-        ydirG = 1;
-      } else {
-        //                  if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
-        if (y <= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y-14"))) {
-          //println("4");
-          xdirG = 0;
-          ydirG = -1;
-        }
-      }
-      return true;
-    } else {
-      if (y == currentGY) {
-        if (x <= currentGX && !this.checkWalls(currentGY-13, currentGY+13, "x-14")) {
-          //println("1");
-          xdirG = -1;
-          ydirG = 0;
-        } else {
-          //            if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
-          if (x >= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x+13"))) {
-            //println("2");
-            xdirG = 1;
-            ydirG = 0;
-          }
-        }
-
-        return true;
-      }
+    if ((xdir1 == 1) && (checkWallsG(ghostY1-13, ghostY1+13, "x+13"))){
+      xdir1 = 0;
+      ydir1 = -1;
     }
-    return false;
+    
+    ghostY1 += ydir1;
+    ghostX1 += xdir1;
+    ghostY2 += ydir1;
+    ghostX2 -= xdir1;
+    ghostY3 -= ydir1;
+    ghostX3 += xdir1;
+    ghostY4 -= ydir1;
+    ghostX4 -= xdir1;
   }
-
-  boolean noChoice() {
-    if ((x > currentGX && (this.checkWalls(currentGY-13, currentGY+13, "x+13"))) || 
-      (x < currentGX && (this.checkWalls(currentGY-13, currentGY+13, "x-14"))) || 
-      (y > currentGY && (this.checkWalls(currentGX-13, currentGX+13, "y+13"))) || 
-      (y < currentGY && (this.checkWalls(currentGX-13, currentGX+13, "y-14"))) ) {
-
-      this.onlyWallChase();
+  
+  boolean checkWallsG(int startCoor, int endCoor, String bound) {
+  color temp = get(ghostX1, ghostY1);
+  for (int i = startCoor; i != endCoor; i++) {
+    if (bound.equals("x-14")) {
+      temp = get(ghostX1-14, i);
+    }
+    if (bound.equals("x+13")) {
+      temp = get(ghostX1+11, i);
+    }
+    if (bound.equals("y-14")) {
+      temp = get(i, ghostY1-12);
+    }
+    if (bound.equals("y+13")) {
+      temp = get(i, ghostY1+11);
+    }
+    if ((getRGB(temp)).equals("2156255")) {
       return true;
     }
-    return false;
   }
-
-  void updateG() {
-    float rGX = random(2);
-    float rGY = random(2);
-    int randGXLeft = int(rGX)- 1;
-    int randGYUp = int(rGY) - 1;
-    int randGXRight = int(rGX) + 1;
-    int randGYDown = int(rGY) + 1;
-    if (ghostX.isEmpty()) {
-      this.addInitalCoordsG();
-    }
-    placeGhostNRandom = 0;
-    while (placeGhostNRandom < 2) { // 2 target ghosts
-      currentGX = ghostX.get(placeGhostNRandom);
-      currentGY = ghostY.get(placeGhostNRandom);
-      //println(currentGX + "," + currentGY);
-      //    rGX = random(2);
-      //    rGY = random(2);
-      //    randGXLeft = int(rGX)- 1;
-      //    randGYUp = int(rGY) - 1;
-      //    randGXRight = int(rGX) + 1;
-      //    randGYDown = int(rGY) + 1;
-      //        if (x < currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x-14"))){
-      //    if (!noChoice()) {
-      if (x <= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x-14"))) {
-        //println("1");
-        xdirG = -1;
-        ydirG = 0;
-      } else {
-        //            if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
-        if (x >= currentGX && !(this.checkWalls(currentGY-13, currentGY+13, "x+13"))) {
-          //println("2");
-          xdirG = 1;
-          ydirG = 0;
-        } else {
-          //              if (y > currentGY && !(this.checkWalls(x-13, x+13, "y+13"))){
-          if (y >= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y+13"))) {
-            //println("3");
-            xdirG = 0;
-            ydirG = 1;
-          } else {
-            //                  if (y < currentGY || !(this.checkWalls(x-13, x+13, "y-13"))){
-            if (y <= currentGY && !(this.checkWalls(currentGX-13, currentGX+13, "y-14"))) {
-              //println("4");
-              xdirG = 0;
-              ydirG = -1;
-            }
-          }
-        }
-      }
-
-      currentGX += xdirG;
-      currentGY += ydirG;
-      ghostX.set(placeGhostNRandom, currentGX);
-      ghostY.set(placeGhostNRandom, currentGY);
-      //println("place" + placeGhostRandom);
-      placeGhostNRandom += 1;
-      //println(ghostX);
-      //println(ghostY);
-    }
-  }
+  return false;
+}
 }
 
 setUpCircles test = new setUpCircles();
 setUpCirclesSnake test2 = new setUpCirclesSnake();
-setUpGhosts test3 = new setUpGhosts();
+setUpGhostsP test3 = new setUpGhostsP();
 
 void draw() {
   background(0);
   imageMode(CENTER);
   image(img, 450, 300);
-  //  or = true;
-
+  //or = false;
   if ((test.game(x, y)) == true) {
     or = true;
     saveX = x;
@@ -624,13 +473,9 @@ void draw() {
     x = 450;
     y = 314;
   }
-
-  println(test.game(x, y));
-  println(or);
-
   if (or == true) {
     test2.updateDraw(x, y, 30, xdir, ydir);
-    println("savedX: "  + saveX + " savedY: " + saveY);
+    //println("savedX: "  + saveX + " savedY: " + saveY);
   } else {
     test.update(x, y);
     test.updateDraw(8);
@@ -638,7 +483,7 @@ void draw() {
     test3.drawGhosts();
     ellipse(x, y, 26, 26);
   }
-  //  ellipse(x, y, 26, 26);
+  //ellipse(x, y, 26, 26);
   //ellipse(58,146,8,8);
 
   color rr = get(mouseX, mouseY);
@@ -655,38 +500,22 @@ void draw() {
       (!(checkWalls(y-13, y+13, "x-14")))) { //go left
       xdir = -1;
       ydir = 0;
-      //      if (or == true){
-      //        xdir = -3;
-      //        ydir = 0;
-      //      }
     }
     if ((key == 'd' || key == 'D') &&
       (!(checkWalls(y-13, y+13, "x+13")))) { //go right
       xdir = 1;
       ydir = 0;
-      //      if (or == true){
-      //        xdir = 3;
-      //        ydir = 0;
-      //     }
     }
     if ((key == 'w' || key =='W') &&
       (!(checkWalls(x-13, x+13, "y-14")))) { //go up
       xdir = 0;
       ydir = -1;
-      //      if (or == true){
-      //        xdir = 0;
-      //        ydir = -3;
-      //      }
     }
 
     if ((key == 's' || key == 'S') &&
       (!(checkWalls(x-13, x+13, "y+13")))) { //go down
       xdir = 0;
       ydir = 1;
-      //      if (or == true){
-      //        xdir = 0;
-      //        ydir = 3;
-      //      }
     }
   }
 
@@ -731,4 +560,3 @@ boolean checkWalls(int startCoor, int endCoor, String bound) {
   }
   return false;
 }
-
