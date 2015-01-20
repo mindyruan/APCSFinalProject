@@ -9,6 +9,7 @@ Once you get to the big circles in the four corners, you have to clear a mini-ga
 Set amount of lives (3)
 Lose a life when a ghost gets you.
 When you lose a minigame of Snake (either you hit the border or a ghost in Snake gets you), you lose a life. 
+
 When you lose a life, you also go back to the center of Pacman.
 
 (All the while, you're avoiding the ghosts.)
@@ -16,7 +17,7 @@ When you lose a life, you also go back to the center of Pacman.
 Ghosts are in Snake and Pacman.
 In Pacman...
 - The ghosts are protecting the minigames in the four corners, so the ghosts will be roaming around the sides of the game.
-- [We couldn't really code the ghosts so that they keep within the walls and follow Pacman (even if we did, the ghosts would spaz and get out of control sometimes)]
+[We couldn't really code the ghosts so that they keep within the walls and follow Pacman (even if we did, the ghosts would spaz and get out of control sometimes)]
 In Snake...
 - The ghosts are following the snake.
 
