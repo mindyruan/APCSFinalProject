@@ -487,11 +487,6 @@ class setUpCirclesSnake {
 }
 
 
-
-
-
-
-
 class setUpGhostsP {
   int ghostX1 = 842; //bottom right
   int ghostY1 = 454;
@@ -518,6 +513,31 @@ class setUpGhostsP {
   }
 
   void updateG() {
+    if ((((ghostY1-y)<=10) && ((ghostY1-y)>=-10)) 
+      && (((ghostX1-x)<=10) && ((ghostX1-x)>=-10))) {
+      x = 450;
+      y = 314;
+      println("you lost a life! 1 ");
+    }
+    if ((((ghostY2-y)<=10) && ((ghostY2-y)>=-10)) 
+      && (((ghostX2-x)<=10) && ((ghostX2-x)>=-10))) {
+      x = 450;
+      y = 314;
+      println("you lost a life! 2 ");
+    }
+    if ((((ghostY3-y)<=10) && ((ghostY3-y)>=-10)) 
+      && (((ghostX3-x)<=10) && ((ghostX3-x)>=-10))) {
+      x = 450;
+      y = 314;
+      println("you lost a life! 3 ");
+    }
+    if ((((ghostY4-y)<=10) && ((ghostY4-y)>=-10)) 
+      && (((ghostX4-x)<=10) && ((ghostX4-x)>=-10))) {
+      x = 450;
+      y = 314;
+      println("you lost a life! 4 ");
+    }
+
     if ((ydir1 == -1)  && (checkWallsG(ghostX1-13, ghostX1+13, "y-14"))) { //up
       ydir1 = 1;
     }
@@ -574,7 +594,7 @@ void draw() {
   background(0);
   imageMode(CENTER);
   image(img, 450, 300);
-//  or = true;
+  //or = true;
   if ((test.game(x, y)) == true) {
     or = true;
     saveX = x;
@@ -669,4 +689,3 @@ boolean checkWalls(int startCoor, int endCoor, String bound) {
   }
   return false;
 }
-
