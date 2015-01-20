@@ -24,7 +24,7 @@ int removedPlace = 0;
 boolean win = false;
 int xGhostSnake = 50;
 int yGhostSnake = 50;
-int lives = 2;
+int lives = 3;
 boolean OVER = false;
 boolean victory = false;
 
@@ -139,7 +139,6 @@ class setUpCircles {
 
 
   PFont f= createFont("Arial", 25, true);
-  int score = 0;
 
   void addCirclesToArray(int col) {
     // (below) : load the circles Pacman is eating
@@ -577,13 +576,28 @@ void draw() {
     victory = false;
   }
   
-  if (OVER == true){
+  if (lives == 0) {
+    OVER = true;
+    victory = false;
+  }
+
+  if (OVER == true) {
     background(0);
-    if (victory == false){
-      println("YOU LOSE");
-    }else{
-      println("YOU WIN");
-    }
+      imageMode(CENTER);
+      image(catgod, 450, 230);
+          if (victory == false) {
+      textFont(winlose, 60);
+      textAlign(CENTER);
+      text("YOU LOSE", 450, 65);
+          }
+          if (victory == true){
+      textFont(winlose, 60);
+      textAlign(CENTER);
+      text("YOU WIN", 450, 65);
+          }
+      textFont(yourscore, 50);
+      textAlign(CENTER);
+      text("YOUR SCORE IS " + score + ".\nPLAY AGAIN?", 450, 450);
   }
 
   if (OVER == false) {
