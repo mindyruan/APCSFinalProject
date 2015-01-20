@@ -97,5 +97,7 @@ January 19, 2015
   - Ghosts will now also be in the Snake minigame
 - Made the corner ghosts mentioned above. Right now, Pacman can go through them; to be fixed soon.
 - SNAKE wraps around itself and no longer whips around. (Thanks to classmates who gave a few hints)
+- Pacman will be sent back to the middle if eaten by the corner ghosts.
 - Made a ghost in Snake that will be jiggling around randomly and also following pacman.
 - Made sure collisions with the ghosts or the walls in Snake will make the user lose a life. Then, the Snake game will end and go back to Pacman.
+- Minigame circles will now reappear if the player loses the minigame.
