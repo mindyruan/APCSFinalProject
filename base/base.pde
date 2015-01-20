@@ -1,6 +1,9 @@
 import java.util.*;
 
 PImage img;
+PImage catgod;
+PFont winlose;
+PFont yourscore;
 
 int x = 450;
 int y = 314;
@@ -41,6 +44,7 @@ void setup() {
   noStroke();
 
   img = loadImage("try2.png");
+  catgod = loadImage("catgod.gif");
 }
 
 //x = 45: blank space begins
@@ -476,13 +480,13 @@ class setUpGhostsP {
   //top left - 58,146
 
   void drawGhosts() {
-    fill(255,0,0);
+    fill(255, 0, 0);
     ellipse(ghostX1, ghostY1, 26, 26);
-    fill(001,213,255);
+    fill(001, 213, 255);
     ellipse(ghostX2, ghostY2, 26, 26);
-    fill(255,140,031);
+    fill(255, 140, 031);
     ellipse(ghostX3, ghostY3, 26, 26);
-    fill(255,121,226);
+    fill(255, 121, 226);
     ellipse(ghostX4, ghostY4, 26, 26);
     //ellipse(156,189,26,26);
   }
@@ -575,7 +579,7 @@ void draw() {
     OVER = true;
     victory = false;
   }
-  
+
   if (lives == 0) {
     OVER = true;
     victory = false;
@@ -583,21 +587,23 @@ void draw() {
 
   if (OVER == true) {
     background(0);
-      imageMode(CENTER);
-      image(catgod, 450, 230);
-          if (victory == false) {
+    imageMode(CENTER);
+    image(catgod, 450, 230);
+    PFont winlose= createFont("Arial", 25, true);
+    PFont yourscore= createFont("Arial", 25, true);
+    if (victory == false) {
       textFont(winlose, 60);
       textAlign(CENTER);
       text("YOU LOSE", 450, 65);
-          }
-          if (victory == true){
+    }
+    if (victory == true) {
       textFont(winlose, 60);
       textAlign(CENTER);
       text("YOU WIN", 450, 65);
-          }
-      textFont(yourscore, 50);
-      textAlign(CENTER);
-      text("YOUR SCORE IS " + score + ".\nPLAY AGAIN?", 450, 450);
+    }
+    textFont(yourscore, 50);
+    textAlign(CENTER);
+    text("YOUR SCORE IS " + score + ".\nPLAY AGAIN?", 450, 450);
   }
 
   if (OVER == false) {
@@ -626,7 +632,7 @@ void draw() {
         test.updateDraw(8);
         test3.updateG();
         test3.drawGhosts();
-        fill(255,255,255);
+        fill(255, 255, 255);
         ellipse(x, y, 26, 26);
       }
     }
