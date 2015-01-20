@@ -275,23 +275,24 @@ class setUpCirclesSnake {
 
   boolean update(int x, int y) {
     on = false;
-    int xTailPlace = 0;
-    int yTailPlace = 0;
 
-    while (xTailPlace < lengthTail) {
-      //      if (checkCoordB(xTail.subList(0,lengthTail + 1), yTail.subList(0,lengthTail + 1), xTail.get(xTailPlace), yTail.get(yTailPlace))) {
-      if (xTail.get(xTailPlace) - 10 <= 0 || xTail.get(xTailPlace) + 10 >= width || 
-        yTail.get(yTailPlace) - 10 <= 0 || yTail.get(yTailPlace) + 10 >= height) {
-        scoreSnake = 0;
-        or = false;
-        x = 450;
-        y = 314;
-        win = false;
-      } else {
-        xTailPlace += 1;
-        yTailPlace += 1;
-      }
-    }
+    /*
+
+     while (xTailPlace < lengthTail) {
+     //      if (checkCoordB(xTail.subList(0,lengthTail + 1), yTail.subList(0,lengthTail + 1), xTail.get(xTailPlace), yTail.get(yTailPlace))) {
+     if (xTail.get(xTailPlace) - 10 <= 0 || xTail.get(xTailPlace) + 10 >= width || 
+     yTail.get(yTailPlace) - 10 <= 0 || yTail.get(yTailPlace) + 10 >= height) {
+     scoreSnake = 0;
+     or = false;
+     x = 450;
+     y = 314;
+     win = false;
+     } else {
+     xTailPlace += 1;
+     yTailPlace += 1;
+     }
+     }
+     */
 
     xTailPlace = 0;
     yTailPlace = 0;
@@ -383,9 +384,20 @@ class setUpCirclesSnake {
 
         println(lengthTail);
 
+        //    while (xTailPlace < lengthTail) {
+        //      if (checkCoordB(xTail.subList(0,lengthTail + 1), yTail.subList(0,lengthTail + 1), xTail.get(xTailPlace), yTail.get(yTailPlace))) {
+        if (xTail.get(0) - 10 <= 0 || xTail.get(xTailPlace) + 10 >= width || 
+          yTail.get(0) - 10 <= 0 || yTail.get(yTailPlace) + 10 >= height) {
+          scoreSnake = 0;
+          or = false;
+          x = 450;
+          y = 314;
+          win = false;
+        } 
+
+
+
         //GHOSTS!!!!!!!!!!!!!!!!!!!!!!
-
-
 
         xTargetSnake = xTail.get(0);
         yTargetSnake = yTail.get(0);
@@ -689,3 +701,4 @@ boolean checkWalls(int startCoor, int endCoor, String bound) {
   }
   return false;
 }
+
