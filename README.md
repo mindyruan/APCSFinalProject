@@ -83,3 +83,4 @@ January 19, 2015
 - CHANGES TO THE GAME: 
   - Ghosts in the pacman game will patrol the corners (where the minigames are)
   - Ghosts will now also be in the Snake minigame
+- Made the corner ghosts mentioned above. Right now, Pacman can go through them; to be fixed soon.
