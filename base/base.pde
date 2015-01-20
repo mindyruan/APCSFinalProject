@@ -24,6 +24,9 @@ int removedPlace = 0;
 boolean win = false;
 int xGhostSnake = 50;
 int yGhostSnake = 50;
+int lives = 2;
+boolean OVER = false;
+boolean victory = false;
 
 ArrayList<Integer>gameX = new ArrayList<Integer>(
 Arrays.asList(1, 29, 1, 29));
@@ -324,9 +327,12 @@ class setUpCirclesSnake {
         if (xTail.get(0) - 10 <= 0 || xTail.get(xTailPlace) + 10 >= width || 
           yTail.get(0) - 10 <= 0 || yTail.get(yTailPlace) + 10 >= height) {
           scoreSnake = 0;
+          gameX.add(((saveX-58)/28)+1);
+          gameY.add(((saveY-146)/28)+1);
           or = false;
           x = 450;
           y = 314;
+          lives--;
           win = false;
         } 
 
@@ -359,6 +365,7 @@ class setUpCirclesSnake {
           or = false;
           x = 450;
           y = 314;
+          lives--;
           win = false;
         } else {
           if (HoVertGhost == 0) { // checking horizontally
@@ -383,6 +390,7 @@ class setUpCirclesSnake {
                         or = false;
                         x = 450;
                         y = 314;
+                        lives--;
                         win = false;
                       }
                     }
@@ -413,6 +421,7 @@ class setUpCirclesSnake {
                           or = false;
                           x = 450;
                           y = 314;
+                          lives--;
                           win = false;
                         }
                       }
@@ -458,9 +467,13 @@ class setUpGhostsP {
   //top left - 58,146
 
   void drawGhosts() {
+    fill(255,0,0);
     ellipse(ghostX1, ghostY1, 26, 26);
+    fill(001,213,255);
     ellipse(ghostX2, ghostY2, 26, 26);
+    fill(255,140,031);
     ellipse(ghostX3, ghostY3, 26, 26);
+    fill(255,121,226);
     ellipse(ghostX4, ghostY4, 26, 26);
     //ellipse(156,189,26,26);
   }
@@ -470,24 +483,28 @@ class setUpGhostsP {
       && (((ghostX1-x)<=10) && ((ghostX1-x)>=-10))) {
       x = 450;
       y = 314;
+      lives--;
       println("you lost a life! 1 ");
     }
     if ((((ghostY2-y)<=10) && ((ghostY2-y)>=-10)) 
       && (((ghostX2-x)<=10) && ((ghostX2-x)>=-10))) {
       x = 450;
       y = 314;
+      lives--;
       println("you lost a life! 2 ");
     }
     if ((((ghostY3-y)<=10) && ((ghostY3-y)>=-10)) 
       && (((ghostX3-x)<=10) && ((ghostX3-x)>=-10))) {
       x = 450;
       y = 314;
+      lives--;
       println("you lost a life! 3 ");
     }
     if ((((ghostY4-y)<=10) && ((ghostY4-y)>=-10)) 
       && (((ghostX4-x)<=10) && ((ghostX4-x)>=-10))) {
       x = 450;
       y = 314;
+      lives--;
       println("you lost a life! 4 ");
     }
 
@@ -544,75 +561,100 @@ setUpCirclesSnake test2 = new setUpCirclesSnake();
 setUpGhostsP test3 = new setUpGhostsP();
 
 void draw() {
-  background(0);
-  imageMode(CENTER);
-  image(img, 450, 300);
-  //or = true;
-  if ((test.game(x, y)) == true) {
-    or = true;
-    saveX = x;
-    saveY = y;
-    x = 450;
-    y = 314;
+
+  if (lives == 0) {
+    OVER = true;
+    victory = false;
   }
-  if (or == true) {
-    test2.updateDraw(x, y, 30, xdir, ydir);
-    //println("savedX: "  + saveX + " savedY: " + saveY);
-  } else {
-    test.update(x, y);
-    test.updateDraw(8);
-    test3.updateG();
-    test3.drawGhosts();
-    ellipse(x, y, 26, 26);
+  
+  if (OVER == true){
+    background(0);
+    if (victory == false){
+      println("YOU LOSE");
+    }else{
+      println("YOU WIN");
+    }
   }
-  //ellipse(x, y, 26, 26);
-  //ellipse(58,146,8,8);
 
-  color rr = get(mouseX, mouseY);
-  //println(mouseX + " " + mouseY + " " + getRGB(rr));
-  //println("x: " + x+" y: "+y);
+  if (OVER == false) {
 
-  //FIRST GHOST: (226,230)
-  //MIDDLE GHOST : (450,230)
-  //LAST GHOST: (674,230)
+    background(0);
+    imageMode(CENTER);
+    image(img, 450, 300);
+    //or = true;
+
+    if ((test.game(x, y)) == true) {
+      or = true;
+      saveX = x;
+      saveY = y;
+      x = 450;
+      y = 314;
+    }
+    if (or == true) {
+      test2.updateDraw(x, y, 30, xdir, ydir);
+      //println("savedX: "  + saveX + " savedY: " + saveY);
+    } else {
+      if ((gameX.isEmpty()) == true) {
+        OVER = true;
+        victory = true;
+      } else {
+        test.update(x, y);
+        test.updateDraw(8);
+        test3.updateG();
+        test3.drawGhosts();
+        fill(255,255,255);
+        ellipse(x, y, 26, 26);
+      }
+    }
+    //ellipse(x, y, 26, 26);
+    //ellipse(58,146,8,8);
+
+    color rr = get(mouseX, mouseY);
+    //println(mouseX + " " + mouseY + " " + getRGB(rr));
+    //println("x: " + x+" y: "+y);
+
+    //FIRST GHOST: (226,230)
+    //MIDDLE GHOST : (450,230)
+    //LAST GHOST: (674,230)
 
 
-  if (keyPressed) {
-    if ((key == 'a' || key =='A') &&
-      (!(checkWalls(y-13, y+13, "x-14")))) { //go left
-      xdir = -1;
+    if (keyPressed) {
+      if ((key == 'a' || key =='A') &&
+        (!(checkWalls(y-13, y+13, "x-14")))) { //go left
+        xdir = -1;
+        ydir = 0;
+      }
+      if ((key == 'd' || key == 'D') &&
+        (!(checkWalls(y-13, y+13, "x+13")))) { //go right
+        xdir = 1;
+        ydir = 0;
+      }
+      if ((key == 'w' || key =='W') &&
+        (!(checkWalls(x-13, x+13, "y-14")))) { //go up
+        xdir = 0;
+        ydir = -1;
+      }
+
+      if ((key == 's' || key == 'S') &&
+        (!(checkWalls(x-13, x+13, "y+13")))) { //go down
+        xdir = 0;
+        ydir = 1;
+      }
+    }
+
+    color i = get((x+(14*xdir)), (y+(14*ydir)));
+    if (xdir == 1 || ydir == 1) {
+      i = get((x+(13*xdir)), (y+(13*ydir)));
+    }
+
+    if ((getRGB(i).equals("2156255"))) {
+      xdir = 0;
       ydir = 0;
     }
-    if ((key == 'd' || key == 'D') &&
-      (!(checkWalls(y-13, y+13, "x+13")))) { //go right
-      xdir = 1;
-      ydir = 0;
-    }
-    if ((key == 'w' || key =='W') &&
-      (!(checkWalls(x-13, x+13, "y-14")))) { //go up
-      xdir = 0;
-      ydir = -1;
-    }
 
-    if ((key == 's' || key == 'S') &&
-      (!(checkWalls(x-13, x+13, "y+13")))) { //go down
-      xdir = 0;
-      ydir = 1;
-    }
+    x += xdir;
+    y += ydir;
   }
-
-  color i = get((x+(14*xdir)), (y+(14*ydir)));
-  if (xdir == 1 || ydir == 1) {
-    i = get((x+(13*xdir)), (y+(13*ydir)));
-  }
-
-  if ((getRGB(i).equals("2156255"))) {
-    xdir = 0;
-    ydir = 0;
-  }
-
-  x += xdir;
-  y += ydir;
 }
 
 
