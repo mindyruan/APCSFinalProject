@@ -239,6 +239,7 @@ class setUpCirclesSnake {
   int yTargetSnake = 0;
   float RandomHoVertGhost = random (2);
   int HoVertGhost = int(RandomHoVertGhost);
+  int tailPlaceSUBLIST = 0;
 
 
   ArrayList<Integer>xStart = new ArrayList<Integer>();
@@ -249,6 +250,8 @@ class setUpCirclesSnake {
   //  ArrayList<Integer>ydirection = new ArrayList<Integer>();
   ArrayList<Integer>xTail = new ArrayList<Integer>();
   ArrayList<Integer>yTail = new ArrayList<Integer>();
+  ArrayList<Integer>xTailSUBLIST = new ArrayList<Integer>();
+  ArrayList<Integer>yTailSUBLIST = new ArrayList<Integer>();
 
   setUpCirclesSnake() {
     int placeeS = 0;
@@ -387,10 +390,20 @@ class setUpCirclesSnake {
         xTargetSnake = xTail.get(0);
         yTargetSnake = yTail.get(0);
 
+        tailPlaceSUBLIST = 0;
+        while (tailPlaceSUBLIST < lengthTail) {
+          xTailSUBLIST.add(0);
+          yTailSUBLIST.add(0);
+          xTailSUBLIST.set(tailPlaceSUBLIST, xTail.get(tailPlaceSUBLIST));
+          yTailSUBLIST.set(tailPlaceSUBLIST, yTail.get(tailPlaceSUBLIST));
+
+          tailPlaceSUBLIST += 1;
+        }
+
 
         RandomHoVertGhost = random (2);
         HoVertGhost = int(RandomHoVertGhost);
-        if (checkCoord(xTail, yTail, xGhostSnake, yGhostSnake)) {
+        if (checkCoord(xTailSUBLIST, yTailSUBLIST, xGhostSnake, yGhostSnake)) {
 
           //////STUFF TO END SNAKE GAME//////////////
           scoreSnake = 0;
@@ -401,17 +414,17 @@ class setUpCirclesSnake {
         } else {
           if (HoVertGhost == 0) { // checking horizontally
             if (xTargetSnake < xGhostSnake) {
-              xGhostSnake -= 2;
+              xGhostSnake -= 1;
             } else {
               if (xTargetSnake > xGhostSnake) {
-                xGhostSnake += 2;
+                xGhostSnake += 1;
               } else {
                 if (xTargetSnake == xGhostSnake) {
                   if (yTargetSnake < yGhostSnake) {
-                    yGhostSnake -= 2;
+                    yGhostSnake -= 1;
                   } else {
                     if (yTargetSnake > yGhostSnake) {
-                      yGhostSnake += 2;
+                      yGhostSnake += 1;
                     } else {
                       if (yTargetSnake == yGhostSnake) {
                         // STUFF TO END SNAKE GAME /////
@@ -429,17 +442,17 @@ class setUpCirclesSnake {
           } else {
             if (HoVertGhost == 1) { //checking vertically
               if (yTargetSnake < yGhostSnake) {
-                yGhostSnake -= 2;
+                yGhostSnake -= 1;
               } else {
                 if (yTargetSnake > yGhostSnake) {
-                  yGhostSnake += 2;
+                  yGhostSnake += 1;
                 } else {
                   if (yTargetSnake == yGhostSnake) {
                     if (xTargetSnake < xGhostSnake) {
-                      xGhostSnake -= 2;
+                      xGhostSnake -= 1;
                     } else {
                       if (xTargetSnake > xGhostSnake) {
-                        xGhostSnake += 2;
+                        xGhostSnake += 1;
                       } else {
                         if (xTargetSnake == xGhostSnake) {
                           // STUFF TO END SNAKE GAME /////
@@ -561,7 +574,7 @@ void draw() {
   background(0);
   imageMode(CENTER);
   image(img, 450, 300);
-or = true;
+//  or = true;
   if ((test.game(x, y)) == true) {
     or = true;
     saveX = x;
