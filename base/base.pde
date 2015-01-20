@@ -21,6 +21,7 @@ int xGhost = 0;
 int yGhost = 0;
 boolean or = false;
 int removedPlace = 0;
+boolean win = false;
 
 void setup() {
   size(900, 600);
@@ -230,6 +231,14 @@ class setUpCirclesSnake {
   float randY = random(600);
   int xcoor = int(randX);
   int ycoor = int(randY);
+  float xRGhostSnake = random(860);
+  float yRGhostSnake = random(560);
+  int xGhostSnake = int(xRGhostSnake) + 20;
+  int yGhostSnake = int(yRGhostSnake) + 20;
+  int xTargetSnake = 0;
+  int yTargetSnake = 0;
+  float RandomHoVertGhost = random (2);
+  int HoVertGhost = int(RandomHoVertGhost);
 
 
   ArrayList<Integer>xStart = new ArrayList<Integer>();
@@ -272,8 +281,9 @@ class setUpCirclesSnake {
         yTail.get(yTailPlace) - 10 <= 0 || yTail.get(yTailPlace) + 10 >= height) {
         scoreSnake = 0;
         or = false;
-        x = saveX;
-        y = saveY;
+        x = 450;
+        y = 314;
+        win = false;
       } else {
         xTailPlace += 1;
         yTailPlace += 1;
@@ -300,87 +310,173 @@ class setUpCirclesSnake {
     text(scoreSnake, 660, 220);
     //int saveX = savedX;
     //int saveY = savedY;
-
-    if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(xc, yc) == true)) {
-      randX = random(860);
-      randY = random(560);
-      xcoor = int(randX) + 20;
-      ycoor = int(randY) + 20;
-      xStart.clear();
-      yStart.clear();
-      addCirclesToArray(xcoor, ycoor);
-    }
-
-    fill(100);
-    ellipse(xcoor, ycoor, radius, radius);
-
-    /*
-//    if (score >= 1) {
-     println("hi1");
-     xCoorTail = xc;
-     yCoorTail = yc;
-     numberOfCircles = 0;
-     while (numberOfCircles <= score) {
-     println("yoooooooooooooooooo");
-     xCoorTail += (-1 * numberOfCircles * (dirxc) * 20);
-     xTail.add(numberOfCircles, xCoorTail);
-     yCoorTail += (-1 * numberOfCircles * (diryc) * 20);
-     yTail.add(numberOfCircles, yCoorTail);
-     numberOfCircles += 1;
-     //      }
-     } 
-     */
-    //      if (lastxdirc != dirxc || lastydirc != diryc) {
     if (or != false) {
+      if ((xStart.isEmpty() && yStart.isEmpty()) || (this.update(xc, yc) == true)) {
+        randX = random(860);
+        randY = random(560);
+        xcoor = int(randX) + 20;
+        ycoor = int(randY) + 20;
+        xStart.clear();
+        yStart.clear();
+        addCirclesToArray(xcoor, ycoor);
+      }
 
-      if (millis() - timee > 150) {
-        xCoorTail = xTail.get(0) + ((dirxc) * 20);
-        yCoorTail = yTail.get(0) + ((diryc) * 20);
-        xTail.add(0, xCoorTail);
-        yTail.add(0, yCoorTail);
+      fill(100);
+      ellipse(xcoor, ycoor, radius, radius);
 
-        //    lastxdirc = dirxc;
-        //    lastydirc = diryc;
-        /*
+      /*
+//    if (score >= 1) {
+       println("hi1");
+       xCoorTail = xc;
+       yCoorTail = yc;
+       numberOfCircles = 0;
+       while (numberOfCircles <= score) {
+       println("yoooooooooooooooooo");
+       xCoorTail += (-1 * numberOfCircles * (dirxc) * 20);
+       xTail.add(numberOfCircles, xCoorTail);
+       yCoorTail += (-1 * numberOfCircles * (diryc) * 20);
+       yTail.add(numberOfCircles, yCoorTail);
+       numberOfCircles += 1;
+       //      }
+       } 
+       */
+      //      if (lastxdirc != dirxc || lastydirc != diryc) {
+      if (or == true) {
+
+        if (millis() - timee > 150) {
+          xCoorTail = xTail.get(0) + ((dirxc) * 20);
+          yCoorTail = yTail.get(0) + ((diryc) * 20);
+          xTail.add(0, xCoorTail);
+          yTail.add(0, yCoorTail);
+
+          //    lastxdirc = dirxc;
+          //    lastydirc = diryc;
+          /*
          xTailPlace = xTail.size() - 1;
-         yTailPlace = yTail.size() - 1;
-         
-         while (xTailPlace > 0) {
-         xTail.set(xTailPlace, xTail.get(xTailPlace - 1));
-         xTailPlace -= 1;
-         }
-         
-         while (yTailPlace > 0) {
-         yTail.set(yTailPlace, yTail.get(yTailPlace - 1));
-         yTailPlace -= 1;
-         }
-         */
+           yTailPlace = yTail.size() - 1;
+           
+           while (xTailPlace > 0) {
+           xTail.set(xTailPlace, xTail.get(xTailPlace - 1));
+           xTailPlace -= 1;
+           }
+           
+           while (yTailPlace > 0) {
+           yTail.set(yTailPlace, yTail.get(yTailPlace - 1));
+           yTailPlace -= 1;
+           }
+           */
 
-        timee = millis();
-      }
+          timee = millis();
+        }
 
-      lengthTail = 1 + scoreSnake;
-      numberOfCircles = 0;
-      //    println(xTail.subList(0, 1));
-      //    println(yTail.subList(0, 1));
-      while (numberOfCircles < lengthTail) {
-        ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
-        numberOfCircles += 1;
-      }
+        lengthTail = 1 + scoreSnake;
+        numberOfCircles = 0;
+        //    println(xTail.subList(0, 1));
+        //    println(yTail.subList(0, 1));
+        while (numberOfCircles < lengthTail) {
+          ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
+          numberOfCircles += 1;
+        }
 
-      println(lengthTail);
+        println(lengthTail);
+
+        //GHOSTS!!!!!!!!!!!!!!!!!!!!!!
 
 
 
-      if (scoreSnake == 5) {
-        or = false;
-        scoreSnake = 0;
-        x = saveX;
-        y = saveY;
+        xTargetSnake = xTail.get(0);
+        yTargetSnake = yTail.get(0);
+
+
+        RandomHoVertGhost = random (2);
+        HoVertGhost = int(RandomHoVertGhost);
+        if (checkCoord(xTail, yTail, xGhostSnake, yGhostSnake)) {
+
+          //////STUFF TO END SNAKE GAME//////////////
+          scoreSnake = 0;
+          or = false;
+          x = 450;
+          y = 314;
+          win = false;
+        } else {
+          if (HoVertGhost == 0) { // checking horizontally
+            if (xTargetSnake < xGhostSnake) {
+              xGhostSnake -= 2;
+            } else {
+              if (xTargetSnake > xGhostSnake) {
+                xGhostSnake += 2;
+              } else {
+                if (xTargetSnake == xGhostSnake) {
+                  if (yTargetSnake < yGhostSnake) {
+                    yGhostSnake -= 2;
+                  } else {
+                    if (yTargetSnake > yGhostSnake) {
+                      yGhostSnake += 2;
+                    } else {
+                      if (yTargetSnake == yGhostSnake) {
+                        // STUFF TO END SNAKE GAME /////
+                        scoreSnake = 0;
+                        or = false;
+                        x = 450;
+                        y = 314;
+                        win = false;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          } else {
+            if (HoVertGhost == 1) { //checking vertically
+              if (yTargetSnake < yGhostSnake) {
+                yGhostSnake -= 2;
+              } else {
+                if (yTargetSnake > yGhostSnake) {
+                  yGhostSnake += 2;
+                } else {
+                  if (yTargetSnake == yGhostSnake) {
+                    if (xTargetSnake < xGhostSnake) {
+                      xGhostSnake -= 2;
+                    } else {
+                      if (xTargetSnake > xGhostSnake) {
+                        xGhostSnake += 2;
+                      } else {
+                        if (xTargetSnake == xGhostSnake) {
+                          // STUFF TO END SNAKE GAME /////
+                          scoreSnake = 0;
+                          or = false;
+                          x = 450;
+                          y = 314;
+                          win = false;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        fill(255, 0, 0);
+        ellipse(xGhostSnake, yGhostSnake, 20, 20);
+
+
+        if (scoreSnake == 5) {
+          or = false;
+          scoreSnake = 0;
+          x = saveX;
+          y = saveY;
+          win = true;
+        }
       }
     }
   }
 }
+
+
+
+
+
 
 
 class setUpGhostsP {
@@ -394,36 +490,36 @@ class setUpGhostsP {
   int ghostY4 = 146;
   int xdir1 = 0;
   int ydir1 = -1;
-  
+
   //bottom right - 842,454
   //bottom left - 58, 454
   //top right - 842,146
   //top left - 58,146
-  
-  void drawGhosts(){
-    ellipse(ghostX1, ghostY1,26,26);
-    ellipse(ghostX2, ghostY2,26,26);
-    ellipse(ghostX3, ghostY3,26,26);
-    ellipse(ghostX4, ghostY4,26,26);
+
+  void drawGhosts() {
+    ellipse(ghostX1, ghostY1, 26, 26);
+    ellipse(ghostX2, ghostY2, 26, 26);
+    ellipse(ghostX3, ghostY3, 26, 26);
+    ellipse(ghostX4, ghostY4, 26, 26);
     //ellipse(156,189,26,26);
   }
-  
-  void updateG(){
-    if ((ydir1 == -1)  && (checkWallsG(ghostX1-13, ghostX1+13, "y-14"))){ //up
+
+  void updateG() {
+    if ((ydir1 == -1)  && (checkWallsG(ghostX1-13, ghostX1+13, "y-14"))) { //up
       ydir1 = 1;
     }
-    if ((ydir1 == 1)  && (checkWallsG(ghostX1-13, ghostX1+13, "y+13"))){
+    if ((ydir1 == 1)  && (checkWallsG(ghostX1-13, ghostX1+13, "y+13"))) {
       ydir1 = 0;
       xdir1 = -1;
     }
-    if ((xdir1 == -1) && (checkWallsG(ghostY1-13, ghostY1+13, "x-14"))){
+    if ((xdir1 == -1) && (checkWallsG(ghostY1-13, ghostY1+13, "x-14"))) {
       xdir1 = 1;
     }
-    if ((xdir1 == 1) && (checkWallsG(ghostY1-13, ghostY1+13, "x+13"))){
+    if ((xdir1 == 1) && (checkWallsG(ghostY1-13, ghostY1+13, "x+13"))) {
       xdir1 = 0;
       ydir1 = -1;
     }
-    
+
     ghostY1 += ydir1;
     ghostX1 += xdir1;
     ghostY2 += ydir1;
@@ -433,28 +529,28 @@ class setUpGhostsP {
     ghostY4 -= ydir1;
     ghostX4 -= xdir1;
   }
-  
+
   boolean checkWallsG(int startCoor, int endCoor, String bound) {
-  color temp = get(ghostX1, ghostY1);
-  for (int i = startCoor; i != endCoor; i++) {
-    if (bound.equals("x-14")) {
-      temp = get(ghostX1-14, i);
+    color temp = get(ghostX1, ghostY1);
+    for (int i = startCoor; i != endCoor; i++) {
+      if (bound.equals("x-14")) {
+        temp = get(ghostX1-14, i);
+      }
+      if (bound.equals("x+13")) {
+        temp = get(ghostX1+11, i);
+      }
+      if (bound.equals("y-14")) {
+        temp = get(i, ghostY1-12);
+      }
+      if (bound.equals("y+13")) {
+        temp = get(i, ghostY1+11);
+      }
+      if ((getRGB(temp)).equals("2156255")) {
+        return true;
+      }
     }
-    if (bound.equals("x+13")) {
-      temp = get(ghostX1+11, i);
-    }
-    if (bound.equals("y-14")) {
-      temp = get(i, ghostY1-12);
-    }
-    if (bound.equals("y+13")) {
-      temp = get(i, ghostY1+11);
-    }
-    if ((getRGB(temp)).equals("2156255")) {
-      return true;
-    }
+    return false;
   }
-  return false;
-}
 }
 
 setUpCircles test = new setUpCircles();
@@ -465,7 +561,7 @@ void draw() {
   background(0);
   imageMode(CENTER);
   image(img, 450, 300);
-  //or = false;
+or = true;
   if ((test.game(x, y)) == true) {
     or = true;
     saveX = x;
@@ -560,3 +656,4 @@ boolean checkWalls(int startCoor, int endCoor, String bound) {
   }
   return false;
 }
+
