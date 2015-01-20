@@ -78,3 +78,8 @@ January 17, 2015
 January 18, 2015
 - Continued with ghosts. Sometimes, they stay within the walls, and sometimes, they don't. Need to make ghosts chase after pacman in a way that the ghosts will not start spazzing.
 - Continued working on the whipping of the tail of Snake. Almost there...hopefully.
+
+January 19, 2015
+- CHANGES TO THE GAME: 
+  - Ghosts in the pacman game will patrol the corners (where the minigames are)
+  - Ghosts will now also be in the Snake minigame
