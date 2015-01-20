@@ -345,6 +345,8 @@ class setUpCirclesSnake {
           or = false;
           x = 450;
           y = 314;
+          xdir = 0;
+          ydir = 0;
           lives--;
           win = false;
         } 
@@ -378,6 +380,8 @@ class setUpCirclesSnake {
           or = false;
           x = 450;
           y = 314;
+          xdir = 0;
+          ydir = 0;
           lives--;
           win = false;
         } else {
@@ -403,6 +407,8 @@ class setUpCirclesSnake {
                         or = false;
                         x = 450;
                         y = 314;
+                        xdir = 0;
+                        ydir = 0;
                         lives--;
                         win = false;
                       }
@@ -434,6 +440,8 @@ class setUpCirclesSnake {
                           or = false;
                           x = 450;
                           y = 314;
+                          xdir = 0;
+                          ydir = 0;
                           lives--;
                           win = false;
                         }
@@ -454,6 +462,8 @@ class setUpCirclesSnake {
           scoreSnake = 0;
           x = saveX;
           y = saveY;
+          xdir = 0;
+          ydir = 0;
           win = true;
         }
       }
