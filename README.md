@@ -18,6 +18,7 @@ Ghosts are in Snake and Pacman.
 In Pacman...
 - The ghosts are protecting the minigames in the four corners, so the ghosts will be roaming around the sides of the game.
 [We couldn't really code the ghosts so that they keep within the walls and follow Pacman (even if we did, the ghosts would spaz and get out of control sometimes)]
+
 In Snake...
 - The ghosts are following the snake.
 
