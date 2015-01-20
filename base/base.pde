@@ -31,6 +31,9 @@ int lives = 3;
 boolean OVER = false;
 boolean victory = false;
 
+ArrayList<Integer>xTail = new ArrayList<Integer>();
+ArrayList<Integer>yTail = new ArrayList<Integer>();
+
 ArrayList<Integer>gameX = new ArrayList<Integer>(
 Arrays.asList(1, 29, 1, 29));
 
@@ -60,7 +63,7 @@ boolean checkCoord(ArrayList<Integer> exampleX, ArrayList<Integer>exampleY, int 
   placeX = 0;
   placeY = 0;
   while (placeY < exampleY.size ()) {
-    if (((pow((y - exampleY.get(placeY)), 2)) + (pow((x - exampleX.get(placeY)), 2))) <= 100) {
+    if (((pow((y - exampleY.get(placeY)), 2)) + (pow((x - exampleX.get(placeY)), 2))) <= 150) {
       removedPlace = placeY;
       //println("hello check coord true");
       return true;
@@ -259,8 +262,8 @@ class setUpCirclesSnake {
 
   ArrayList<Integer>xStart = new ArrayList<Integer>();
   ArrayList<Integer>yStart = new ArrayList<Integer>();
-  ArrayList<Integer>xTail = new ArrayList<Integer>();
-  ArrayList<Integer>yTail = new ArrayList<Integer>();
+  //  ArrayList<Integer>xTail = new ArrayList<Integer>();
+  //  ArrayList<Integer>yTail = new ArrayList<Integer>();
   ArrayList<Integer>xTailSUBLIST = new ArrayList<Integer>();
   ArrayList<Integer>yTailSUBLIST = new ArrayList<Integer>();
 
@@ -314,7 +317,7 @@ class setUpCirclesSnake {
         addCirclesToArray(xcoor, ycoor);
       }
 
-      fill(100);
+      fill(255, 200, 200);
       ellipse(xcoor, ycoor, radius, radius);
 
       if (or == true) {
@@ -331,6 +334,7 @@ class setUpCirclesSnake {
         lengthTail = 1 + scoreSnake;
         numberOfCircles = 0;
         while (numberOfCircles < lengthTail) {
+          fill(255);
           ellipse(xTail.get(numberOfCircles), yTail.get(numberOfCircles), 20, 20);
           numberOfCircles += 1;
         }
@@ -352,7 +356,6 @@ class setUpCirclesSnake {
         } 
 
 
-
         //GHOSTS!!!!!!!!!!!!!!!!!!!!!!
 
         xTargetSnake = xTail.get(0);
@@ -364,10 +367,8 @@ class setUpCirclesSnake {
           yTailSUBLIST.add(0);
           xTailSUBLIST.set(tailPlaceSUBLIST, xTail.get(tailPlaceSUBLIST));
           yTailSUBLIST.set(tailPlaceSUBLIST, yTail.get(tailPlaceSUBLIST));
-
           tailPlaceSUBLIST += 1;
         }
-
 
         RandomHoVertGhost = random (2);
         HoVertGhost = int(RandomHoVertGhost);
@@ -457,7 +458,7 @@ class setUpCirclesSnake {
         ellipse(xGhostSnake, yGhostSnake, 20, 20);
 
 
-        if (scoreSnake == 2) {
+        if (scoreSnake == 5) {
           or = false;
           scoreSnake = 0;
           x = saveX;
@@ -629,6 +630,10 @@ void draw() {
       saveY = y;
       x = 450;
       y = 314;
+      xTail.clear();
+      yTail.clear();
+      xTail.add(450);
+      yTail.add(314);
     }
     if (or == true) {
       test2.updateDraw(x, y, 30, xdir, ydir);
@@ -724,3 +729,4 @@ boolean checkWalls(int startCoor, int endCoor, String bound) {
   }
   return false;
 }
+
