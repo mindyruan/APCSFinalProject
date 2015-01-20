@@ -22,6 +22,8 @@ int yGhost = 0;
 boolean or = false;
 int removedPlace = 0;
 boolean win = false;
+int xGhostSnake = 50;
+int yGhostSnake = 50;
 
 void setup() {
   size(900, 600);
@@ -231,10 +233,10 @@ class setUpCirclesSnake {
   float randY = random(600);
   int xcoor = int(randX);
   int ycoor = int(randY);
-  float xRGhostSnake = random(860);
-  float yRGhostSnake = random(560);
-  int xGhostSnake = int(xRGhostSnake) + 20;
-  int yGhostSnake = int(yRGhostSnake) + 20;
+//  float xRGhostSnake = random(860);
+//  float yRGhostSnake = random(560);
+//  int xGhostSnake = int(xRGhostSnake) + 20;
+//  int yGhostSnake = int(yRGhostSnake) + 20;
   int xTargetSnake = 0;
   int yTargetSnake = 0;
   float RandomHoVertGhost = random (2);
@@ -613,6 +615,8 @@ void draw() {
     saveY = y;
     x = 450;
     y = 314;
+    xGhostSnake = 50;
+    yGhostSnake = 50;
   }
   if (or == true) {
     test2.updateDraw(x, y, 30, xdir, ydir);
