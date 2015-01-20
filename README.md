@@ -4,17 +4,27 @@ APCSFinalProject
 Pacman (with a twist).
 
 Small circles are extra points (not mandatory to clear all).
-Once you get to the big circles, you have to clear a mini-game (probably snake).
+Once you get to the big circles in the four corners, you have to clear a mini-game of Snake. You have to clear all minigames to win. 
 
 Set amount of lives (3)
 Lose a life when a ghost gets you.
-Don't lose a life when you lose a mini game, but the length of the snake required is set higher.
+When you lose a minigame of Snake (either you hit the border or a ghost in Snake gets you), you lose a life. 
+When you lose a life, you also go back to the center of Pacman.
 
 (All the while, you're avoiding the ghosts.)
 
-As you level...
+Ghosts are in Snake and Pacman.
+In Pacman...
+- The ghosts are protecting the minigames in the four corners, so the ghosts will be roaming around the sides of the game.
+- [We couldn't really code the ghosts so that they keep within the walls and follow Pacman (even if we did, the ghosts would spaz and get out of control sometimes)]
+In Snake...
+- The ghosts are following the snake.
+
+**removed this{
+As you level... 
 - You have to clear more mini games.
 - Ghosts get faster.
+ }
 
 January 7, 2015
 - Very basic movement for pacman using with keyboard input! (currently in one direction)
@@ -84,3 +94,6 @@ January 19, 2015
   - Ghosts in the pacman game will patrol the corners (where the minigames are)
   - Ghosts will now also be in the Snake minigame
 - Made the corner ghosts mentioned above. Right now, Pacman can go through them; to be fixed soon.
+- SNAKE wraps around itself and no longer whips around. (Thanks to classmates who gave a few hints)
+- Made a ghost in Snake that will be jiggling around randomly and also following pacman.
+- Made sure collisions with the ghosts or the walls in Snake will make the user lose a life. Then, the Snake game will end and go back to Pacman.
