@@ -634,6 +634,8 @@ void draw() {
       yTail.clear();
       xTail.add(450);
       yTail.add(314);
+      xGhostSnake = 50;
+      yGhostSnake = 50;
     }
     if (or == true) {
       test2.updateDraw(x, y, 30, xdir, ydir);
