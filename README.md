@@ -43,6 +43,9 @@ WHAT TO PULL
 
 LOG
 -------------
+
+*Note: We have some commits that are just copying and pasting each other's code to work on separate parts of the game.
+
 January 7, 2015
 - Very basic movement for pacman using with keyboard input! (currently in one direction)
 - Added continuous movements for up, down, left, right using w,a,s,d (circle goes a little offscreen when you go left or down)
@@ -117,3 +120,6 @@ January 19, 2015
 - Made sure collisions with the ghosts or the walls in Snake will make the user lose a life. Then, the Snake game will end and go back to Pacman.
 - Minigame circles will now reappear if the player loses the minigame.
 - Added lives counter and win/lose screens
+
+January 20, 2015
+- Minor bug changes with resetting the ghost's position every time a new game of Snake is played. If not, the ghost would be at the same position as it was the last minigame, which might be able to eat the snake automatically.
