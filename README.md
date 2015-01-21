@@ -8,26 +8,41 @@ Once you get to the big circles in the four corners, you have to clear a mini-ga
 
 Set amount of lives (3)
 Lose a life when a ghost gets you.
-When you lose a minigame of Snake (either you hit the border or a ghost in Snake gets you), you lose a life. 
+Lose a life when you lose Snake minigame (Either ghost gets you or you hit the border)
 
-When you lose a life, you also go back to the center of Pacman.
+When you lose a life, you also go back to the center of the Pacman map.
 
 (All the while, you're avoiding the ghosts.)
 
-Ghosts are in Snake and Pacman.
+Ghosts are in both Snake and Pacman.
+
 In Pacman...
-- The ghosts are protecting the minigames in the four corners, so the ghosts will be roaming around the sides of the game.
+- The ghosts patrol the minigames in the four corners, so the ghosts will be roaming around the sides of the game.
 [We couldn't really code the ghosts so that they keep within the walls and follow Pacman (even if we did, the ghosts would spaz and get out of control sometimes)]
 
 In Snake...
-- The ghosts are following the snake.
+- The ghosts follow Snake.
 
-**removed this{
+Only one level.
+
+***removed this{
 As you level... 
 - You have to clear more mini games.
 - Ghosts get faster.
  }
 
+
+WHAT TO PULL
+-------------
+- Only the base folder and these files: 
+  - base.pde
+  - catgod.gif
+  - try2.png
+- All other folders/files are just experimentations and are not necessary.
+
+
+LOG
+-------------
 January 7, 2015
 - Very basic movement for pacman using with keyboard input! (currently in one direction)
 - Added continuous movements for up, down, left, right using w,a,s,d (circle goes a little offscreen when you go left or down)
